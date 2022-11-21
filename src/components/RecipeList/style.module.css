@@ -1,3 +1,17 @@
-.title{
-    font-family: Arial;
+.recipeList{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+@media (max-width: 900px){
+    .recipeList{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 450px){
+    .recipeList{
+        grid-template-columns: 1f;
+    }
 }

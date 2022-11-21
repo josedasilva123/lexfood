@@ -4,7 +4,7 @@ import styles from "./style.module.css";
 
 const RecipeList = ({recipeList, removeRecipe}) => {  
   return (
-    <ul className={styles.title}>
+    <ul className={styles.recipeList}>
       {recipeList.map((recipe, index) => (
         <RecipeCard key={index} recipe={recipe} removeRecipe={removeRecipe} />
       ))}

@@ -2,7 +2,6 @@ import LoginPage from "./pages/LoginPage";
 import RecipePage from "./pages/RecipePage";
 import { useState } from "react";
 import { categoryData, recipeData } from "./data/data";
-import './styles.css'
 
 function App() {
    const [login, setLogin] = useState(false); // estado boleano responsável pelo login (gatilho da renderização condicional)

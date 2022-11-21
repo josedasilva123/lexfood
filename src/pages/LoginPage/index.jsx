@@ -2,10 +2,10 @@ import React from "react";
 
 const LoginPage = ({ setLogin }) => {
    return (
-      <>
-         <h1>Bem vindo as receitinhas do Alex</h1>
+      <div className="container">
+         <h1 className="title one">Bem vindo as receitinhas do Alex</h1>
          <button onClick={() => setLogin(true)}>Logar</button>
-      </>
+      </div>
    );
 };
 
