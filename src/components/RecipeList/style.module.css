@@ -12,6 +12,6 @@
 
 @media (max-width: 450px){
     .recipeList{
-        grid-template-columns: 1f;
+        grid-template-columns: 1fr;
     }
 }
