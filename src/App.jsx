@@ -24,7 +24,6 @@ function App() {
       setRecipeList(newList);
    }
 
-
    return (
       <div className="App">
          <StyledTitle tag="h3" fontSize="one">Testando meu styled</StyledTitle>
