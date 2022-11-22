@@ -10,7 +10,7 @@ const RecipeCard = ({recipe, removeRecipe}) => {
       <p>
         {recipe.description}
       </p>
-      <button className='btn default outline1' onClick={() => removeRecipe(recipe.title)}>Remover</button>
+      <button className='btn default outline1' onClick={() => removeRecipe(recipe.id)}>Remover</button>
     </li>
   )
 }
