@@ -1,9 +1,9 @@
 import React from 'react'
-import styles from "./style.module.css";
+import { StyledRecipeCard } from './style';
 
 const RecipeCard = ({recipe, removeRecipe}) => {
   return (
-    <li className={styles.recipeCard}>
+    <StyledRecipeCard>
       <h3 className='title three'>
         {recipe.title}
       </h3>
@@ -11,7 +11,7 @@ const RecipeCard = ({recipe, removeRecipe}) => {
         {recipe.description}
       </p>
       <button className='btn default outline1' onClick={() => removeRecipe(recipe.id)}>Remover</button>
-    </li>
+    </StyledRecipeCard>
   )
 }
 
