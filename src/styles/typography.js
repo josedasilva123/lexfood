@@ -13,9 +13,10 @@ import BaseTitle from "./components/BaseTitle";
 // ou finalidades complexas como no fontSize
 
 export const StyledTitle = styled(BaseTitle)`
+   text-align: ${({ textAlign }) => textAlign};
    font-weight: ${({ fontWeight }) => fontWeight}; 
 
-   color: ${({ color }) => (color ? color : "black")};
+   color: ${({theme}) => theme.colors.black};
 
    ${({ fontSize }) => {
       switch (fontSize) {
@@ -32,10 +33,22 @@ export const StyledTitle = styled(BaseTitle)`
          case "two":
             return css`
                font-size: 2.5rem;
+               @media (max-width: 800px){
+                  font-size: 1.8rem;
+               }
+               @media (max-width: 400px){
+                  font-size: 1.4rem; 
+               }
             `;
          case "three":
             return css`
                font-size: 1.8rem;
+               @media (max-width: 800px){
+                  font-size: 1.5rem;
+               }
+               @media (max-width: 400px){
+                  font-size: 1.25rem;
+               }
             `;
       }
 

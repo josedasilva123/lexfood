@@ -1,5 +1,8 @@
 import { createGlobalStyle } from "styled-components";
 
+/* width + padding - (100% + 30px) */
+/* box-sizing: border-box: border-box (100%) */
+
 export const GlobalStyle = createGlobalStyle`
     *{
         margin: 0;
