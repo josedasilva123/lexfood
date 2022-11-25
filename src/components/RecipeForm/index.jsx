@@ -38,7 +38,7 @@ const RecipeForm = ({ categoryList, addRecipe }) => {
             value={formData.description}
             onChange={(event) => setFormData({ ...formData, description: event.target.value })}
          />
-         <select defaultValue={formData.category} onChange={(event) => setFormData({ ...formData, category: event.target.value })}>
+         <select value={formData.category} onChange={(event) => setFormData({ ...formData, category: event.target.value })}>
             {categoryList.map((category) => (
                <option key={category.value} value={category.value}>
                   {category.label}
