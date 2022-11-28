@@ -3,7 +3,7 @@ import React, { useState} from 'react'
 const SearchForm = ({setSearch}) => {
   const [searchInput, setSearchInput] = useState("");  
 
-  function submit(event) => {
+  function submit(event) {
     event.preventDefault();
     setSearch(searchInput);
   } 
