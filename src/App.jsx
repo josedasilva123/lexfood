@@ -8,7 +8,6 @@ import { darkTheme, mainTheme } from "./styles/theme";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FavoriteList from "./components/FavoriteList";
-import SamplePage from "./pages/SamplePage";
 
 function App() {
    const localStorageFavorites = localStorage.getItem("@FAVORITE_LIST");
@@ -23,8 +22,9 @@ function App() {
    const [darkMode, setDarkMode] = useState(false);
 
    const filteredRecipeList = recipeList.filter(
-      (recipe) => (filter === "todos" ? true : recipe.category === filter) && 
-      (!search ? true : recipe.title.toLowerCase().includes(search.toLowerCase()))
+      (recipe) =>
+         (filter === "todos" ? true : recipe.category === filter) &&
+         (!search ? true : recipe.title.toLowerCase().includes(search.toLowerCase()))
    );
 
    useEffect(() => {
