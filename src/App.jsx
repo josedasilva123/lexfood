@@ -8,6 +8,7 @@ import { darkTheme, mainTheme } from "./styles/theme";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FavoriteList from "./components/FavoriteList";
+import SamplePage from "./pages/SamplePage";
 
 function App() {
    const localStorageFavorites = localStorage.getItem("@FAVORITE_LIST");
@@ -17,10 +18,14 @@ function App() {
    const [recipeList, setRecipeList] = useState([]);
    const [favoriteList, setFavoriteList] = useState(localStorageFavorites ? JSON.parse(localStorageFavorites) : []);
    const [filter, setFilter] = useState("todos");
+   const [search, setSearch] = useState("");
    // const [count, setCount] = useState(recipeList.length);
    const [darkMode, setDarkMode] = useState(false);
 
-   const filteredRecipeList = recipeList.filter((recipe) => (filter === "todos" ? true : recipe.category === filter));
+   const filteredRecipeList = recipeList.filter(
+      (recipe) => (filter === "todos" ? true : recipe.category === filter) && 
+      (!search ? true : recipe.title.toLowerCase().includes(search.toLowerCase()))
+   );
 
    useEffect(() => {
       localStorage.setItem("@FAVORITE_LIST", JSON.stringify(favoriteList));
@@ -41,19 +46,17 @@ function App() {
       toast.warn("Receita desfavoritada com sucesso!");
    }
 
-   function addReviewOnFavoriteRecipe(recipeId, review){
+   function addReviewOnFavoriteRecipe(recipeId, review) {
       //Utilizar o map para alterar um item específico de uma lista
-      const newList = favoriteList.map(recipe => {
-         if(recipe._id === recipeId){
-            return { ...recipe, review: review} 
+      const newList = favoriteList.map((recipe) => {
+         if (recipe._id === recipeId) {
+            return { ...recipe, review: review };
          } else {
             return recipe;
          }
-      })
+      });
       setFavoriteList(newList);
    }
-
-
 
    /*
    function addRecipe(recipeData) {
@@ -71,11 +74,14 @@ function App() {
    return (
       <ThemeProvider theme={darkMode ? darkTheme : mainTheme}>
          <div className="App">
-            <button onClick={() => console.log(recipeList)}>Debug</button>
             <button onClick={() => setDarkMode(!darkMode)}>Alternar tema</button>
             {login ? (
                <>
-                  <FavoriteList favoriteList={favoriteList} removeRecipeFromFavoriteList={removeRecipeFromFavoriteList} addReviewOnFavoriteRecipe={addReviewOnFavoriteRecipe}/>
+                  <FavoriteList
+                     favoriteList={favoriteList}
+                     removeRecipeFromFavoriteList={removeRecipeFromFavoriteList}
+                     addReviewOnFavoriteRecipe={addReviewOnFavoriteRecipe}
+                  />
                   <RecipePage
                      recipeList={filteredRecipeList}
                      categoryList={categoryList}
@@ -83,6 +89,8 @@ function App() {
                      setLogin={setLogin}
                      setRecipeList={setRecipeList}
                      addRecipeToFavoriteList={addRecipeToFavoriteList}
+                     search={search}
+                     setSearch={setSearch}
                   />
                </>
             ) : (
