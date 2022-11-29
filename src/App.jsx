@@ -20,6 +20,7 @@ function App() {
    const [search, setSearch] = useState("");
    // const [count, setCount] = useState(recipeList.length);
    const [darkMode, setDarkMode] = useState(false);
+   const [favoriteModal, setFavoriteModal] = useState(false);
 
    const filteredRecipeList = recipeList.filter(
       (recipe) =>
@@ -34,6 +35,7 @@ function App() {
    function addRecipeToFavoriteList(recipe) {
       if (!favoriteList.some((favoriteRecipe) => favoriteRecipe._id === recipe._id)) {
          setFavoriteList([...favoriteList, recipe]);
+         setFavoriteModal(true);
          toast.success("Receita favoritada com sucesso!");
       } else {
          toast.error("Essa receita já está favoritada.");
@@ -75,13 +77,17 @@ function App() {
       <ThemeProvider theme={darkMode ? darkTheme : mainTheme}>
          <div className="App">
             <button onClick={() => setDarkMode(!darkMode)}>Alternar tema</button>
+            <button onClick={() => setFavoriteModal(true)}>Favoritos</button>
             {login ? (
                <>
-                  <FavoriteList
-                     favoriteList={favoriteList}
-                     removeRecipeFromFavoriteList={removeRecipeFromFavoriteList}
-                     addReviewOnFavoriteRecipe={addReviewOnFavoriteRecipe}
-                  />
+                  {favoriteModal && (
+                     <FavoriteList
+                        favoriteList={favoriteList}
+                        removeRecipeFromFavoriteList={removeRecipeFromFavoriteList}
+                        addReviewOnFavoriteRecipe={addReviewOnFavoriteRecipe}
+                        setFavoriteModal={setFavoriteModal}
+                     />
+                  )}
                   <RecipePage
                      recipeList={filteredRecipeList}
                      categoryList={categoryList}
@@ -99,7 +105,7 @@ function App() {
          </div>
 
          <ToastContainer
-            position="top-right"
+            position="bottom-right"
             autoClose={3000}
             hideProgressBar={false}
             newestOnTop={false}

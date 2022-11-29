@@ -50,6 +50,13 @@ export const StyledTitle = styled(BaseTitle)`
                   font-size: 1.25rem;
                }
             `;
+         case "four":
+            return css`
+               font-size: 1.25rem;
+               @media (max-width: 800px){
+                  font-size: 1rem;
+               }
+            `   
       }
 
       /*
@@ -84,3 +91,7 @@ export const StyledTitle = styled(BaseTitle)`
    }}
 `;
 
+export const StyledParagraph = styled.p`
+   font-size: 1rem;
+   font-weight: 400;
+`
