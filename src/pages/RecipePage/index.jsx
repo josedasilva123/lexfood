@@ -38,7 +38,9 @@ const RecipePage = ({ recipeList, categoryList, setFilter, setLogin, setRecipeLi
                         <StyledTitle tag="h2" fontSize="one" fontWeight={700}>
                            Resultados de busca para: {search}
                         </StyledTitle>
-                        <StyledButton buttonStyle="solid1" buttonSize="default" onClick={() => setSearch("")}>Limpar busca</StyledButton>
+                        <StyledButton buttonStyle="solid1" buttonSize="default" onClick={() => setSearch("")}>
+                           Limpar busca
+                        </StyledButton>
                      </>
                   )}
                   <SearchForm setSearch={setSearch} />
