@@ -8,6 +8,7 @@ import { darkTheme, mainTheme } from "./styles/theme";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FavoriteList from "./components/FavoriteList";
+import RegisterPage from "./pages/RegisterPage";
 
 function App() {
    const localStorageFavorites = localStorage.getItem("@FAVORITE_LIST");
@@ -76,6 +77,31 @@ function App() {
    return (
       <ThemeProvider theme={darkMode ? darkTheme : mainTheme}>
          <div className="App">
+            <RegisterPage />
+         </div>
+
+         <ToastContainer
+            position="bottom-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+         />
+      </ThemeProvider>
+   );
+}
+
+export default App;
+
+/*
+return (
+      <ThemeProvider theme={darkMode ? darkTheme : mainTheme}>
+         <div className="App">
             <button onClick={() => setDarkMode(!darkMode)}>Alternar tema</button>
             <button onClick={() => setFavoriteModal(true)}>Favoritos</button>
             {login ? (
@@ -118,6 +144,4 @@ function App() {
          />
       </ThemeProvider>
    );
-}
-
-export default App;
+*/
