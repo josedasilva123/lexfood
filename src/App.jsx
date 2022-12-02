@@ -8,14 +8,20 @@ import { darkTheme, mainTheme } from "./styles/theme";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FavoriteList from "./components/FavoriteList";
-import RegisterPage from "./pages/RegisterPage";
+import RoutesComponent from "./routes";
+import { api } from "./api/api";
+import { useNavigate } from "react-router-dom";
 
 function App() {
    const localStorageFavorites = localStorage.getItem("@FAVORITE_LIST");
 
-   const [login, setLogin] = useState(false);
+   const navigate = useNavigate();
+
+   const [user, setUser] = useState(null);
+
    const [categoryList, setCategoryList] = useState(categoryData);
    const [recipeList, setRecipeList] = useState([]);
+
    const [favoriteList, setFavoriteList] = useState(localStorageFavorites ? JSON.parse(localStorageFavorites) : []);
    const [filter, setFilter] = useState("todos");
    const [search, setSearch] = useState("");
@@ -74,10 +80,52 @@ function App() {
    }
    */
 
+   async function userLogin(formData, setLoading){
+      try {
+         setLoading(true);
+         const response = await api.post('user/login', formData);
+         localStorage.setItem('@TOKEN', response.data.token);
+         setUser(response.data.user);
+         navigate('/recipes');
+      } catch (error) {
+         toast.error(error.response.data.error);
+      } finally {
+         setLoading(false);
+      }
+   } 
+
+   function userLogout(){
+      localStorage.removeItem('@TOKEN');
+      setUser(null);
+      navigate('/'); 
+   }
+
    return (
       <ThemeProvider theme={darkMode ? darkTheme : mainTheme}>
          <div className="App">
-            <RegisterPage />
+            {favoriteModal && (
+               <FavoriteList
+                  favoriteList={favoriteList}
+                  removeRecipeFromFavoriteList={removeRecipeFromFavoriteList}
+                  addReviewOnFavoriteRecipe={addReviewOnFavoriteRecipe}
+                  setFavoriteModal={setFavoriteModal}
+               />
+            )}
+            <button onClick={() => console.log(user)}>Debug</button>
+            <button onClick={() => setDarkMode(!darkMode)}>Alternar tema</button>
+            <button onClick={() => setFavoriteModal(true)}>Favoritos</button>
+            <RoutesComponent
+               recipeList={filteredRecipeList}
+               categoryList={categoryList}
+               setFilter={setFilter}
+               setRecipeList={setRecipeList}
+               addRecipeToFavoriteList={addRecipeToFavoriteList}
+               search={search}
+               setSearch={setSearch}
+               user={user}
+               userLogin={userLogin}
+               userLogout={userLogout}
+            />           
          </div>
 
          <ToastContainer

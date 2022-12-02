@@ -7,7 +7,17 @@ import SearchForm from "../../components/SearchForm";
 import { StyledTitle } from "../../styles/typography";
 import { StyledButton } from "../../styles/buttons";
 
-const RecipePage = ({ recipeList, categoryList, setFilter, setLogin, setRecipeList, addRecipeToFavoriteList, search, setSearch }) => {
+const RecipePage = ({
+   recipeList,
+   categoryList,
+   setFilter,
+   setRecipeList,
+   addRecipeToFavoriteList,
+   search,
+   setSearch,
+   user,
+   userLogout,
+}) => {
    const [loading, setLoading] = useState(false);
 
    useEffect(() => {
@@ -30,7 +40,7 @@ const RecipePage = ({ recipeList, categoryList, setFilter, setLogin, setRecipeLi
             <h1>Carregando...</h1>
          ) : (
             <>
-               <Header setLogin={setLogin} />
+               <Header user={user} userLogout={userLogout} />
 
                <div className="container">
                   {search && (
