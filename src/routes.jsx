@@ -16,11 +16,12 @@ const RoutesComponent = ({
    user,
    userLogin,
    userLogout,
+   userRegister,
 }) => {
    return (
       <Routes>
          <Route path="/" element={<LoginPage userLogin={userLogin} />} />
-         <Route path="/register" element={<RegisterPage />} />
+         <Route path="/register" element={<RegisterPage userRegister={userRegister} />} />
          <Route path="/recipes" element={<ProtectedRoutes user={user} />}>
             <Route
                index
