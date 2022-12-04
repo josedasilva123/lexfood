@@ -24,8 +24,15 @@ export const StyledHeader = styled.header`
       }
    }
 
-   .darkMode{
-    color: ${({ theme }) => theme.colors.lockWhite}; 
+   .darkMode {
+      color: ${({ theme }) => theme.colors.lockWhite};
+   }
+   
+   .favorite {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: ${({ theme }) => theme.colors.lockWhite};
    }
 `;
 

@@ -7,19 +7,26 @@ import SearchForm from "../../components/SearchForm";
 import { StyledTitle } from "../../styles/typography";
 import { StyledButton } from "../../styles/buttons";
 import { StyledContainer } from "../../styles/grid";
+import { StyledRecipePage } from "./style";
 
 const RecipePage = ({
    recipeList,
-   categoryList,
-   setFilter,
    setRecipeList,
+   filteredRecipeList,
+   categoryList,
+   setCategoryList,
+   filter,
+   setFilter,
    addRecipeToFavoriteList,
    search,
    setSearch,
    user,
    userLogout,
    darkMode,
-   setDarkMode
+   setDarkMode,
+   favoriteList,
+   favoriteModal,
+   setFavoriteModal, 
 }) => {
    const [loading, setLoading] = useState(false);
 
@@ -37,13 +44,32 @@ const RecipePage = ({
       })();
    }, []);
 
+   useEffect(() => {
+      (async () => {
+         try {
+            const response = await api.get("category");
+            setCategoryList(response.data.categories)
+         } catch (error) {
+            console.log(error);
+         }
+      })();
+   })
+
    return (
-      <div>
+      <StyledRecipePage>
          {loading ? (
             <h1>Carregando...</h1>
          ) : (
             <>
-               <Header user={user} userLogout={userLogout} darkMode={darkMode} setDarkMode={setDarkMode} />
+               <Header
+                  user={user}
+                  userLogout={userLogout}
+                  darkMode={darkMode}
+                  setDarkMode={setDarkMode}
+                  favoriteList={favoriteList}
+                  favoriteModal={favoriteModal}
+                  setFavoriteModal={setFavoriteModal}
+               />
 
                <StyledContainer>
                   {search && (
@@ -57,14 +83,15 @@ const RecipePage = ({
                      </>
                   )}
                   <SearchForm setSearch={setSearch} />
-                  <h1 className="title one">As melhores receitas do momento.</h1>
-
-                  <RecipeCategories categoryList={categoryList} setFilter={setFilter} />
-                  <RecipeList recipeList={recipeList} addRecipeToFavoriteList={addRecipeToFavoriteList} />
+                  <StyledTitle tag="h1" fontSize="one" fontWeight={700}>
+                     As melhores receitas do momento.
+                  </StyledTitle>
+                  <RecipeCategories recipeList={recipeList} categoryList={categoryList} filter={filter} setFilter={setFilter}  />
+                  <RecipeList filteredRecipeList={filteredRecipeList} addRecipeToFavoriteList={addRecipeToFavoriteList} />
                </StyledContainer>
             </>
          )}
-      </div>
+      </StyledRecipePage>
    );
 };
 

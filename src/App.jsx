@@ -17,16 +17,18 @@ function App() {
 
    const [categoryList, setCategoryList] = useState([]);
    const [recipeList, setRecipeList] = useState([]);
-
-   const [favoriteList, setFavoriteList] = useState(localStorageFavorites ? JSON.parse(localStorageFavorites) : []);
    const [filter, setFilter] = useState("todos");
    const [search, setSearch] = useState("");
-   const [darkMode, setDarkMode] = useState(false);
+
+   const [favoriteList, setFavoriteList] = useState(localStorageFavorites ? JSON.parse(localStorageFavorites) : []);
    const [favoriteModal, setFavoriteModal] = useState(false);
+
+   const [darkMode, setDarkMode] = useState(false);
+   
 
    const filteredRecipeList = recipeList.filter(
       (recipe) =>
-         (filter === "todos" ? true : recipe.category === filter) &&
+         (filter === "todos" ? true : recipe.categories.includes(filter)) &&
          (!search ? true : recipe.title.toLowerCase().includes(search.toLowerCase()))
    );
 
@@ -105,12 +107,14 @@ function App() {
                   setFavoriteModal={setFavoriteModal}
                />
             )}
-            <button onClick={() => setFavoriteModal(true)}>Favoritos</button>
             <RoutesComponent
-               recipeList={filteredRecipeList}
-               categoryList={categoryList}
-               setFilter={setFilter}
+               recipeList={recipeList}
                setRecipeList={setRecipeList}
+               filteredRecipeList={filteredRecipeList}
+               categoryList={categoryList}
+               setCategoryList={setCategoryList}
+               filter={filter}
+               setFilter={setFilter}     
                addRecipeToFavoriteList={addRecipeToFavoriteList}
                search={search}
                setSearch={setSearch}
@@ -120,6 +124,9 @@ function App() {
                userRegister={userRegister}
                darkMode={darkMode}
                setDarkMode={setDarkMode}
+               favoriteList={favoriteList}
+               favoriteModal={favoriteModal}
+               setFavoriteModal={setFavoriteModal}              
             />           
          </div>
 

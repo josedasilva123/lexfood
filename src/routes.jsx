@@ -7,9 +7,12 @@ import ProtectedRoutes from "./components/ProtectedRoutes";
 
 const RoutesComponent = ({
    recipeList,
-   categoryList,
-   setFilter,
    setRecipeList,
+   filteredRecipeList,
+   categoryList,
+   setCategoryList,
+   filter,
+   setFilter,
    addRecipeToFavoriteList,
    search,
    setSearch,
@@ -18,7 +21,10 @@ const RoutesComponent = ({
    userLogout,
    userRegister,
    darkMode,
-   setDarkMode
+   setDarkMode,
+   favoriteList,
+   favoriteModal,
+   setFavoriteModal   
 }) => {
    return (
       <Routes>
@@ -30,9 +36,12 @@ const RoutesComponent = ({
                element={
                   <RecipePage
                      recipeList={recipeList}
-                     categoryList={categoryList}
-                     setFilter={setFilter}
                      setRecipeList={setRecipeList}
+                     filteredRecipeList={filteredRecipeList}
+                     categoryList={categoryList}
+                     setCategoryList={setCategoryList}
+                     filter={filter}
+                     setFilter={setFilter}                  
                      addRecipeToFavoriteList={addRecipeToFavoriteList}
                      search={search}
                      setSearch={setSearch}
@@ -40,6 +49,9 @@ const RoutesComponent = ({
                      userLogout={userLogout}
                      darkMode={darkMode}
                      setDarkMode={setDarkMode}
+                     favoriteList={favoriteList}
+                     favoriteModal={favoriteModal}
+                     setFavoriteModal={setFavoriteModal}                   
                   />
                }
             />

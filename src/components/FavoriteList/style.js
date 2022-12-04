@@ -10,6 +10,7 @@ export const StyledFavoriteList = styled.div`
    background: ${({ theme }) => theme.colors.white};
    box-shadow: 0 0 25px 0 ${({ theme }) => theme.colors.black20};
    min-height: 100vh;
+
    ${({ isClosing }) => {
       if (isClosing) {
          return css`
@@ -31,6 +32,7 @@ export const StyledFavoriteList = styled.div`
          top: 10px;
          right: 10px;
          opacity: 0.5;
+         color: ${({ theme }) => theme.colors.black};
          transition: 0.4s;
 
          &:hover {
@@ -38,8 +40,8 @@ export const StyledFavoriteList = styled.div`
          }
       }
 
-      @media (max-width: 500px){
-        padding: 25px 16px;
+      @media (max-width: 500px) {
+         padding: 25px 16px;
       }
    }
 `;
@@ -58,10 +60,10 @@ export const StyledFavoriteListUL = styled.ul`
    }
 
    ::-webkit-scrollbar-track {
-      background: ${({theme}) => theme.colors.lightgray}
+      background: ${({ theme }) => theme.colors.lightgray};
    }
 
    ::-webkit-scrollbar-thumb {
-      background: ${({theme}) => theme.colors.orange}
+      background: ${({ theme }) => theme.colors.orange};
    }
 `;
