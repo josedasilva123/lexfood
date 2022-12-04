@@ -1,8 +1,4 @@
-import LoginPage from "./pages/LoginPage";
-import RecipePage from "./pages/RecipePage";
 import { useState, useEffect } from "react";
-import { categoryData, recipeData } from "./data/data";
-import { StyledTitle } from "./styles/typography";
 import { ThemeProvider } from "styled-components";
 import { darkTheme, mainTheme } from "./styles/theme";
 import { toast, ToastContainer } from "react-toastify";
@@ -19,13 +15,12 @@ function App() {
 
    const [user, setUser] = useState(null);
 
-   const [categoryList, setCategoryList] = useState(categoryData);
+   const [categoryList, setCategoryList] = useState([]);
    const [recipeList, setRecipeList] = useState([]);
 
    const [favoriteList, setFavoriteList] = useState(localStorageFavorites ? JSON.parse(localStorageFavorites) : []);
    const [filter, setFilter] = useState("todos");
    const [search, setSearch] = useState("");
-   // const [count, setCount] = useState(recipeList.length);
    const [darkMode, setDarkMode] = useState(false);
    const [favoriteModal, setFavoriteModal] = useState(false);
 
@@ -67,19 +62,6 @@ function App() {
       setFavoriteList(newList);
    }
 
-   /*
-   function addRecipe(recipeData) {
-      const newRecipeData = { ...recipeData, id: count };
-      setCount(count + 1);
-      setRecipeList([...recipeList, newRecipeData]);
-   }
-
-   function removeRecipe(recipeId) {
-      const newList = recipeList.filter((recipe) => recipe.id !== recipeId);
-      setRecipeList(newList);
-   }
-   */
-
    async function userLogin(formData, setLoading){
       try {
          setLoading(true);
@@ -93,6 +75,18 @@ function App() {
          setLoading(false);
       }
    } 
+
+   async function userRegister(formData, setLoading) {
+      try {
+        setLoading(true);  
+        const response = await api.post('user', formData);
+        toast.success(response.data.message);
+      } catch (error) {
+        toast.error(error.response.data.error);  
+      } finally {
+        setLoading(false);  
+      }
+    }
 
    function userLogout(){
       localStorage.removeItem('@TOKEN');
@@ -111,7 +105,6 @@ function App() {
                   setFavoriteModal={setFavoriteModal}
                />
             )}
-            <button onClick={() => console.log(user)}>Debug</button>
             <button onClick={() => setDarkMode(!darkMode)}>Alternar tema</button>
             <button onClick={() => setFavoriteModal(true)}>Favoritos</button>
             <RoutesComponent
@@ -125,6 +118,7 @@ function App() {
                user={user}
                userLogin={userLogin}
                userLogout={userLogout}
+               userRegister={userRegister}
             />           
          </div>
 

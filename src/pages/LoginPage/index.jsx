@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import LoginForm from "../../components/Form/LoginForm";
-import { StyledButton } from "../../styles/buttons";
+import { StyledButton, StyledLinkButton } from "../../styles/buttons";
 import { StyledTitle } from "../../styles/typography";
 import { StyledLoginPage, StyledLoginPageFlexBox } from "./style";
 
@@ -16,10 +16,10 @@ const LoginPage = ({ userLogin }) => {
             <StyledLoginPageFlexBox>
                <div className="innerBox">
                   <StyledTitle tag="h1" fontSize="one" fontWeight={600} textAlign="center">
-                     Bem vindo as receitinhas do Alex
+                     Receitas do Alex
                   </StyledTitle>
-
                   <LoginForm userLogin={userLogin} />
+                  <StyledLinkButton to="/register" buttonStyle="outline1" buttonSize="big">Cadastrar-se</StyledLinkButton>
                </div>
             </StyledLoginPageFlexBox>
          </div>
