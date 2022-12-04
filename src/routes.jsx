@@ -17,6 +17,8 @@ const RoutesComponent = ({
    userLogin,
    userLogout,
    userRegister,
+   darkMode,
+   setDarkMode
 }) => {
    return (
       <Routes>
@@ -36,6 +38,8 @@ const RoutesComponent = ({
                      setSearch={setSearch}
                      user={user}
                      userLogout={userLogout}
+                     darkMode={darkMode}
+                     setDarkMode={setDarkMode}
                   />
                }
             />

@@ -39,32 +39,32 @@ export const buttonCSS = css`
          case "solid1":
             return css`
                background: ${theme.colors.orange};
-               color: ${theme.colors.white};
+               color: ${theme.colors.lockWhite};
             `;
          case "solid2":
             return css`
                background: ${theme.colors.white};
-               color: ${theme.colors.orange};
+               color: ${theme.colors.lockOrange};
             `;
 
          case "outline1":
             return css`
-               border: 1px solid ${theme.colors.orange};
-               color: ${theme.colors.orange};
+               border: 1px solid ${theme.colors.lockOrange};
+               color: ${theme.colors.lockOrange};
 
                &:hover {
-                  background: ${theme.colors.orange};
-                  color: ${theme.colors.white};
+                  background: ${theme.colors.lockOrange};
+                  color: ${theme.colors.lockWhite};
                }
             `;
 
          case "outline2":
             return css`
-               border: 1px solid ${theme.colors.white};
-               color: ${theme.colors.white};
+               border: 1px solid ${theme.colors.lockWhite};
+               color: ${theme.colors.lockWhite};
 
                &:hover {
-                  background: ${theme.colors.white};
+                  background: ${theme.colors.lockWhite};
                   color: ${theme.colors.orange};
                }
             `;

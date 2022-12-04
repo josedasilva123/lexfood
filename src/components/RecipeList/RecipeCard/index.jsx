@@ -1,14 +1,19 @@
 import React from "react";
+import { StyledButton } from "../../../styles/buttons";
+import { StyledParagraph, StyledTitle } from "../../../styles/typography";
 import { StyledRecipeCard } from "./style";
+import { MdFavorite } from "react-icons/md"
 
 const RecipeCard = ({ recipe, addRecipeToFavoriteList }) => {
    return (
       <StyledRecipeCard>
          <img src={recipe.thumbnail_url} alt={recipe.title} />
          <div className="content">
-            <h3 className="title three">{recipe.title}</h3>
-            <p>{recipe.content}</p>
-            <button className="btn default outline1" onClick={() => addRecipeToFavoriteList(recipe)}>Favoritar</button>
+            <StyledTitle tag="h3" fontSize="four">{recipe.title}</StyledTitle>
+            <StyledParagraph>{recipe.content}</StyledParagraph>
+            <StyledButton buttonStyle="outline1" buttonSize="default" onClick={() => addRecipeToFavoriteList(recipe)}>
+               <MdFavorite size={21} /> Favoritar
+            </StyledButton>
          </div>
       </StyledRecipeCard>
    );

@@ -6,6 +6,7 @@ import { api } from "../../api/api";
 import SearchForm from "../../components/SearchForm";
 import { StyledTitle } from "../../styles/typography";
 import { StyledButton } from "../../styles/buttons";
+import { StyledContainer } from "../../styles/grid";
 
 const RecipePage = ({
    recipeList,
@@ -17,6 +18,8 @@ const RecipePage = ({
    setSearch,
    user,
    userLogout,
+   darkMode,
+   setDarkMode
 }) => {
    const [loading, setLoading] = useState(false);
 
@@ -40,9 +43,9 @@ const RecipePage = ({
             <h1>Carregando...</h1>
          ) : (
             <>
-               <Header user={user} userLogout={userLogout} />
+               <Header user={user} userLogout={userLogout} darkMode={darkMode} setDarkMode={setDarkMode} />
 
-               <div className="container">
+               <StyledContainer>
                   {search && (
                      <>
                         <StyledTitle tag="h2" fontSize="one" fontWeight={700}>
@@ -58,7 +61,7 @@ const RecipePage = ({
 
                   <RecipeCategories categoryList={categoryList} setFilter={setFilter} />
                   <RecipeList recipeList={recipeList} addRecipeToFavoriteList={addRecipeToFavoriteList} />
-               </div>
+               </StyledContainer>
             </>
          )}
       </div>

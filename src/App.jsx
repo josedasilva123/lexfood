@@ -105,7 +105,6 @@ function App() {
                   setFavoriteModal={setFavoriteModal}
                />
             )}
-            <button onClick={() => setDarkMode(!darkMode)}>Alternar tema</button>
             <button onClick={() => setFavoriteModal(true)}>Favoritos</button>
             <RoutesComponent
                recipeList={filteredRecipeList}
@@ -119,6 +118,8 @@ function App() {
                userLogin={userLogin}
                userLogout={userLogout}
                userRegister={userRegister}
+               darkMode={darkMode}
+               setDarkMode={setDarkMode}
             />           
          </div>
 
