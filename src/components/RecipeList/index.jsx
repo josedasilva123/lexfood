@@ -1,14 +1,14 @@
 import React from 'react'
 import RecipeCard from "./RecipeCard"
-import styles from "./style.module.css";
+import { StyledRecipeList } from './style';
 
-const RecipeList = ({recipeList, removeRecipe}) => {  
+const RecipeList = ({filteredRecipeList, addRecipeToFavoriteList}) => {  
   return (
-    <ul className={styles.title}>
-      {recipeList.map((recipe, index) => (
-        <RecipeCard key={index} recipe={recipe} removeRecipe={removeRecipe} />
+    <StyledRecipeList>
+      {filteredRecipeList.map((recipe, index) => (
+        <RecipeCard key={index} recipe={recipe} addRecipeToFavoriteList={addRecipeToFavoriteList} />
       ))}
-    </ul>  
+    </StyledRecipeList>  
   )
 }
 
