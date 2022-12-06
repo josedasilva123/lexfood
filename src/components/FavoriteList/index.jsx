@@ -3,6 +3,7 @@ import FavoriteCard from "./FavoriteCard";
 import { StyledFavoriteList, StyledFavoriteListUL } from "./style";
 import { MdClose } from "react-icons/md";
 import { StyledParagraph, StyledTitle } from "../../styles/typography";
+import { useOutclick } from "../../hooks/useOutclick";
 
 const FavoriteList = ({ favoriteList, removeRecipeFromFavoriteList, addReviewOnFavoriteRecipe, setFavoriteModal }) => {
    const [isClosing, setClosing] = useState(false);
@@ -14,9 +15,11 @@ const FavoriteList = ({ favoriteList, removeRecipeFromFavoriteList, addReviewOnF
          setClosing(false);
       }, 600)     
    }
+
+   const modalRef = useOutclick(() => closeModal());
    
    return (
-      <StyledFavoriteList isClosing={isClosing}>
+      <StyledFavoriteList isClosing={isClosing} ref={modalRef}>
          <div>
             <button onClick={() => closeModal()} disabled={isClosing}>
                <MdClose size={21} />

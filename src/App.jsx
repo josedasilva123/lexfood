@@ -24,7 +24,6 @@ function App() {
    const [favoriteModal, setFavoriteModal] = useState(false);
 
    const [darkMode, setDarkMode] = useState(false);
-   
 
    const filteredRecipeList = recipeList.filter(
       (recipe) =>
@@ -64,36 +63,36 @@ function App() {
       setFavoriteList(newList);
    }
 
-   async function userLogin(formData, setLoading){
+   async function userLogin(formData, setLoading) {
       try {
          setLoading(true);
-         const response = await api.post('user/login', formData);
-         localStorage.setItem('@TOKEN', response.data.token);
+         const response = await api.post("user/login", formData);
+         localStorage.setItem("@TOKEN", response.data.token);
          setUser(response.data.user);
-         navigate('/recipes');
+         navigate("/recipes");
       } catch (error) {
          toast.error(error.response.data.error);
       } finally {
          setLoading(false);
       }
-   } 
+   }
 
    async function userRegister(formData, setLoading) {
       try {
-        setLoading(true);  
-        const response = await api.post('user', formData);
-        toast.success(response.data.message);
+         setLoading(true);
+         const response = await api.post("user", formData);
+         toast.success(response.data.message);
       } catch (error) {
-        toast.error(error.response.data.error);  
+         toast.error(error.response.data.error);
       } finally {
-        setLoading(false);  
+         setLoading(false);
       }
-    }
+   }
 
-   function userLogout(){
-      localStorage.removeItem('@TOKEN');
+   function userLogout() {
+      localStorage.removeItem("@TOKEN");
       setUser(null);
-      navigate('/'); 
+      navigate("/");
    }
 
    return (
@@ -114,7 +113,7 @@ function App() {
                categoryList={categoryList}
                setCategoryList={setCategoryList}
                filter={filter}
-               setFilter={setFilter}     
+               setFilter={setFilter}
                addRecipeToFavoriteList={addRecipeToFavoriteList}
                search={search}
                setSearch={setSearch}
@@ -126,8 +125,8 @@ function App() {
                setDarkMode={setDarkMode}
                favoriteList={favoriteList}
                favoriteModal={favoriteModal}
-               setFavoriteModal={setFavoriteModal}              
-            />           
+               setFavoriteModal={setFavoriteModal}
+            />
          </div>
 
          <ToastContainer
