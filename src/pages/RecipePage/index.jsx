@@ -3,11 +3,12 @@ import RecipeCategories from "../../components/RecipeCategories";
 import RecipeList from "../../components/RecipeList";
 import Header from "../../components/Header";
 import { api } from "../../api/api";
-import SearchForm from "../../components/SearchForm";
+import SearchForm from "../../components/SearchSection/SearchForm";
 import { StyledTitle } from "../../styles/typography";
 import { StyledButton } from "../../styles/buttons";
 import { StyledContainer } from "../../styles/grid";
 import { StyledRecipePage } from "./style";
+import SearchSection from "../../components/SearchSection";
 
 const RecipePage = ({
    recipeList,
@@ -72,20 +73,7 @@ const RecipePage = ({
                />
 
                <StyledContainer>
-                  {search && (
-                     <>
-                        <StyledTitle tag="h2" fontSize="one" fontWeight={700}>
-                           Resultados de busca para: {search}
-                        </StyledTitle>
-                        <StyledButton buttonStyle="solid1" buttonSize="default" onClick={() => setSearch("")}>
-                           Limpar busca
-                        </StyledButton>
-                     </>
-                  )}
-                  <SearchForm setSearch={setSearch} />
-                  <StyledTitle tag="h1" fontSize="one" fontWeight={700}>
-                     As melhores receitas do momento.
-                  </StyledTitle>
+                  <SearchSection search={search} setSearch={setSearch} />
                   <RecipeCategories recipeList={recipeList} categoryList={categoryList} filter={filter} setFilter={setFilter}  />
                   <RecipeList filteredRecipeList={filteredRecipeList} addRecipeToFavoriteList={addRecipeToFavoriteList} />
                </StyledContainer>
