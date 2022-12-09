@@ -4,8 +4,14 @@ import { StyledButton } from "../../styles/buttons";
 import { StyledContainer } from "../../styles/grid";
 import { StyledHeader, StyledHeaderFlexBox } from "./style";
 import { MdFavorite, MdDarkMode, MdLightMode } from "react-icons/md"
+import { useContext } from "react";
+import { UserContext } from "../../providers/UserContext";
+import { FavoriteContext } from "../../providers/FavoriteContext";
 
-const Header = ({ user, userLogout, darkMode, setDarkMode, favoriteList, favoriteModal, setFavoriteModal }) => {
+const Header = ({ darkMode, setDarkMode }) => {
+   const { user, userLogout } = useContext(UserContext);
+   const { favoriteModal, setFavoriteModal, favoriteList} = useContext(FavoriteContext);
+   
    return (
       <StyledHeader>
          <StyledContainer>

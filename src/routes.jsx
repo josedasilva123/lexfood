@@ -4,55 +4,20 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import RecipePage from "./pages/RecipePage";
 import ProtectedRoutes from "./components/ProtectedRoutes";
+import { RecipeProvider } from "./providers/RecipeContext";
 
-const RoutesComponent = ({
-   recipeList,
-   setRecipeList,
-   filteredRecipeList,
-   categoryList,
-   setCategoryList,
-   filter,
-   setFilter,
-   addRecipeToFavoriteList,
-   search,
-   setSearch,
-   user,
-   userLogin,
-   userLogout,
-   userRegister,
-   darkMode,
-   setDarkMode,
-   favoriteList,
-   favoriteModal,
-   setFavoriteModal   
-}) => {
+const RoutesComponent = ({ darkMode, setDarkMode }) => {
    return (
       <Routes>
-         <Route path="/" element={<LoginPage userLogin={userLogin} />} />
-         <Route path="/register" element={<RegisterPage userRegister={userRegister} />} />
-         <Route path="/recipes" element={<ProtectedRoutes user={user} />}>
+         <Route path="/" element={<LoginPage />} />
+         <Route path="/register" element={<RegisterPage />} />
+         <Route path="/recipes" element={<ProtectedRoutes />}>
             <Route
                index
                element={
-                  <RecipePage
-                     recipeList={recipeList}
-                     setRecipeList={setRecipeList}
-                     filteredRecipeList={filteredRecipeList}
-                     categoryList={categoryList}
-                     setCategoryList={setCategoryList}
-                     filter={filter}
-                     setFilter={setFilter}                  
-                     addRecipeToFavoriteList={addRecipeToFavoriteList}
-                     search={search}
-                     setSearch={setSearch}
-                     user={user}
-                     userLogout={userLogout}
-                     darkMode={darkMode}
-                     setDarkMode={setDarkMode}
-                     favoriteList={favoriteList}
-                     favoriteModal={favoriteModal}
-                     setFavoriteModal={setFavoriteModal}                   
-                  />
+                  <RecipeProvider>
+                     <RecipePage darkMode={darkMode} setDarkMode={setDarkMode} />
+                  </RecipeProvider>
                }
             />
          </Route>
