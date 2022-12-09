@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
+import { RecipeContext } from "../../providers/RecipeContext";
 import { StyledButton } from "../../styles/buttons";
 import { StyledTitle } from "../../styles/typography";
 import SearchForm from "./SearchForm";
 import { StyledSearchResults, StyledSearchSection } from "./style";
 
-const SearchSection = ({search, setSearch}) => {
+const SearchSection = () => {
+   const { search, setSearch } = useContext(RecipeContext);
    return (
       <StyledSearchSection>        
-         <SearchForm setSearch={setSearch} />
+         <SearchForm />
          {search && (
             <StyledSearchResults>
                <StyledTitle tag="h2" fontSize="two" fontWeight={700}>

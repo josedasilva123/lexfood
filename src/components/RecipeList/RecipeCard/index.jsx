@@ -3,8 +3,12 @@ import { StyledButton } from "../../../styles/buttons";
 import { StyledParagraph, StyledTitle } from "../../../styles/typography";
 import { StyledRecipeCard } from "./style";
 import { MdFavorite } from "react-icons/md"
+import { useContext } from "react";
+import { FavoriteContext } from "../../../providers/FavoriteContext";
 
-const RecipeCard = ({ recipe, addRecipeToFavoriteList }) => {
+const RecipeCard = ({ recipe }) => {
+   const { addRecipeToFavoriteList } = useContext(FavoriteContext);
+   
    return (
       <StyledRecipeCard>
          <img src={recipe.thumbnail_url} alt={recipe.title} />

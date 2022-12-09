@@ -3,10 +3,13 @@ import FavoriteCard from "./FavoriteCard";
 import { StyledFavoriteList, StyledFavoriteListUL } from "./style";
 import { MdClose } from "react-icons/md";
 import { StyledParagraph, StyledTitle } from "../../styles/typography";
-import { useOutclick } from "../../hooks/useOutclick";
+import { useContext } from "react";
+import { FavoriteContext } from "../../providers/FavoriteContext";
 
-const FavoriteList = ({ favoriteList, removeRecipeFromFavoriteList, addReviewOnFavoriteRecipe, setFavoriteModal }) => {
+const FavoriteList = () => {
    const [isClosing, setClosing] = useState(false);
+
+   const { setFavoriteModal, favoriteList } = useContext(FavoriteContext);
 
    function closeModal(){
       setClosing(true);
@@ -31,8 +34,6 @@ const FavoriteList = ({ favoriteList, removeRecipeFromFavoriteList, addReviewOnF
                   <FavoriteCard
                      key={recipe._id}
                      recipe={recipe}
-                     addReviewOnFavoriteRecipe={addReviewOnFavoriteRecipe}
-                     removeRecipeFromFavoriteList={removeRecipeFromFavoriteList}
                   />
                )) : (
                   <StyledParagraph>Adicione um favorito</StyledParagraph>

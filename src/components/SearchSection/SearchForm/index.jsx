@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { MdSearch } from "react-icons/md";
 import { StyledSearchForm } from "./style";
 import { StyledForm } from "../../../styles/form";
 import { StyledButton } from "../../../styles/buttons";
+import { RecipeContext } from "../../../providers/RecipeContext";
 
-const SearchForm = ({ setSearch }) => {
+const SearchForm = () => {
    const [searchInput, setSearchInput] = useState("");
+   const { setSearch } = useContext(RecipeContext);
 
    function submit(event) {
       event.preventDefault();

@@ -1,19 +1,22 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { StyledButton } from "../../../styles/buttons";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Input from "../Input";
 import { loginSchema } from "./loginSchema";
 import { StyledFieldError, StyledForm } from "../../../styles/form";
+import { UserContext } from "../../../providers/UserContext";
 
-const LoginForm = ({ userLogin }) => {
+const LoginForm = () => {
    const [loading, setLoading] = useState(false);
+
+   /* importador */
+   const { userLogin } = useContext(UserContext);
 
    const {
       register,
       handleSubmit,
       formState: { errors },
-      getValues
    } = useForm({
       resolver: yupResolver(loginSchema),
    });
@@ -23,8 +26,7 @@ const LoginForm = ({ userLogin }) => {
    };
 
    return (
-      <StyledForm onSubmit={handleSubmit(submit)}>
-         
+      <StyledForm onSubmit={handleSubmit(submit)}>         
          <Input
             id="email"
             label="E-mail"

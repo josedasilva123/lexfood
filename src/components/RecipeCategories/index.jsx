@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import { RecipeContext } from "../../providers/RecipeContext";
 import { StyledButton } from "../../styles/buttons";
 import { StyledRecipeCategories } from "./style";
 
-const RecipeCategories = ({ recipeList, categoryList, filter, setFilter }) => {
+const RecipeCategories = () => {
+   const { categoryList, recipeList, filter, setFilter } = useContext(RecipeContext);
    const filteredCategoryList = categoryList.filter((category) => recipeList.some((recipe) => recipe.categories.includes(category.slug)));
 
    return (
