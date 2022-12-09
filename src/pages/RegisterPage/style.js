@@ -26,6 +26,6 @@ export const StyledRegisterPageFlexBox = styled.div`
         gap: 40px;
 
         width: 100%;
-        max-width: 600px;
+        max-width: 500px;
     }
 `

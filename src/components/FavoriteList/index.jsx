@@ -16,10 +16,9 @@ const FavoriteList = ({ favoriteList, removeRecipeFromFavoriteList, addReviewOnF
       }, 600)     
    }
 
-   const modalRef = useOutclick(() => closeModal());
-   
+  
    return (
-      <StyledFavoriteList isClosing={isClosing} ref={modalRef}>
+      <StyledFavoriteList isClosing={isClosing}>
          <div>
             <button onClick={() => closeModal()} disabled={isClosing}>
                <MdClose size={21} />

@@ -80,7 +80,7 @@ function App() {
    async function userRegister(formData, setLoading) {
       try {
          setLoading(true);
-         const response = await api.post("user", formData);
+         const response = await api.post("user", formData);         
          toast.success(response.data.message);
       } catch (error) {
          toast.error(error.response.data.error);

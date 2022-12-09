@@ -6,6 +6,7 @@ export const useOutclick = (callback) => {
 
     useEffect(() => {
         function handleOutclick(event){
+
             if(!ref.current.contains(event.target)){
                 callback();
             }

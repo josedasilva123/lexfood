@@ -19,3 +19,4 @@ export const AnimationFadeOut = keyframes`
         opacity: 0;
     }
 `
+ 

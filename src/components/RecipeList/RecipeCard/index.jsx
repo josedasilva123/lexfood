@@ -11,7 +11,10 @@ const RecipeCard = ({ recipe, addRecipeToFavoriteList }) => {
          <div className="content">
             <StyledTitle tag="h3" fontSize="four">{recipe.title}</StyledTitle>
             <StyledParagraph>{recipe.content}</StyledParagraph>
-            <StyledButton buttonStyle="outline1" buttonSize="default" onClick={() => addRecipeToFavoriteList(recipe)}>
+            <StyledButton buttonStyle="outline1" buttonSize="default" onClick={(event) => {
+               event.stopPropagation();
+               addRecipeToFavoriteList(recipe)
+            }}>
                <MdFavorite size={21} /> Favoritar
             </StyledButton>
          </div>
