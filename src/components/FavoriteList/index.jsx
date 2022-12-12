@@ -31,7 +31,7 @@ const FavoriteList = () => {
             <StyledFavoriteListUL>
                {favoriteRecipes.length > 0 ? favoriteRecipes.map((recipe) => (
                   <FavoriteCard
-                     key={recipe.id}
+                     key={recipe.recipeId}
                      recipe={recipe}
                   />
                )) : (

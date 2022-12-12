@@ -12,17 +12,20 @@ export const FavoriteProvider = ({ children }) => {
    const [favoriteModal, setFavoriteModal] = useState(false);
 
    async function addRecipeToFavoriteList(recipe) {
-      if(!favoriteRecipes.some(currentRecipe => currentRecipe.id === recipe._id)){
+      if(!favoriteRecipes.some(currentRecipe => currentRecipe.recipeId === recipe._id)){
+
+         const newRecipe = {
+            recipeId: recipe._id,
+            title: recipe.title,
+            thumbnail_url: recipe.thumbnail_url,
+         }
+
          try {
             const token = localStorage.getItem("@TOKEN");
             //Atualizando o back-end
             const response = await api.post(
                "favorite",
-               {
-                  recipeId: recipe._id,
-                  title: recipe.title,
-                  thumbnail_url: recipe.thumbnail_url,
-               },
+               newRecipe,
                {
                   headers: {
                      auth: token,
@@ -33,11 +36,7 @@ export const FavoriteProvider = ({ children }) => {
             //Atualizando o front-end
             setFavoriteRecipes([
                ...favoriteRecipes,
-               {
-                  id: recipe._id,
-                  title: recipe.title,
-                  thumbnail_url: recipe.thumbnail_url,
-               },
+               newRecipe
             ]);
          } catch (error) {
             toast.error(error.response.data.error);
@@ -61,7 +60,7 @@ export const FavoriteProvider = ({ children }) => {
          toast.success(response.data.message);
 
          //Atualizar front-end
-         const newRecipeList = favoriteRecipes.filter((recipe) => recipe.id !== recipeId);
+         const newRecipeList = favoriteRecipes.filter((recipe) => recipe.recipeId !== recipeId);
          setFavoriteRecipes(newRecipeList);
       } catch (error) {
          toast.error(error.response.data.error);
