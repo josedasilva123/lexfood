@@ -10,6 +10,8 @@ export const buttonCSS = css`
    border-radius: 255px;
    transition: 0.4s;
 
+   font-size: 1rem;
+
    &:hover {
       filter: brightness(1.2);
    }

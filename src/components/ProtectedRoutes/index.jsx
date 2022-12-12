@@ -1,8 +1,11 @@
-import React, { useEffect} from 'react'
+import React, { useContext, useEffect} from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
+import { UserContext } from '../../providers/UserContext';
 
-const ProtectedRoutes = ({user}) => {
+const ProtectedRoutes = () => {
   const navigate = useNavigate();
+
+  const { user } = useContext(UserContext);
   
   useEffect(() => {
     if(!user){

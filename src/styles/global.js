@@ -8,6 +8,7 @@ export const GlobalStyle = createGlobalStyle`
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        border: none;
     }
 
     button{
@@ -25,7 +26,7 @@ export const GlobalStyle = createGlobalStyle`
         list-style: none;
     }
 
-    h1, h2, h3, h4, h5, h6, p, a, span, li, button, input{
+    h1, h2, h3, h4, h5, h6, p, a, span, li, button, label, input{
         font-family: 'Roboto', sans-serif;
     }
 `;

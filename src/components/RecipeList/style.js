@@ -9,7 +9,7 @@ export const StyledRecipeList = styled.ul`
         grid-template-columns: repeat(2, 1fr);
    }
 
-   @media (max-width: 450px) {      
+   @media (max-width: 520px) {      
         grid-template-columns: 1fr;      
    }
 `;

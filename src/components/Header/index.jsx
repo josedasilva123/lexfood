@@ -4,8 +4,16 @@ import { StyledButton } from "../../styles/buttons";
 import { StyledContainer } from "../../styles/grid";
 import { StyledHeader, StyledHeaderFlexBox } from "./style";
 import { MdFavorite, MdDarkMode, MdLightMode } from "react-icons/md"
+import { useContext } from "react";
+import { UserContext } from "../../providers/UserContext";
+import { FavoriteContext } from "../../providers/FavoriteContext";
+import { DarkModeContext } from "../../providers/DarkModeContext";
 
-const Header = ({ user, userLogout, darkMode, setDarkMode, favoriteList, favoriteModal, setFavoriteModal }) => {
+const Header = () => {
+   const { user, userLogout } = useContext(UserContext);
+   const { favoriteModal, setFavoriteModal, favoriteRecipes } = useContext(FavoriteContext);
+   const { darkMode, setDarkMode } = useContext(DarkModeContext);
+   
    return (
       <StyledHeader>
          <StyledContainer>
@@ -22,9 +30,9 @@ const Header = ({ user, userLogout, darkMode, setDarkMode, favoriteList, favorit
                      <StyledButton buttonStyle="solid2" buttonSize="default" onClick={() => userLogout()}>
                         Sair
                      </StyledButton>
-                     <button class="favorite" onClick={() => setFavoriteModal(!favoriteModal)}>
+                     <button className="favorite" onClick={() => setFavoriteModal(!favoriteModal)}>
                         <MdFavorite size={21} />
-                        <span>({favoriteList.length})</span>
+                        <span>({favoriteRecipes.length})</span>
                      </button>
                      <button className="darkMode" onClick={() => setDarkMode(!darkMode)}>
                         {darkMode ? <MdLightMode size={21} /> : <MdDarkMode size={21} />}
