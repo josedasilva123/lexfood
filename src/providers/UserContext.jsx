@@ -10,6 +10,7 @@ export const UserContext = createContext({});
 export const UserProvider = ({ children }) => {
    const [globalLoading, setGlobalLoading] = useState(false);
    const [user, setUser] = useState(null);
+   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
 
    const navigate = useNavigate();
 
@@ -26,6 +27,7 @@ export const UserProvider = ({ children }) => {
                   },
                });
                setUser(response.data.user);
+               setFavoriteRecipes(response.data.user.favoriteRecipes);
                navigate("/recipes");
             } catch (error) {
                console.log(error);
@@ -42,6 +44,7 @@ export const UserProvider = ({ children }) => {
          const response = await api.post("user/login", formData);
          localStorage.setItem("@TOKEN", response.data.token);
          setUser(response.data.user);
+         setFavoriteRecipes(response.data.user.favoriteRecipes);
          navigate("/recipes");
       } catch (error) {
          toast.error(error.response.data.error);
@@ -68,5 +71,9 @@ export const UserProvider = ({ children }) => {
       navigate("/");
    }
 
-   return <UserContext.Provider value={{ user, userLogin, userRegister, userLogout, globalLoading }}>{children}</UserContext.Provider>;
+   return (
+      <UserContext.Provider value={{ user, userLogin, userRegister, userLogout, globalLoading, favoriteRecipes, setFavoriteRecipes }}>
+         {children}
+      </UserContext.Provider>
+   );
 };

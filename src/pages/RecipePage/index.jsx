@@ -12,11 +12,7 @@ import SearchSection from "../../components/SearchSection";
 import { useContext } from "react";
 import { RecipeContext } from "../../providers/RecipeContext";
 
-const RecipePage = ({
-   darkMode,
-   setDarkMode,
-
-}) => {
+const RecipePage = () => {
    const { loading } = useContext(RecipeContext);
 
    return (
@@ -25,10 +21,7 @@ const RecipePage = ({
             <h1>Carregando...</h1>
          ) : (
             <>
-               <Header
-                  darkMode={darkMode}
-                  setDarkMode={setDarkMode}
-               />
+               <Header />
 
                <StyledContainer>
                   <SearchSection />
