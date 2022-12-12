@@ -1,21 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { darkTheme, mainTheme } from "./styles/theme";
-import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FavoriteList from "./components/FavoriteList";
 import RoutesComponent from "./routes";
-import { api } from "./api/api";
-import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { FavoriteContext } from "./providers/FavoriteContext";
 import { UserContext } from "./providers/UserContext";
+import { DarkModeContext } from "./providers/DarkModeContext";
 
 function App() {
    const { globalLoading } = useContext(UserContext);
    const { favoriteModal } = useContext(FavoriteContext);  
-
-   const [darkMode, setDarkMode] = useState(false);
+   const { darkMode } = useContext(DarkModeContext);   
    
    return (
       <ThemeProvider theme={darkMode ? darkTheme : mainTheme}>
@@ -26,8 +23,6 @@ function App() {
                <>
                   {favoriteModal && <FavoriteList />}
                   <RoutesComponent
-                     darkMode={darkMode}
-                     setDarkMode={setDarkMode}
                   />
                </>
             )}

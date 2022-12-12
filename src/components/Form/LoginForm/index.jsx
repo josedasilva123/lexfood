@@ -4,7 +4,7 @@ import { StyledButton } from "../../../styles/buttons";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Input from "../Input";
 import { loginSchema } from "./loginSchema";
-import { StyledFieldError, StyledForm } from "../../../styles/form";
+import { StyledForm } from "../../../styles/form";
 import { UserContext } from "../../../providers/UserContext";
 
 const LoginForm = () => {
@@ -34,8 +34,7 @@ const LoginForm = () => {
             placeholder="Seu e-mail"
             register={register("email")}           
             error={errors.email}
-            disabled={loading}
- 
+            disabled={loading} 
          />
 
          <Input

@@ -9,7 +9,7 @@ import { FavoriteContext } from "../../providers/FavoriteContext";
 const FavoriteList = () => {
    const [isClosing, setClosing] = useState(false);
 
-   const { setFavoriteModal, favoriteList } = useContext(FavoriteContext);
+   const { setFavoriteModal, favoriteRecipes } = useContext(FavoriteContext);
 
    function closeModal(){
       setClosing(true);
@@ -18,7 +18,6 @@ const FavoriteList = () => {
          setClosing(false);
       }, 600)     
    }
-
   
    return (
       <StyledFavoriteList isClosing={isClosing}>
@@ -30,9 +29,9 @@ const FavoriteList = () => {
                Favoritos
             </StyledTitle>
             <StyledFavoriteListUL>
-               {favoriteList.length > 0 ? favoriteList.map((recipe) => (
+               {favoriteRecipes.length > 0 ? favoriteRecipes.map((recipe) => (
                   <FavoriteCard
-                     key={recipe._id}
+                     key={recipe.id}
                      recipe={recipe}
                   />
                )) : (

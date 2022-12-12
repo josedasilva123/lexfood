@@ -10,7 +10,7 @@ const FavoriteCard = ({ recipe }) => {
    return (
       <StyledFavoriteCard>
          <StyledTitle tag="h3" fontSize="four" fontWeight={700}>{recipe.title}</StyledTitle>
-         <button onClick={() => removeRecipeFromFavoriteList(recipe._id)}>
+         <button onClick={() => removeRecipeFromFavoriteList(recipe.id)}>
             <MdDelete size={21} />
          </button>
       </StyledFavoriteCard>

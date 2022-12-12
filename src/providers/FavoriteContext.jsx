@@ -1,53 +1,88 @@
 import { useContext, useEffect, useState } from "react";
 import { createContext } from "react";
 import { toast } from "react-toastify";
+import { api } from "../api/api";
 import { UserContext } from "./UserContext";
 
 export const FavoriteContext = createContext({});
 
-export const FavoriteProvider = ({ children }) => {  
+export const FavoriteProvider = ({ children }) => {
+   const { favoriteRecipes, setFavoriteRecipes } = useContext(UserContext);
 
-   const localStorageFavorites = localStorage.getItem("@FAVORITE_LIST");
-
-   const [favoriteList, setFavoriteList] = useState(localStorageFavorites ? JSON.parse(localStorageFavorites) : []);
    const [favoriteModal, setFavoriteModal] = useState(false);
 
-   useEffect(() => {
-      localStorage.setItem("@FAVORITE_LIST", JSON.stringify(favoriteList));
-   }, [favoriteList]);
-
-   function addRecipeToFavoriteList(recipe) {
-      if (!favoriteList.some((favoriteRecipe) => favoriteRecipe._id === recipe._id)) {
-         setFavoriteList([...favoriteList, recipe]);
-         setFavoriteModal(true);
-         toast.success("Receita favoritada com sucesso!");
+   async function addRecipeToFavoriteList(recipe) {
+      if(!favoriteRecipes.some(currentRecipe => currentRecipe.id === recipe._id)){
+         try {
+            const token = localStorage.getItem("@TOKEN");
+            //Atualizando o back-end
+            const response = await api.post(
+               "favorite",
+               {
+                  recipeId: recipe._id,
+                  title: recipe.title,
+                  thumbnail_url: recipe.thumbnail_url,
+               },
+               {
+                  headers: {
+                     auth: token,
+                  },
+               }
+            );
+            toast.success(response.data.message);
+            //Atualizando o front-end
+            setFavoriteRecipes([
+               ...favoriteRecipes,
+               {
+                  id: recipe._id,
+                  title: recipe.title,
+                  thumbnail_url: recipe.thumbnail_url,
+               },
+            ]);
+         } catch (error) {
+            toast.error(error.response.data.error);
+         }
       } else {
-         toast.error("Essa receita já está favoritada.");
+         toast.error("Está receita já consta na lista favoritos.")
+      }
+      
+   }
+
+   async function removeRecipeFromFavoriteList(recipeId) {
+      try {
+         const token = localStorage.getItem("@TOKEN");
+         //Atualizando o back-end
+         const response = await api.delete(`favorite/${recipeId}`, {
+            headers: {
+               auth: token,
+            },
+         });
+
+         toast.success(response.data.message);
+
+         //Atualizar front-end
+         const newRecipeList = favoriteRecipes.filter((recipe) => recipe.id !== recipeId);
+         setFavoriteRecipes(newRecipeList);
+      } catch (error) {
+         toast.error(error.response.data.error);
       }
    }
 
-   function removeRecipeFromFavoriteList(recipeId) {
-      const newList = favoriteList.filter((recipe) => recipe._id !== recipeId);
-      setFavoriteList(newList);
-      toast.warn("Receita desfavoritada com sucesso!");
-   }
-
    function addReviewOnFavoriteRecipe(recipeId, review) {
-      //Utilizar o map para alterar um item específico de uma lista
-      const newList = favoriteList.map((recipe) => {
+      const newList = favoriteRecipes.map((recipe) => {
          if (recipe._id === recipeId) {
             return { ...recipe, review: review };
          } else {
             return recipe;
          }
       });
-      setFavoriteList(newList);
+      setFavoriteRecipes(newList);
    }
 
    return (
       <FavoriteContext.Provider
          value={{
-            favoriteList,
+            favoriteRecipes,
             favoriteModal,
             setFavoriteModal,
             addRecipeToFavoriteList,
