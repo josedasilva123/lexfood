@@ -45,7 +45,6 @@ const LoginForm = () => {
             register={register("password")}
             error={errors.password}
             disabled={loading}
-
          />
 
          <StyledButton type="submit" buttonStyle="solid1" buttonSize="big" disabled={loading}>

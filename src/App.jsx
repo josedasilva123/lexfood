@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import { darkTheme, mainTheme } from "./styles/theme";
 import "react-toastify/dist/ReactToastify.css";

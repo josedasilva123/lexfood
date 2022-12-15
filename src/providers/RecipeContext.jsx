@@ -41,8 +41,27 @@ export const RecipeProvider = ({ children }) => {
       })();
    });
 
+   const recipeCreate = async (formData) => {
+      const token = localStorage.getItem("@TOKEN");
+      try {
+         //Atualizou o back-end
+          const response = await api.post('recipe', formData, {
+              headers: {
+                  "Content-Type": "multipart/form-data",
+                  auth: token
+              }
+          })
+          /* response.data.recipe === receita nova */
+          setRecipeList([...recipeList, response.data.recipe]);
+          // 
+          console.log(response);
+      } catch (error) {
+          console.log(error);
+      }
+    }
+
    return (
-      <RecipeContext.Provider value={{ categoryList, recipeList, filteredRecipeList, filter, setFilter, search, setSearch, loading }}>
+      <RecipeContext.Provider value={{ categoryList, recipeList, filteredRecipeList, filter, setFilter, search, setSearch, loading, recipeCreate }}>
          {children}
       </RecipeContext.Provider>
    );

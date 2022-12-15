@@ -11,6 +11,7 @@ import { StyledRecipePage } from "./style";
 import SearchSection from "../../components/SearchSection";
 import { useContext } from "react";
 import { RecipeContext } from "../../providers/RecipeContext";
+import CreateRecipeForm from "../../components/Form/CreateRecipeForm";
 
 const RecipePage = () => {
    const { loading } = useContext(RecipeContext);
@@ -22,7 +23,7 @@ const RecipePage = () => {
          ) : (
             <>
                <Header />
-
+               <CreateRecipeForm />
                <StyledContainer>
                   <SearchSection />
                   <RecipeCategories />

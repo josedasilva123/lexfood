@@ -8,7 +8,7 @@ import { api } from "../api/api";
 export const UserContext = createContext({});
 
 export const UserProvider = ({ children }) => {
-   const [globalLoading, setGlobalLoading] = useState(false);
+   const [globalLoading, setGlobalLoading] = useState(false); /* true | false */
    const [user, setUser] = useState(null);
    const [favoriteRecipes, setFavoriteRecipes] = useState([]);
 
