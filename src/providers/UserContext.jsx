@@ -38,7 +38,7 @@ export const UserProvider = ({ children }) => {
       })();
    }, []);
 
-   async function userLogin(formData, setLoading, callback) {
+   async function userLogin(formData, setLoading) {
       try {
          setLoading(true);
          const response = await api.post("user/login", formData);

@@ -43,8 +43,7 @@ export const FavoriteProvider = ({ children }) => {
          }
       } else {
          toast.error("Está receita já consta na lista favoritos.")
-      }
-      
+      }      
    }
 
    async function removeRecipeFromFavoriteList(recipeId) {
