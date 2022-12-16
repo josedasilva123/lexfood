@@ -14,7 +14,8 @@ export const StyledForm = styled.form`
    input[type="text"],
    input[type="email"],
    input[type="password"],
-   input[type="password"] {
+   input[type="password"],
+   select {
       background: ${({ theme }) => theme.colors.lightgray};
       width: 100%;
       padding: 0 20px;

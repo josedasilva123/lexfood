@@ -33,6 +33,11 @@ export const buttonCSS = css`
                padding: 0 1.75rem;
                height: 40px;
             `;
+         case "round":
+            return css`
+               width: 40px;
+               height: 40px;
+            `   
       }
    }}
 
