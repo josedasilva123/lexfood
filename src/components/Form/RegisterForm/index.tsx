@@ -1,11 +1,18 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useState, useContext } from "react";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { UserContext } from "../../../providers/UserContext";
 import { StyledButton } from "../../../styles/buttons";
 import { StyledForm } from "../../../styles/form";
 import Input from "../Input";
 import { registerSchema } from "./registerSchema";
+
+export interface iRegisterFormValues{
+   name: string;
+   email: string;
+   password: string;
+   confirmPassword: string;
+}
 
 const RegisterForm = () => {
    const [loading, setLoading] = useState(false);
@@ -17,12 +24,12 @@ const RegisterForm = () => {
       handleSubmit,
       formState: { errors },
       reset,
-   } = useForm({
+   } = useForm<iRegisterFormValues>({
       mode: "onBlur",
       resolver: yupResolver(registerSchema),
    });
 
-   const submit = async (data) => {
+   const submit: SubmitHandler<iRegisterFormValues> = async (data) => {
       await userRegister(data, setLoading);
       reset({
          name: "Batatinha",

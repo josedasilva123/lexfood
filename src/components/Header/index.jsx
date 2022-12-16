@@ -10,8 +10,8 @@ import { FavoriteContext } from "../../providers/FavoriteContext";
 import { DarkModeContext } from "../../providers/DarkModeContext";
 
 const Header = () => {
-   const { user, userLogout } = useContext(UserContext);
-   const { favoriteModal, setFavoriteModal, favoriteRecipes } = useContext(FavoriteContext);
+   const { user, userLogout, favoriteRecipes } = useContext(UserContext);
+   const { favoriteModal, setFavoriteModal } = useContext(FavoriteContext);
    const { darkMode, setDarkMode } = useContext(DarkModeContext);
    
    return (

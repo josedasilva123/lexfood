@@ -1,11 +1,16 @@
 import React, { useContext, useState } from "react";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { StyledButton } from "../../../styles/buttons";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Input from "../Input";
 import { loginSchema } from "./loginSchema";
 import { StyledForm } from "../../../styles/form";
 import { UserContext } from "../../../providers/UserContext";
+
+export interface iLoginFormValues{
+   email: string;
+   password: string;
+}
 
 const LoginForm = () => {
    const [loading, setLoading] = useState(false);
@@ -17,11 +22,11 @@ const LoginForm = () => {
       register,
       handleSubmit,
       formState: { errors },
-   } = useForm({
+   } = useForm<iLoginFormValues>({
       resolver: yupResolver(loginSchema),
    });
 
-   const submit = (data) => {
+   const submit: SubmitHandler<iLoginFormValues> = (data) => {
       userLogin(data, setLoading);
    };
 

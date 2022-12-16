@@ -2,7 +2,12 @@
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 
-export const buttonCSS = css`
+interface iStyledButtonProps{
+   buttonSize: "default" | "big" | "small"
+   buttonStyle: "solid1" | "solid2" | "outline1" | "outline2";
+}
+
+export const buttonCSS = css<iStyledButtonProps>`
    display: inline-flex;
    align-items: center;
    justify-content: center;
@@ -74,10 +79,10 @@ export const buttonCSS = css`
    }}
 `;
 
-export const StyledButton = styled.button`
+export const StyledButton = styled.button<iStyledButtonProps>`
    ${buttonCSS}
 `;
 
-export const StyledLinkButton = styled(Link)`
+export const StyledLinkButton = styled(Link)<iStyledButtonProps>`
    ${buttonCSS}
 `;

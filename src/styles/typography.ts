@@ -2,7 +2,13 @@
 import styled, { css } from "styled-components";
 import BaseTitle from "./components/BaseTitle";
 
-export const StyledTitle = styled(BaseTitle)`
+interface iStyledTitleProps{
+   textAlign: string | number;
+   fontWeight: string | number;
+   fontSize: "one" | "two" | "three" | "four";
+}
+
+export const StyledTitle = styled(BaseTitle)<iStyledTitleProps>`
    text-align: ${({ textAlign }) => textAlign};
    font-weight: ${({ fontWeight }) => fontWeight};
 
