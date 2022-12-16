@@ -37,31 +37,40 @@ const RecipeCreateForm = () => {
    };
 
    return (
-      <StyledForm onSubmit={handleSubmit(submit)}>
-         <Input id="title" label="Título:" type="text" placeholder="Digite um título" register={register("title")} error={errors.title} />
-         <Input
-            id="content"
-            label="Conteúdo:"
-            type="text"
-            placeholder="Digite um conteúdo"
-            register={register("content")}
-            error={errors.title}
-         />
+      <>
+         <StyledForm onSubmit={handleSubmit(submit)}>
+            <Input
+               id="title"
+               label="Título:"
+               type="text"
+               placeholder="Digite um título"
+               register={register("title")}
+               error={errors.title}
+            />
+            <Input
+               id="content"
+               label="Conteúdo:"
+               type="text"
+               placeholder="Digite um conteúdo"
+               register={register("content")}
+               error={errors.title}
+            />
 
-         <label htmlFor="file">Selecione uma imagem de destaque:</label>
-         <input id="file" type="file" {...register("file")} />
+            <label htmlFor="file">Selecione uma imagem de destaque:</label>
+            <input id="file" type="file" {...register("file")} />
 
-         <Select id="category" label="category" register={register("category")} error={errors.category}>
-            <option value="">Escolha uma categoria</option>
-            {categoryList.map((category) => (
-               <option value={category.slug}>{category.name}</option>
-            ))}
-         </Select>
+            <Select id="category" label="category" register={register("category")} error={errors.category}>
+               <option value="">Escolha uma categoria</option>
+               {categoryList.map((category) => (
+                  <option value={category.slug}>{category.name}</option>
+               ))}
+            </Select>
 
-         <StyledButton type="submit" buttonStyle="solid1" buttonSize="big">
-            Enviar
-         </StyledButton>
-      </StyledForm>
+            <StyledButton type="submit" buttonStyle="solid1" buttonSize="big">
+               Enviar
+            </StyledButton>
+         </StyledForm>
+      </>
    );
 };
 
