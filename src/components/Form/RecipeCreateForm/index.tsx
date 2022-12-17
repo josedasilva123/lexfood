@@ -1,3 +1,4 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useContext } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { RecipeContext } from "../../../providers/RecipeContext/RecipeContext";
@@ -7,6 +8,7 @@ import { StyledForm } from "../../../styles/form";
 import Input from "../Input";
 import Select from "../Select";
 import { iRecipeCreateFormValues } from "./@types";
+import { recipeCreateSchema } from "./recipeCreateSchema";
 
 const RecipeCreateForm = () => {
    const { user } = useContext(UserContext);
@@ -16,7 +18,9 @@ const RecipeCreateForm = () => {
       register,
       handleSubmit,
       formState: { errors },
-   } = useForm<iRecipeCreateFormValues>();
+   } = useForm<iRecipeCreateFormValues>({
+      resolver: yupResolver(recipeCreateSchema)
+   });
 
    const submit: SubmitHandler<iRecipeCreateFormValues> = (formData) => {
       const newRecipe = {
