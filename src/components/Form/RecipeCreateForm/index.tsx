@@ -6,13 +6,7 @@ import { StyledButton } from "../../../styles/buttons";
 import { StyledForm } from "../../../styles/form";
 import Input from "../Input";
 import Select from "../Select";
-
-interface iRecipeCreateFormValues{
-   title: string;
-   content: string;
-   file: File[];
-   category: string;
-}
+import { iRecipeCreateFormValues } from "./@types";
 
 const RecipeCreateForm = () => {
    const { user } = useContext(UserContext);
