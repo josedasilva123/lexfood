@@ -2,7 +2,12 @@
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 
-export const buttonCSS = css`
+interface StyledButtonProps{ 
+   buttonSize: 'default' | 'big' | 'small' | 'round';
+   buttonStyle: 'solid1' | 'solid2' | 'outline1' | 'outline2';
+}
+
+export const buttonCSS = css<StyledButtonProps>`
    display: inline-flex;
    align-items: center;
    justify-content: center;
