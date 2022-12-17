@@ -1,13 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useRef } from "react";
 
-export const useOutclick = (callback) => {
-    const ref = useRef(null);
+export const useOutclick = <Element extends globalThis.Element>(callback: () => void) => {
+    const ref = useRef<Element>(null);
 
     useEffect(() => {
-        function handleOutclick(event){
-
-            if(!ref.current.contains(event.target)){
+        function handleOutclick(event: MouseEvent){
+            if(!ref.current?.contains(event.target as Element)){
                 callback();
             }
         }
