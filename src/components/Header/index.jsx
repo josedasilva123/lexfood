@@ -5,7 +5,7 @@ import { StyledContainer } from "../../styles/grid";
 import { StyledHeader, StyledHeaderFlexBox } from "./style";
 import { MdFavorite, MdDarkMode, MdLightMode } from "react-icons/md"
 import { useContext } from "react";
-import { UserContext } from "../../providers/UserContext";
+import { UserContext } from "../../providers/UserContext/UserContext";
 import { FavoriteContext } from "../../providers/FavoriteContext";
 import { DarkModeContext } from "../../providers/DarkModeContext";
 

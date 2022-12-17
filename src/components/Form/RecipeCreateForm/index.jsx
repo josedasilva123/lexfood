@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { RecipeContext } from "../../../providers/RecipeContext";
-import { UserContext } from "../../../providers/UserContext";
+import { UserContext } from "../../../providers/UserContext/UserContext";
 import { StyledButton } from "../../../styles/buttons";
 import { StyledForm } from "../../../styles/form";
 import Input from "../Input";

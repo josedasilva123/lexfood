@@ -1,10 +1,11 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useState, useContext } from "react";
-import { useForm } from "react-hook-form";
-import { UserContext } from "../../../providers/UserContext";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { UserContext } from "../../../providers/UserContext/UserContext";
 import { StyledButton } from "../../../styles/buttons";
 import { StyledForm } from "../../../styles/form";
 import Input from "../Input";
+import { iUserRegisterFormValues } from "./@types";
 import { registerSchema } from "./registerSchema";
 
 const RegisterForm = () => {
@@ -17,12 +18,12 @@ const RegisterForm = () => {
       handleSubmit,
       formState: { errors },
       reset,
-   } = useForm({
+   } = useForm<iUserRegisterFormValues>({
       mode: "onBlur",
       resolver: yupResolver(registerSchema),
    });
 
-   const submit = async (data) => {
+   const submit: SubmitHandler<iUserRegisterFormValues> = async (data) => {
       await userRegister(data, setLoading);
       reset({
          name: "Batatinha",

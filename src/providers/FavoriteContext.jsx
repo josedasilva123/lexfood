@@ -1,8 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { createContext } from "react";
 import { toast } from "react-toastify";
 import { api } from "../api/api";
-import { UserContext } from "./UserContext";
+import { UserContext } from "./UserContext/UserContext";
 
 export const FavoriteContext = createContext({});
 

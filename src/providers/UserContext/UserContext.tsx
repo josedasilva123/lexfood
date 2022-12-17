@@ -1,16 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { AxiosError } from "axios";
 import { useEffect } from "react";
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { api } from "../api/api";
+import { api } from "../../api/api";
+import { iUserLoginFormValues } from "../../components/Form/LoginForm/@types";
+import { iUserRegisterFormValues } from "../../components/Form/RegisterForm/@types";
+import { iContextProviderProps, iDefaultErrorResponse } from "../@types";
+import { iUserContext, iUser, iFavoriteRecipe, iUserAutoLoginResponse, iUserLoginResponse } from "./@types";
 
-export const UserContext = createContext({});
+export const UserContext = createContext({} as iUserContext);
 
-export const UserProvider = ({ children }) => {
-   const [globalLoading, setGlobalLoading] = useState(false); /* true | false */
-   const [user, setUser] = useState(null);
-   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+export const UserProvider = ({ children }: iContextProviderProps) => {
+   const [globalLoading, setGlobalLoading] = useState(false);
+   const [user, setUser] = useState<iUser | null>(null);
+   const [favoriteRecipes, setFavoriteRecipes] = useState<iFavoriteRecipe[]>([]);
 
    const navigate = useNavigate();
 
@@ -21,7 +26,7 @@ export const UserProvider = ({ children }) => {
          if (token) {
             try {
                setGlobalLoading(true);
-               const response = await api.get("user/autologin", {
+               const response = await api.get<iUserAutoLoginResponse>("user/autologin", {
                   headers: {
                      auth: token,
                   },
@@ -38,28 +43,30 @@ export const UserProvider = ({ children }) => {
       })();
    }, []);
 
-   async function userLogin(formData, setLoading) {
+   async function userLogin(formData: iUserLoginFormValues, setLoading: React.Dispatch<React.SetStateAction<boolean>>) {
       try {
          setLoading(true);
-         const response = await api.post("user/login", formData);
+         const response = await api.post<iUserLoginResponse>("user/login", formData);
          localStorage.setItem("@TOKEN", response.data.token);
          setUser(response.data.user);
          setFavoriteRecipes(response.data.user.favoriteRecipes);
          navigate("/recipes");
       } catch (error) {
-         toast.error(error.response.data.error);
+         const currentError = error as AxiosError<iDefaultErrorResponse>;
+         toast.error(currentError.response?.data.error);
       } finally {
          setLoading(false);
       }
    }
 
-   async function userRegister(formData, setLoading) {
+   async function userRegister(formData: iUserRegisterFormValues, setLoading: React.Dispatch<React.SetStateAction<boolean>>) {
       try {
          setLoading(true);
          const response = await api.post("user", formData);
          toast.success(response.data.message);
       } catch (error) {
-         toast.error(error.response.data.error);
+         const currentError = error as AxiosError<iDefaultErrorResponse>;
+         toast.error(currentError.response?.data.error);
       } finally {
          setLoading(false);
       }
