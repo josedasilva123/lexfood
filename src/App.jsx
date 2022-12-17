@@ -5,7 +5,7 @@ import FavoriteList from "./components/FavoriteList";
 import RoutesComponent from "./routes";
 import { useContext } from "react";
 import { FavoriteContext } from "./providers/FavoriteContext";
-import { UserContext } from "./providers/UserContext";
+import { UserContext } from "./providers/UserContext/UserContext";
 import { DarkModeContext } from "./providers/DarkModeContext";
 
 function App() {

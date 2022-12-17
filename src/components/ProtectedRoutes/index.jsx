@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { RecipeProvider } from "../../providers/RecipeContext";
-import { UserContext } from "../../providers/UserContext";
+import { UserContext } from "../../providers/UserContext/UserContext";
 
 const ProtectedRoutes = () => {
    const navigate = useNavigate();
