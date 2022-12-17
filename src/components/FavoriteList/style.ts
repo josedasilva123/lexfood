@@ -1,7 +1,11 @@
 import styled, { css } from "styled-components";
 import { AnimationFade, AnimationFadeOut } from "../../styles/animations";
 
-export const StyledFavoriteList = styled.div`
+interface iStyledFavoriteListProps{
+   isClosing: boolean;
+}
+
+export const StyledFavoriteList = styled.div<iStyledFavoriteListProps>`
    position: fixed;
    width: 100%;
    max-width: 380px;

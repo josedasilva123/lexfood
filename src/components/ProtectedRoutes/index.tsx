@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { RecipeProvider } from "../../providers/RecipeContext/RecipeContext";

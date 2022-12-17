@@ -5,8 +5,13 @@ import { StyledRecipeCard } from "./style";
 import { MdFavorite } from "react-icons/md"
 import { useContext } from "react";
 import { FavoriteContext } from "../../../providers/FavoriteContext/FavoriteContext";
+import { iRecipe } from "../../../providers/RecipeContext/@types";
 
-const RecipeCard = ({ recipe }) => {
+interface iRecipeCardProps{
+   recipe: iRecipe;
+}
+
+const RecipeCard = ({ recipe }: iRecipeCardProps) => {
    const { addRecipeToFavoriteList } = useContext(FavoriteContext);
    
    return (

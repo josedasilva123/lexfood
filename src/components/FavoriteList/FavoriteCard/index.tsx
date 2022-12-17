@@ -2,10 +2,15 @@ import React from "react";
 import { useContext } from "react";
 import { MdDelete } from "react-icons/md"
 import { FavoriteContext } from "../../../providers/FavoriteContext/FavoriteContext";
+import { iFavoriteRecipe } from "../../../providers/UserContext/@types";
 import { StyledTitle } from "../../../styles/typography";
 import { StyledFavoriteCard } from "./style";
 
-const FavoriteCard = ({ recipe }) => {
+interface iFavoriteCardProps{
+   recipe: iFavoriteRecipe;
+}
+
+const FavoriteCard = ({ recipe }: iFavoriteCardProps) => {
    const { removeRecipeFromFavoriteList } = useContext(FavoriteContext);
    return (
       <StyledFavoriteCard>

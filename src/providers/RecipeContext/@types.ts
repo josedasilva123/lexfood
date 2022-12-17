@@ -10,7 +10,7 @@ export interface iRecipe {
    _id: string;
    userID: string;
    title: string;
-   cntent: string;
+   content: string;
    thumbnail_filename: string;
    thumbnail_url: string;
    categories: string[];

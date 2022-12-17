@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { SyntheticEvent, useContext, useState } from "react";
 import { MdSearch } from "react-icons/md";
 import { StyledSearchForm } from "./style";
 import { StyledForm } from "../../../styles/form";
@@ -9,7 +9,7 @@ const SearchForm = () => {
    const [searchInput, setSearchInput] = useState("");
    const { setSearch } = useContext(RecipeContext);
 
-   function submit(event) {
+   function submit(event: SyntheticEvent) {
       event.preventDefault();
       setSearch(searchInput);
    }

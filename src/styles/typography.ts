@@ -4,13 +4,13 @@ import BaseTitle, { iBaseTitleProps } from "./components/BaseTitle";
 
 interface iStyledTitleProps extends iBaseTitleProps{
    textAlign?: number;
-   fontWeight: number;
+   fontWeight?: number;
    fontSize: "one" | "two" | "three" | "four";
 }
 
 export const StyledTitle = styled(BaseTitle)<iStyledTitleProps>`
    text-align: ${({ textAlign }) => textAlign};
-   font-weight: ${({ fontWeight }) => fontWeight};
+   font-weight: ${({ fontWeight }) => fontWeight ? fontWeight : 700};
 
    color: ${({ theme }) => theme.colors.black};
 
