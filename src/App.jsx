@@ -4,9 +4,9 @@ import "react-toastify/dist/ReactToastify.css";
 import FavoriteList from "./components/FavoriteList";
 import RoutesComponent from "./routes";
 import { useContext } from "react";
-import { FavoriteContext } from "./providers/FavoriteContext";
+import { FavoriteContext } from "./providers/FavoriteContext/FavoriteContext";
 import { UserContext } from "./providers/UserContext/UserContext";
-import { DarkModeContext } from "./providers/DarkModeContext";
+import { DarkModeContext } from "./providers/DarkModeContext/DarkModeContext";
 
 function App() {
    const { globalLoading } = useContext(UserContext);

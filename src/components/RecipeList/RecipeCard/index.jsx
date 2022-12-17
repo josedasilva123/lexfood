@@ -4,7 +4,7 @@ import { StyledParagraph, StyledTitle } from "../../../styles/typography";
 import { StyledRecipeCard } from "./style";
 import { MdFavorite } from "react-icons/md"
 import { useContext } from "react";
-import { FavoriteContext } from "../../../providers/FavoriteContext";
+import { FavoriteContext } from "../../../providers/FavoriteContext/FavoriteContext";
 
 const RecipeCard = ({ recipe }) => {
    const { addRecipeToFavoriteList } = useContext(FavoriteContext);
