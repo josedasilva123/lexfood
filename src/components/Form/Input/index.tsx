@@ -9,7 +9,7 @@ interface iInputProps {
    type: string;
    register: UseFormRegisterReturn;
    placeholder?: string;
-   error: FieldError;
+   error?: FieldError;
    disabled?: boolean;
 }
 

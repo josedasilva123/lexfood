@@ -8,7 +8,7 @@ interface iSelectProps{
    id: string;
    label?: string;
    register: UseFormRegisterReturn;
-   error: FieldError;
+   error?: FieldError;
 }
 
 const Select = ({ children, id, label, register, error }: iSelectProps) => {

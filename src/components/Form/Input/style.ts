@@ -2,10 +2,10 @@ import { FieldError } from "react-hook-form";
 import styled, { css } from "styled-components";
 
 interface iStyledInputProps{
-    error: FieldError;
+    error?: FieldError;
 }
 
-export const StyledInput = styled.input<FieldError>`
+export const StyledInput = styled.input<iStyledInputProps>`
     ${({error}) => {
         if(error){
             return css`
