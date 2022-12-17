@@ -4,11 +4,10 @@ import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import App from "./App";
 import Providers from "./providers/Providers";
-import { UserProvider } from "./providers/UserContext";
 import reportWebVitals from "./reportWebVitals";
 import { GlobalStyle } from "./styles/global";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
    <React.StrictMode>
       <BrowserRouter>
