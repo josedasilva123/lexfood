@@ -1,11 +1,18 @@
 import React, { useContext } from "react";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { RecipeContext } from "../../../providers/RecipeContext/RecipeContext";
 import { UserContext } from "../../../providers/UserContext/UserContext";
 import { StyledButton } from "../../../styles/buttons";
 import { StyledForm } from "../../../styles/form";
 import Input from "../Input";
 import Select from "../Select";
+
+interface iRecipeCreateFormValues{
+   title: string;
+   content: string;
+   file: File[];
+   category: string;
+}
 
 const RecipeCreateForm = () => {
    const { user } = useContext(UserContext);
@@ -15,11 +22,11 @@ const RecipeCreateForm = () => {
       register,
       handleSubmit,
       formState: { errors },
-   } = useForm();
+   } = useForm<iRecipeCreateFormValues>();
 
-   const submit = (formData) => {
+   const submit: SubmitHandler<iRecipeCreateFormValues> = (formData) => {
       const newRecipe = {
-         userID: user._id,
+         userID: user?.id,
          file: formData.file[0],
          title: formData.title,
          content: formData.content,
@@ -27,7 +34,7 @@ const RecipeCreateForm = () => {
       };
 
       const newRecipeFormData = new FormData();
-      newRecipeFormData.append("userID", newRecipe.userID);
+      newRecipeFormData.append("userID", newRecipe.userID as string);
       newRecipeFormData.append("file", newRecipe.file);
       newRecipeFormData.append("title", newRecipe.title);
       newRecipeFormData.append("content", newRecipe.content);
