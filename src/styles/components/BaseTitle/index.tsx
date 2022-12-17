@@ -1,7 +1,11 @@
 import React from 'react'
 
-/* h1,h2,h3,h4,h5,h6 */
-const BaseTitle = ({ children, className, tag }) => {
+export interface iBaseTitleProps{
+  children: React.ReactNode;
+  className: string;
+  tag: "h1" | "h2" | "h3" | "h4" | "h5" | "h6"
+}
+const BaseTitle = ({ children, className, tag }: iBaseTitleProps) => {
   return (
     <>
         {tag === "h1" && <h1 className={className}>{children}</h1>}

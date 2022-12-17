@@ -1,8 +1,14 @@
 /* eslint-disable default-case */
 import styled, { css } from "styled-components";
-import BaseTitle from "./components/BaseTitle";
+import BaseTitle, { iBaseTitleProps } from "./components/BaseTitle";
 
-export const StyledTitle = styled(BaseTitle)`
+interface iStyledTitleProps extends iBaseTitleProps{
+   textAlign?: number;
+   fontWeight: number;
+   fontSize: "one" | "two" | "three" | "four";
+}
+
+export const StyledTitle = styled(BaseTitle)<iStyledTitleProps>`
    text-align: ${({ textAlign }) => textAlign};
    font-weight: ${({ fontWeight }) => fontWeight};
 
