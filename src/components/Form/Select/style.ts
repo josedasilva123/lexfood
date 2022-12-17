@@ -1,6 +1,11 @@
+import { FieldError } from "react-hook-form";
 import styled, {css} from "styled-components";
 
-export const StyledSelect = styled.select`
+interface iStyledSelectProps{
+    error: FieldError;
+}
+
+export const StyledSelect = styled.select<iStyledSelectProps>`
     ${({error}) => {
         if(error){
             return css`
