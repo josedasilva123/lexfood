@@ -1,12 +1,14 @@
 import { createContext, useEffect, useState } from "react";
-import { api } from "../api/api";
+import { api } from "../../api/api";
+import { iContextProviderProps } from "../@types";
+import { iRecipeContext, iCategory, iRecipe, iRecipeGetResponse, iCategoryGetResponse, iRecipeCreateResponse } from "./@types";
 
-export const RecipeContext = createContext({});
+export const RecipeContext = createContext({} as iRecipeContext);
 
-export const RecipeProvider = ({ children }) => {
+export const RecipeProvider = ({ children }: iContextProviderProps) => {
    const [loading, setLoading] = useState(false);
-   const [categoryList, setCategoryList] = useState([]);
-   const [recipeList, setRecipeList] = useState([]);
+   const [categoryList, setCategoryList] = useState<iCategory[]>([]);
+   const [recipeList, setRecipeList] = useState<iRecipe[]>([]);
    const [filter, setFilter] = useState("todos");
    const [search, setSearch] = useState("");
 
@@ -20,7 +22,7 @@ export const RecipeProvider = ({ children }) => {
       (async () => {
          try {
             setLoading(true);
-            const response = await api.get("recipe");
+            const response = await api.get<iRecipeGetResponse>("recipe");
             setRecipeList(response.data.recipes);
          } catch (error) {
             console.log(error);
@@ -33,7 +35,7 @@ export const RecipeProvider = ({ children }) => {
    useEffect(() => {
       (async () => {
          try {
-            const response = await api.get("category");
+            const response = await api.get<iCategoryGetResponse>("category");
             setCategoryList(response.data.categories);
          } catch (error) {
             console.log(error);
@@ -41,11 +43,11 @@ export const RecipeProvider = ({ children }) => {
       })();
    });
 
-   const recipeCreate = async (formData) => {
+   const recipeCreate = async (formData: FormData) => {
       const token = localStorage.getItem("@TOKEN");
       try {
          //Atualizou o back-end
-          const response = await api.post('recipe', formData, {
+          const response = await api.post<iRecipeCreateResponse>('recipe', formData, {
               headers: {
                   "Content-Type": "multipart/form-data",
                   auth: token

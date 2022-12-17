@@ -3,7 +3,7 @@ import { MdSearch } from "react-icons/md";
 import { StyledSearchForm } from "./style";
 import { StyledForm } from "../../../styles/form";
 import { StyledButton } from "../../../styles/buttons";
-import { RecipeContext } from "../../../providers/RecipeContext";
+import { RecipeContext } from "../../../providers/RecipeContext/RecipeContext";
 
 const SearchForm = () => {
    const [searchInput, setSearchInput] = useState("");

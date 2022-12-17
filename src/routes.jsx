@@ -4,7 +4,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import RecipePage from "./pages/RecipePage";
 import ProtectedRoutes from "./components/ProtectedRoutes";
-import { RecipeProvider } from "./providers/RecipeContext";
+import { RecipeProvider } from "./providers/RecipeContext/RecipeContext";
 import RecipeCreatePage from "./pages/RecipePage/RecipeCreatePage";
 
 const RoutesComponent = () => {

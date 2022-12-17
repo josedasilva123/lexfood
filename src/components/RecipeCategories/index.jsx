@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { RecipeContext } from "../../providers/RecipeContext";
+import { RecipeContext } from "../../providers/RecipeContext/RecipeContext";
 import { StyledButton } from "../../styles/buttons";
 import { StyledRecipeCategories } from "./style";
 

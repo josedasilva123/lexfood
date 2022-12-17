@@ -6,7 +6,7 @@ import { StyledContainer } from "../../styles/grid";
 import { StyledRecipePage } from "./style";
 import SearchSection from "../../components/SearchSection";
 import { useContext } from "react";
-import { RecipeContext } from "../../providers/RecipeContext";
+import { RecipeContext } from "../../providers/RecipeContext/RecipeContext";
 import RecipeControls from "../../components/RecipeControls";
 
 const RecipePage = () => {
