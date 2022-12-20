@@ -31,4 +31,5 @@ export interface iUserContext {
    globalLoading: boolean;
    favoriteRecipes: iFavoriteRecipe[];
    setFavoriteRecipes: React.Dispatch<React.SetStateAction<iFavoriteRecipe[]>>;
+   setCurrentRoute: React.Dispatch<React.SetStateAction<string | null>>;
 }

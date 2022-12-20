@@ -7,10 +7,14 @@ import { UserContext } from "../../providers/UserContext/UserContext";
 const ProtectedRoutes = () => {
    const navigate = useNavigate();
 
-   const { user } = useContext(UserContext);
+   const pathname = window.location.pathname;
+  
+
+   const { user,setCurrentRoute } = useContext(UserContext);
 
    useEffect(() => {
       if (!user) {
+         setCurrentRoute(pathname);
          navigate("/");
       }
    }, []);
