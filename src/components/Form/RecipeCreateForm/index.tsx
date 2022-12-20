@@ -67,7 +67,7 @@ const RecipeCreateForm = () => {
             <Select id="category" label="category" register={register("category")} error={errors.category}>
                <option value="">Escolha uma categoria</option>
                {categoryList.map((category) => (
-                  <option value={category.slug}>{category.name}</option>
+                  <option key={category.slug} value={category.slug}>{category.name}</option>
                ))}
             </Select>
 
