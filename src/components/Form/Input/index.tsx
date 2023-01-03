@@ -6,7 +6,7 @@ import { StyledInput } from "./style";
 interface iInputProps {
    id: string;
    label?: string;
-   type: string;
+   type: "text" | "email" |  "password";
    register: UseFormRegisterReturn;
    placeholder?: string;
    error?: FieldError;
