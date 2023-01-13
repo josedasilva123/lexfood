@@ -38,7 +38,7 @@ const RecipeCreateForm = () => {
       newRecipeFormData.append("content", newRecipe.content);
       newRecipeFormData.append("categories", newRecipe.categories);
 
-      recipeCreate(newRecipeFormData);
+      recipeCreate.mutate({formData: newRecipeFormData});
    };
 
    return (
@@ -58,7 +58,7 @@ const RecipeCreateForm = () => {
                type="text"
                placeholder="Digite um conteúdo"
                register={register("content")}
-               error={errors.title}
+               error={errors.content}
             />
 
             <label htmlFor="file">Selecione uma imagem de destaque:</label>
@@ -66,7 +66,7 @@ const RecipeCreateForm = () => {
 
             <Select id="category" label="category" register={register("category")} error={errors.category}>
                <option value="">Escolha uma categoria</option>
-               {categoryList.map((category) => (
+               {categoryList?.map((category) => (
                   <option value={category.slug}>{category.name}</option>
                ))}
             </Select>
