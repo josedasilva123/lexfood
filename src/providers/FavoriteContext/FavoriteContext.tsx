@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { api } from "../../api/api";
 import { iContextProviderProps, iDefaultErrorResponse } from "../@types";
 import { iRecipe } from "../RecipeContext/@types";
-import { iFavoriteRecipe, iUserAutoLoginResponse } from "../UserContext/@types";
+import { iFavoriteRecipe, iUser, iUserAutoLoginResponse } from "../UserContext/@types";
 import { UserContext } from "../UserContext/UserContext";
 import { iFavoriteContext, iFavoriteCreateResponse, iFavoriteDeleteResponse } from "./@types";
 
@@ -15,28 +15,6 @@ export const FavoriteContext = createContext({} as iFavoriteContext);
 export const FavoriteProvider = ({ children }: iContextProviderProps) => {
    const { user } = useContext(UserContext);
    const [favoriteModal, setFavoriteModal] = useState(false);
-
-   const { isLoading, data: favoriteRecipes } = useQuery({
-      queryKey: ['favoriteRecipes'],
-      queryFn: async () => {
-         const token = localStorage.getItem("@TOKEN");
-
-         if (token) {
-            try {             
-               const response = await api.get<iUserAutoLoginResponse>("user/autologin", {
-                  headers: {
-                     auth: token,
-                  },
-               });
-              return response.data.user.favoriteRecipes;
-            } catch (error) {
-               throw new Error("Acontece um erro");
-            }        
-         }
-      },
-      initialData: [],
-      enabled: !!user,
-   })
 
    const queryClient = useQueryClient();
 
@@ -58,9 +36,10 @@ export const FavoriteProvider = ({ children }: iContextProviderProps) => {
          }
       },
       onSuccess: (data) => {
-         queryClient.setQueryData('favoriteRecipes', (currentData) => {
-            return [...currentData as iFavoriteRecipe[], data.recipe ]
-         })
+         queryClient.setQueryData<iUser>('user', (currentData) => {
+            const user = currentData as iUser;
+            return { ...user, favoriteRecipes: [...user.favoriteRecipes, data.recipe]}
+         })         
          toast.success(data.message);
       },
       onError: (error) => {
@@ -69,7 +48,7 @@ export const FavoriteProvider = ({ children }: iContextProviderProps) => {
    })
    
    const addRecipeToFavoriteList = (recipe: iRecipe) => {
-      if (!favoriteRecipes?.some((currentRecipe) => currentRecipe.recipeId === recipe._id)) {
+      if (!user?.favoriteRecipes.some((currentRecipe) => currentRecipe.recipeId === recipe._id)) {
          const newRecipe = {
             recipeId: recipe._id,
             title: recipe.title,
@@ -100,10 +79,10 @@ export const FavoriteProvider = ({ children }: iContextProviderProps) => {
          }
       },
       onSuccess: (data) => {
-         queryClient.setQueryData('favoriteRecipes', (currentData) => {
-            const currentFavoriteRecipes = currentData as iFavoriteRecipe[];
-            const newCurrentData = currentFavoriteRecipes?.filter((recipe) => recipe.recipeId !== data.recipeId);
-            return newCurrentData
+         queryClient.setQueryData<iUser>('user', (currentData) => {
+            const user = currentData as iUser;
+            const newFavoriteRecipes = user.favoriteRecipes?.filter((recipe) => recipe.recipeId !== data.recipeId);
+            return { ...user, favoriteRecipes: newFavoriteRecipes};
          })
          toast.success(data.message);
       },
@@ -132,7 +111,7 @@ export const FavoriteProvider = ({ children }: iContextProviderProps) => {
    return (
       <FavoriteContext.Provider
          value={{
-            favoriteRecipes,
+            favoriteRecipes: user?.favoriteRecipes,
             favoriteModal,
             setFavoriteModal,
             addRecipeToFavoriteList,

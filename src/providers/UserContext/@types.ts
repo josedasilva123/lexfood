@@ -24,7 +24,7 @@ export interface iUser {
 }
 
 export interface iUserContext {
-   user: iUser | null;
+   user: iUser | null | undefined;
    userLogin: (formData: iUserLoginFormValues, setLoading: React.Dispatch<React.SetStateAction<boolean>>) => void;
    userRegister: (formData: iUserRegisterFormValues, setLoading: React.Dispatch<React.SetStateAction<boolean>>) => void;
    userLogout: () => void;

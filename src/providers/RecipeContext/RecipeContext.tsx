@@ -20,7 +20,7 @@ export const RecipeProvider = ({ children }: iContextProviderProps) => {
    const {
       isLoading: recipeListLoading,
       data: recipeList,
-   } = useQuery<iRecipe[]>({
+   } = useQuery({
       queryKey: ["recipeList"],
       queryFn: async () => {
          try {
