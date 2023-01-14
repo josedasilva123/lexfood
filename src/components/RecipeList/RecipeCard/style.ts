@@ -21,4 +21,8 @@ export const StyledRecipeCard = styled.li`
     button{
         margin-top: 2rem;
     }
+
+    p{
+        min-height: 57px;
+    }
 `

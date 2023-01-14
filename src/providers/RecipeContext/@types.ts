@@ -1,3 +1,5 @@
+import { UseMutationResult } from "react-query";
+
 export interface iCategory {
    _id: string;
    name: string;
@@ -33,13 +35,13 @@ export interface iRecipeCreateResponse {
 }
 
 export interface iRecipeContext {
-   categoryList: iCategory[];
-   recipeList: iRecipe[];
-   filteredRecipeList: iRecipe[];
+   categoryList: iCategory[] | undefined;
+   recipeList: iRecipe[] | undefined;
+   filteredRecipeList: iRecipe[] | undefined;
    filter: string;
    setFilter: React.Dispatch<React.SetStateAction<string>>;
    search: string;
    setSearch: React.Dispatch<React.SetStateAction<string>>;
-   loading: boolean;
+   recipeListLoading: boolean;
    recipeCreate: (formData: FormData) => void;
 }

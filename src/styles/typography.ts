@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import BaseTitle, { iBaseTitleProps } from "./components/BaseTitle";
 
 interface iStyledTitleProps extends iBaseTitleProps{
-   textAlign?: number;
+   textAlign?: string;
    fontWeight?: number;
    fontSize: "one" | "two" | "three" | "four";
 }

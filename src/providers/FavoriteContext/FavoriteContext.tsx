@@ -1,28 +1,25 @@
 import { AxiosError } from "axios";
 import { useContext, useState } from "react";
 import { createContext } from "react";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
 import { api } from "../../api/api";
 import { iContextProviderProps, iDefaultErrorResponse } from "../@types";
 import { iRecipe } from "../RecipeContext/@types";
+import { iFavoriteRecipe, iUser, iUserAutoLoginResponse } from "../UserContext/@types";
 import { UserContext } from "../UserContext/UserContext";
 import { iFavoriteContext, iFavoriteCreateResponse, iFavoriteDeleteResponse } from "./@types";
 
 export const FavoriteContext = createContext({} as iFavoriteContext);
 
 export const FavoriteProvider = ({ children }: iContextProviderProps) => {
-   const { favoriteRecipes, setFavoriteRecipes } = useContext(UserContext);
-
+   const { user } = useContext(UserContext);
    const [favoriteModal, setFavoriteModal] = useState(false);
 
-   async function addRecipeToFavoriteList(recipe: iRecipe) {
-      if (!favoriteRecipes.some((currentRecipe) => currentRecipe.recipeId === recipe._id)) {
-         const newRecipe = {
-            recipeId: recipe._id,
-            title: recipe.title,
-            thumbnail_url: recipe.thumbnail_url,
-         };
+   const queryClient = useQueryClient();
 
+   const addRecipeToFavoriteListMutation = useMutation({
+      mutationFn: async ({ newRecipe }: { newRecipe: iFavoriteRecipe}) => {
          try {
             const token = localStorage.getItem("@TOKEN");
 
@@ -31,36 +28,71 @@ export const FavoriteProvider = ({ children }: iContextProviderProps) => {
                   auth: token,
                },
             });
-            toast.success(response.data.message);
 
-            setFavoriteRecipes([...favoriteRecipes, newRecipe]);
+            return {recipe: newRecipe, message: response.data.message };
          } catch (error) {
             const currentError = error as AxiosError<iDefaultErrorResponse>;
-            toast.error(currentError.response?.data.error);
+            throw new Error(currentError.response?.data.error);
          }
+      },
+      onSuccess: (data) => {
+         queryClient.setQueryData<iUser>('user', (currentData) => {
+            const user = currentData as iUser;
+            return { ...user, favoriteRecipes: [...user.favoriteRecipes, data.recipe]}
+         })         
+         toast.success(data.message);
+      },
+      onError: (error) => {
+         toast.error(error as string);
+      }      
+   })
+   
+   const addRecipeToFavoriteList = (recipe: iRecipe) => {
+      if (!user?.favoriteRecipes.some((currentRecipe) => currentRecipe.recipeId === recipe._id)) {
+         const newRecipe = {
+            recipeId: recipe._id,
+            title: recipe.title,
+            thumbnail_url: recipe.thumbnail_url,
+         };
+
+         addRecipeToFavoriteListMutation.mutate({ newRecipe });
       } else {
          toast.error("Está receita já consta na lista favoritos.");
       }
    }
 
-   async function removeRecipeFromFavoriteList(recipeId: string) {
-      try {
-         const token = localStorage.getItem("@TOKEN");
+   const removeRecipeFromFavoriteListMutation = useMutation({
+      mutationFn: async ({ recipeId }: { recipeId: string}) => {
+         try {
+            const token = localStorage.getItem("@TOKEN");
 
-         const response = await api.delete<iFavoriteDeleteResponse>(`favorite/${recipeId}`, {
-            headers: {
-               auth: token,
-            },
-         });
+            const response = await api.delete<iFavoriteDeleteResponse>(`favorite/${recipeId}`, {
+               headers: {
+                  auth: token,
+               },
+            });
 
-         toast.success(response.data.message);
-
-         const newRecipeList = favoriteRecipes.filter((recipe) => recipe.recipeId !== recipeId);
-         setFavoriteRecipes(newRecipeList);
-      } catch (error) {
-         const currentError = error as AxiosError<iDefaultErrorResponse>;
-         toast.error(currentError.response?.data.error);
-      }
+            return { recipeId, message: response.data.message }
+         } catch (error) {
+            const currentError = error as AxiosError<iDefaultErrorResponse>;
+            throw new Error(currentError.response?.data.error);
+         }
+      },
+      onSuccess: (data) => {
+         queryClient.setQueryData<iUser>('user', (currentData) => {
+            const user = currentData as iUser;
+            const newFavoriteRecipes = user.favoriteRecipes?.filter((recipe) => recipe.recipeId !== data.recipeId);
+            return { ...user, favoriteRecipes: newFavoriteRecipes};
+         })
+         toast.success(data.message);
+      },
+      onError: (error) => {
+         toast.error(error as string);
+      }      
+   })
+   
+   const removeRecipeFromFavoriteList = (recipeId: string) => {
+      removeRecipeFromFavoriteListMutation.mutate({recipeId})
    }
 
    /*
@@ -79,10 +111,11 @@ export const FavoriteProvider = ({ children }: iContextProviderProps) => {
    return (
       <FavoriteContext.Provider
          value={{
+            favoriteRecipes: user?.favoriteRecipes,
             favoriteModal,
             setFavoriteModal,
             addRecipeToFavoriteList,
-            removeRecipeFromFavoriteList,
+            removeRecipeFromFavoriteList
          }}
       >
          {children}

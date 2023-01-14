@@ -6,28 +6,34 @@ import App from "./App";
 import Providers from "./providers/Providers";
 import reportWebVitals from "./reportWebVitals";
 import { GlobalStyle } from "./styles/global";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
+
+const queryClient = new QueryClient();
+
 root.render(
    <React.StrictMode>
-      <BrowserRouter>
-         <GlobalStyle />
-         <Providers>
-            <App />
-         </Providers>  
-         
-         <ToastContainer
-            position="bottom-right"
-            autoClose={3000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-         />       
-      </BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+         <BrowserRouter>
+            <GlobalStyle />
+            <Providers>
+               <App />
+            </Providers>
+
+            <ToastContainer
+               position="bottom-right"
+               autoClose={3000}
+               hideProgressBar={false}
+               newestOnTop={false}
+               closeOnClick
+               rtl={false}
+               pauseOnFocusLoss
+               draggable
+               pauseOnHover
+            />
+         </BrowserRouter>
+      </QueryClientProvider>
    </React.StrictMode>
 );
 
