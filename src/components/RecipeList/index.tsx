@@ -10,9 +10,9 @@ const RecipeList = () => {
    
    return (
       <>
-         {filteredRecipeList.length === 0 && <StyledParagraph>Desculpe, nenhum resultado foi encontrado...</StyledParagraph>}
+         {filteredRecipeList?.length === 0 && <StyledParagraph>Desculpe, nenhum resultado foi encontrado...</StyledParagraph>}
          <StyledRecipeList>
-            {filteredRecipeList.map((recipe, index) => (
+            {filteredRecipeList?.map((recipe, index) => (
                <RecipeCard key={index} recipe={recipe} />
             ))}
          </StyledRecipeList>

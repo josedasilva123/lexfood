@@ -23,7 +23,7 @@ export const StyledRegisterPageFlexBox = styled.div`
         align-items: center;
         justify-content: center;
 
-        gap: 40px;
+        gap: 20px;
 
         width: 100%;
         max-width: 500px;

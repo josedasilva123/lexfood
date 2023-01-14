@@ -4,6 +4,7 @@ import { StyledLinkButton } from "../../styles/buttons";
 import { StyledTitle } from "../../styles/typography";
 import { StyledLoginPage, StyledLoginPageFlexBox } from "./style";
 import { MdLogin } from "react-icons/md"
+import Logo from "../../assets/LogoAlex.png"
 
 const LoginPage = () => {
    /* 
@@ -15,9 +16,7 @@ const LoginPage = () => {
          <div className="container">
             <StyledLoginPageFlexBox>
                <div className="innerBox">
-                  <StyledTitle tag="h1" fontSize="one" fontWeight={600} textAlign="center">
-                     Receitas do Alex
-                  </StyledTitle>
+                  <img src={Logo} alt="Logo Receitinhas do Alex" />
                   <LoginForm />
                   <StyledLinkButton to="/register" buttonStyle="outline1" buttonSize="big">
                      <MdLogin size={21} /> Cadastrar-se
