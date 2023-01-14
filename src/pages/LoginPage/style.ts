@@ -23,9 +23,17 @@ export const StyledLoginPageFlexBox = styled.div`
         align-items: center;
         justify-content: center;
 
-        gap: 40px;
+        gap: 20px;
 
         width: 100%;
-        max-width: 500px;
+        max-width: 450px;
+
+        img{
+            max-width: 160px;
+        }
+
+        a{
+            width: 100%;
+        }
     }
 `
