@@ -27,7 +27,7 @@ const LoginForm = () => {
    };
 
    return (
-      <StyledForm onSubmit={handleSubmit(submit)}>         
+      <StyledForm onSubmit={handleSubmit(submit)} role="form">         
          <Input
             id="email"
             label="E-mail"
