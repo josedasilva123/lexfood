@@ -19,7 +19,6 @@ export const RecipeProvider = ({ children }: iContextProviderProps) => {
 
    const {
       isLoading: recipeListLoading,
-      error: recipeListError,
       data: recipeList,
    } = useQuery<iRecipe[]>({
       queryKey: ["recipeList"],
@@ -37,7 +36,6 @@ export const RecipeProvider = ({ children }: iContextProviderProps) => {
 
    const {
       isLoading: categoryListLoading,
-      error: categoryListError,
       data: categoryList,
    } = useQuery<iCategory[]>("categoryList", async () => {
       try {
@@ -55,7 +53,7 @@ export const RecipeProvider = ({ children }: iContextProviderProps) => {
          (!search ? true : recipe.title.toLowerCase().includes(search.toLowerCase()))
    );
 
-   const recipeCreate = useMutation({
+   const recipeCreateMutation = useMutation({
       mutationFn: async ({ formData }: { formData: FormData }) => {
          try {
             const token = localStorage.getItem("@TOKEN");
@@ -83,6 +81,9 @@ export const RecipeProvider = ({ children }: iContextProviderProps) => {
       },
    });
 
+   const recipeCreate = (formData: FormData) => {
+      recipeCreateMutation.mutate({formData})
+   }
    /*
    const recipeCreate = async (formData: FormData) => {
       const token = localStorage.getItem("@TOKEN");

@@ -10,8 +10,8 @@ import { FavoriteContext } from "../../providers/FavoriteContext/FavoriteContext
 import { DarkModeContext } from "../../providers/DarkModeContext/DarkModeContext";
 
 const Header = () => {
-   const { user, userLogout, favoriteRecipes } = useContext(UserContext);
-   const { favoriteModal, setFavoriteModal } = useContext(FavoriteContext);
+   const { user, userLogout } = useContext(UserContext);
+   const { favoriteModal, setFavoriteModal, favoriteRecipes } = useContext(FavoriteContext);
    const { darkMode, setDarkMode } = useContext(DarkModeContext);
    
    return (
@@ -32,7 +32,7 @@ const Header = () => {
                      </StyledButton>
                      <button className="favorite" onClick={() => setFavoriteModal(!favoriteModal)}>
                         <MdFavorite size={21} />
-                        <span>({favoriteRecipes.length})</span>
+                        <span>({favoriteRecipes?.length})</span>
                      </button>
                      <button className="darkMode" onClick={() => setDarkMode(!darkMode)}>
                         {darkMode ? <MdLightMode size={21} /> : <MdDarkMode size={21} />}

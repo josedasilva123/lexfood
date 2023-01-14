@@ -43,7 +43,5 @@ export interface iRecipeContext {
    search: string;
    setSearch: React.Dispatch<React.SetStateAction<string>>;
    recipeListLoading: boolean;
-   recipeCreate: UseMutationResult<iRecipe | undefined, unknown, {
-      formData: FormData;
-  }, unknown>
+   recipeCreate: (formData: FormData) => void;
 }

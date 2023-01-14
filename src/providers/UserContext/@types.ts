@@ -29,6 +29,4 @@ export interface iUserContext {
    userRegister: (formData: iUserRegisterFormValues, setLoading: React.Dispatch<React.SetStateAction<boolean>>) => void;
    userLogout: () => void;
    globalLoading: boolean;
-   favoriteRecipes: iFavoriteRecipe[];
-   setFavoriteRecipes: React.Dispatch<React.SetStateAction<iFavoriteRecipe[]>>;
 }

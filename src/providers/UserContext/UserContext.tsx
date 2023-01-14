@@ -14,8 +14,7 @@ export const UserContext = createContext({} as iUserContext);
 
 export const UserProvider = ({ children }: iContextProviderProps) => {
    const [globalLoading, setGlobalLoading] = useState(false);
-   const [user, setUser] = useState<iUser | null>(null);
-   const [favoriteRecipes, setFavoriteRecipes] = useState<iFavoriteRecipe[]>([]);
+   const [user, setUser] = useState<iUser | null>(null); 
 
    const navigate = useNavigate();
 
@@ -32,7 +31,7 @@ export const UserProvider = ({ children }: iContextProviderProps) => {
                   },
                });
                setUser(response.data.user);
-               setFavoriteRecipes(response.data.user.favoriteRecipes);
+               //setFavoriteRecipes(response.data.user.favoriteRecipes);
                navigate("/recipes");
             } catch (error) {
                console.log(error);
@@ -49,7 +48,7 @@ export const UserProvider = ({ children }: iContextProviderProps) => {
          const response = await api.post<iUserLoginResponse>("user/login", formData);
          localStorage.setItem("@TOKEN", response.data.token);
          setUser(response.data.user);
-         setFavoriteRecipes(response.data.user.favoriteRecipes);
+         //setFavoriteRecipes(response.data.user.favoriteRecipes);
          navigate("/recipes");
       } catch (error) {
          const currentError = error as AxiosError<iDefaultErrorResponse>;
@@ -79,7 +78,7 @@ export const UserProvider = ({ children }: iContextProviderProps) => {
    }
 
    return (
-      <UserContext.Provider value={{ user, userLogin, userRegister, userLogout, globalLoading, favoriteRecipes, setFavoriteRecipes }}>
+      <UserContext.Provider value={{ user, userLogin, userRegister, userLogout, globalLoading }}>
          {children}
       </UserContext.Provider>
    );

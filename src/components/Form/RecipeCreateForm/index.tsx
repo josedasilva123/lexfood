@@ -38,7 +38,7 @@ const RecipeCreateForm = () => {
       newRecipeFormData.append("content", newRecipe.content);
       newRecipeFormData.append("categories", newRecipe.categories);
 
-      recipeCreate.mutate({formData: newRecipeFormData});
+      recipeCreate(newRecipeFormData);
    };
 
    return (
