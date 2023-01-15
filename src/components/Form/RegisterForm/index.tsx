@@ -34,7 +34,7 @@ const RegisterForm = () => {
    };
 
    return (
-      <StyledForm onSubmit={handleSubmit(submit)}>
+      <StyledForm onSubmit={handleSubmit(submit)} role="form">
          <Input
             type="text"
             id="name"
