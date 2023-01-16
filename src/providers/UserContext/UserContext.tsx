@@ -65,6 +65,7 @@ export const UserProvider = ({ children }: iContextProviderProps) => {
          setLoading(true);
          const response = await api.post("user", formData);
          toast.success(response.data.message);
+         navigate("/")
       } catch (error) {
          const currentError = error as AxiosError<iDefaultErrorResponse>;
          toast.error(currentError.response?.data.error);

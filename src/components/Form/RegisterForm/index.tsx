@@ -67,7 +67,7 @@ const RegisterForm = () => {
 
          <Input
             type="password"
-            id="password"
+            id="confirmPassword"
             label="Confirmação de senha: "
             placeholder="Confirme sua senha"
             register={register("confirmPassword")}
