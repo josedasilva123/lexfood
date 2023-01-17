@@ -41,7 +41,7 @@ export const RecipeProvider = ({ children }: iContextProviderProps) => {
             console.log(error);
          }
       })();
-   });
+   }, []);
 
    const recipeCreate = async (formData: FormData) => {
       const token = localStorage.getItem("@TOKEN");

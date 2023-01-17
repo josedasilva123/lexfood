@@ -1,6 +1,6 @@
 describe("register", () => {
    it("should complete register flow", () => {
-      cy.visit("http://localhost:3000/")
+      cy.visit("http://localhost:3000/");
 
       cy.intercept("POST", "user", {
          statusCode: 200,
@@ -14,6 +14,6 @@ describe("register", () => {
       cy.get("#email").type("testing@example.com.br");
       cy.get("#password").type("@12Patinhos");
       cy.get("#confirmPassword").type("@12Patinhos");
-      cy.get('form > button').click();
+      cy.get("form > button").click();
    });
 });
