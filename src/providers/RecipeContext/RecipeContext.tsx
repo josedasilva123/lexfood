@@ -45,7 +45,7 @@ export const RecipeProvider = ({ children }: iContextProviderProps) => {
          console.log(error);
          throw new Error("Ocorreu um erro!");
       }
-   });
+   }, []);
 
    const filteredRecipeList = recipeList?.filter(
       (recipe) =>

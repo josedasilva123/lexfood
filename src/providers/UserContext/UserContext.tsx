@@ -70,6 +70,7 @@ export const UserProvider = ({ children }: iContextProviderProps) => {
          navigate("/");
       },
       initialData: null,
+      retry: 0,
    });
 
    const navigate = useNavigate();
