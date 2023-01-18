@@ -4,6 +4,7 @@
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import MockAdapter from "axios-mock-adapter";
 import { BrowserRouter } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import { ThemeProvider } from "styled-components";
 import LoginPage from ".";
 import { api } from "../../api/api";
@@ -18,6 +19,8 @@ jest.mock("react-router-dom", () => ({
     ...jest.requireActual("react-router-dom"),
     useNavigate: () => mockNavigate,
 }))
+
+jest.useFakeTimers();
 
 describe("<LoginPage>", () => {
    it("should be able to login", async () => {
@@ -53,9 +56,12 @@ describe("<LoginPage>", () => {
       expect(emailField).toHaveValue("johndoe@example.com");
       expect(passwordField).toHaveValue("123456");
       expect(mockNavigate).toHaveBeenCalled();      
-   });
+   });  
 
-   it("should show errors when the fields are empty", async () => {
+   it("should show error toast when user doesn't exist", async () => {
+      apiMock.onPost("user/login").replyOnce(400, {
+         error: "Desculpe, o usuário fornecido não existe."
+      });
       render(
          <BrowserRouter>
             <ThemeProvider theme={mainTheme}>
@@ -63,18 +69,26 @@ describe("<LoginPage>", () => {
                   <LoginPage />
                </UserProvider>
             </ThemeProvider>
+            <ToastContainer />
          </BrowserRouter>
       );
 
+      const emailField = screen.getByPlaceholderText("Seu e-mail");
+      const passwordField = screen.getByPlaceholderText("Sua senha");
       const form = screen.getByRole("form");
-      await act(() => {
-         fireEvent.submit(form);
+
+      await waitFor(() => {
+         fireEvent.change(emailField, { target: { value: "johndoe@example.com" } });
+         fireEvent.change(passwordField, { target: { value: "123456" } });
       });
 
-      const emailError = screen.getByText("O email é obrigatório.");
-      const passwordError = screen.getByText("A senha é obrigatória.");
+      await act(() => {
+         fireEvent.submit(form);
+         jest.advanceTimersByTime(1000);
+      });
 
-      expect(emailError).toBeInTheDocument();
-      expect(passwordError).toBeInTheDocument();
-   })
+      const errorToast = await screen.findByText("Desculpe, o usuário fornecido não existe.");
+      
+      expect(errorToast).toBeInTheDocument();
+   });
 });

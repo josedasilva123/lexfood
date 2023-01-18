@@ -57,4 +57,46 @@ describe("<RegisterPage />", () => {
       const sucessToast = await screen.findByText("Usuário cadastrado com sucesso!");
       expect(sucessToast).toBeInTheDocument();      
    });
+
+   it("should show error toast when email is already used by another user", async () => {
+      apiMock.onPost("user").replyOnce(400, {
+        error: "Desculpe, o e-mail fornecido já pertence a um usuário cadastrado.",
+      });
+      render(
+         <BrowserRouter>
+            <ThemeProvider theme={mainTheme}>
+               <UserProvider>
+                  <RegisterPage />
+               </UserProvider>
+            </ThemeProvider>
+            <ToastContainer />
+         </BrowserRouter>
+      );
+
+      const nameInput = screen.getByPlaceholderText("Digite o seu nome");
+      const emailInput = screen.getByPlaceholderText("Digite o seu e-mail");
+      const passwordInput = screen.getByPlaceholderText("Crie a sua senha");
+      const confirmPassword = screen.getByPlaceholderText("Confirme sua senha");
+      const form = screen.getByRole("form");
+
+      await waitFor(() => {
+         fireEvent.change(nameInput, { target: { value: "JohnDoe" } });
+         fireEvent.change(emailInput, { target: { value: "johndoe@email.com" } });
+         fireEvent.change(passwordInput, { target: { value: "@12Patinhos" } });
+         fireEvent.change(confirmPassword, { target: { value: "@12Patinhos" } });
+      });
+
+      expect(nameInput).toHaveValue("JohnDoe");
+      expect(emailInput).toHaveValue("johndoe@email.com");
+      expect(passwordInput).toHaveValue("@12Patinhos");
+      expect(confirmPassword).toHaveValue("@12Patinhos");
+
+      await act(() => {
+         fireEvent.submit(form);
+         jest.advanceTimersByTime(1000);
+      });
+
+      const errorToast = await screen.findByText("Desculpe, o e-mail fornecido já pertence a um usuário cadastrado.");
+      expect(errorToast).toBeInTheDocument();      
+   });
 });
