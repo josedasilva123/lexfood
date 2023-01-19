@@ -24,7 +24,6 @@ export const UserProvider = ({ children }: iContextProviderProps) => {
       queryKey: ["user"],
       queryFn: async () => {
          const token = localStorage.getItem("@TOKEN");
-         console.log(cachedRoute);
          if (token) {
             try {
                const response = await api.get<iUserAutoLoginResponse>("user/autologin", {

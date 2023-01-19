@@ -21,8 +21,7 @@ export const RecipeProvider = ({ children }: iContextProviderProps) => {
          const response = await api.get<iCategoryGetResponse>("category");
          return response.data.categories;
       } catch (error) {
-         console.log(error);
-         throw new Error("Ocorreu um erro!");
+         console.log(error);      
       }
    });
    
