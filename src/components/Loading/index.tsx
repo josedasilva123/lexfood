@@ -5,7 +5,7 @@ import LoadingSVG from "../../assets/Loading.svg";
 const Loading = () => {
   return (
     <StyledLoading>
-        <LoadingSVG />
+        <img src={LoadingSVG} alt="Carregando..." />
     </StyledLoading>    
   )
 }

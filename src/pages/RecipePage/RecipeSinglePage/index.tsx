@@ -3,6 +3,7 @@ import { useQuery } from 'react-query'
 import { useParams } from 'react-router-dom'
 import { api } from '../../../api/api'
 import Header from '../../../components/Header'
+import Loading from '../../../components/Loading'
 import { iRecipe } from '../../../providers/RecipeContext/@types'
 import { StyledContainer } from '../../../styles/grid'
 
@@ -31,6 +32,7 @@ const RecipeSinglePage = () => {
   return (
     <div>
       <Header />
+      <Loading />
       <StyledContainer containerWidth={800}>
         {recipeId}
       </StyledContainer>
