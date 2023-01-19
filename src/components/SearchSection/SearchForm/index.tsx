@@ -25,8 +25,7 @@ const SearchForm = () => {
             />
             <StyledButton buttonSize="default" buttonStyle="solid1">
               <MdSearch size={21} />
-            </StyledButton>
-  
+            </StyledButton>  
          </StyledForm>
       </StyledSearchForm>
    );

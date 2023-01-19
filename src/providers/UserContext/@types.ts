@@ -29,4 +29,6 @@ export interface iUserContext {
    userRegister: (formData: iUserRegisterFormValues, setLoading: React.Dispatch<React.SetStateAction<boolean>>) => void;
    userLogout: () => void;
    globalLoading: boolean;
+   cachedRoute: string;
+   setCachedRoute: React.Dispatch<React.SetStateAction<string>>;
 }
