@@ -32,7 +32,6 @@ const RecipeCreateForm = () => {
       };
 
       const newRecipeFormData = new FormData();
-      newRecipeFormData.append("userID", newRecipe.userID as string);
       newRecipeFormData.append("file", newRecipe.file);
       newRecipeFormData.append("title", newRecipe.title);
       newRecipeFormData.append("content", newRecipe.content);
