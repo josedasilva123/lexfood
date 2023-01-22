@@ -39,6 +39,7 @@ export const RecipeProvider = ({ children }: iContextProviderProps) => {
             return response.data.recipe;
          } catch (error) {
             console.log(error);
+            throw new Error("Desculpe, ocorreu um erro e não foi possível cadastrar uma receita.")
          }
       },
       onSuccess: (data) => {
@@ -49,7 +50,7 @@ export const RecipeProvider = ({ children }: iContextProviderProps) => {
          navigate('/recipes');
       },
       onError: (error) => {
-         toast.error("Desculpe, ocorreu um erro.");
+         toast.error(error as string);
       },
    });
 

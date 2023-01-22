@@ -4,7 +4,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { RecipeContext } from "../../../providers/RecipeContext/RecipeContext";
 import { UserContext } from "../../../providers/UserContext/UserContext";
 import { StyledButton } from "../../../styles/buttons";
-import { StyledForm } from "../../../styles/form";
+import { StyledFieldError, StyledForm } from "../../../styles/form";
 import Input from "../Input";
 import Select from "../Select";
 import { iRecipeCreateFormValues } from "./@types";
@@ -24,7 +24,7 @@ const RecipeCreateForm = () => {
 
    const submit: SubmitHandler<iRecipeCreateFormValues> = (formData) => {
       const newRecipe = {
-         userID: user?.id,
+         userId: user?.id,
          file: formData.file[0],
          title: formData.title,
          content: formData.content,
@@ -32,6 +32,7 @@ const RecipeCreateForm = () => {
       };
 
       const newRecipeFormData = new FormData();
+      newRecipeFormData.append("userId", newRecipe.userId as string);
       newRecipeFormData.append("file", newRecipe.file);
       newRecipeFormData.append("title", newRecipe.title);
       newRecipeFormData.append("content", newRecipe.content);
@@ -62,11 +63,12 @@ const RecipeCreateForm = () => {
 
             <label htmlFor="file">Selecione uma imagem de destaque:</label>
             <input id="file" type="file" {...register("file")} />
+            {errors.file && <StyledFieldError>{errors.file.message}</StyledFieldError>}
 
             <Select id="category" label="category" register={register("category")} error={errors.category}>
                <option value="">Escolha uma categoria</option>
                {categoryList?.map((category) => (
-                  <option value={category.slug}>{category.name}</option>
+                  <option key={category.slug} value={category.slug}>{category.name}</option>
                ))}
             </Select>
 
