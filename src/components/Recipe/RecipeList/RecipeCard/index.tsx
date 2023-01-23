@@ -1,11 +1,11 @@
 import React from "react";
-import { StyledButton, StyledLinkButton } from "../../../styles/buttons";
-import { StyledParagraph, StyledTitle } from "../../../styles/typography";
+import { StyledButton, StyledLinkButton } from "../../../../styles/buttons";
+import { StyledParagraph, StyledTitle } from "../../../../styles/typography";
 import { StyledRecipeCard } from "./style";
 import { MdFavorite } from "react-icons/md";
 import { useContext } from "react";
-import { FavoriteContext } from "../../../providers/FavoriteContext/FavoriteContext";
-import { iRecipe } from "../../../providers/RecipeContext/@types";
+import { FavoriteContext } from "../../../../providers/FavoriteContext/FavoriteContext";
+import { iRecipe } from "../../../../providers/RecipeContext/@types";
 
 interface iRecipeCardProps {
    recipe: iRecipe;
