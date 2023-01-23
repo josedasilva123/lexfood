@@ -5,7 +5,14 @@ export const StyledRecipeCard = styled.li`
     background: ${({theme}) => theme.colors.white};
 
     .content{
-        padding: 2rem 1rem;
+        padding: 32px 16px;
+    }
+
+    .buttonBox{
+        gap: 8px;
+        margin-top: 30px;
+        display: flex;
+        align-items: center;
     }
 
     img{
@@ -16,10 +23,6 @@ export const StyledRecipeCard = styled.li`
 
     h3{
         margin-bottom: 1rem;
-    }
-
-    button{
-        margin-top: 2rem;
     }
 
     p{
