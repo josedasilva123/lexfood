@@ -1,12 +1,12 @@
 import React from "react";
 import { useContext } from "react";
-import { RecipeContext } from "../../providers/RecipeContext/RecipeContext";
-import { StyledParagraph } from "../../styles/typography";
+import { RecipePageContext } from "../../../providers/RecipeContext/RecipePageContext/RecipePageContext";
+import { StyledParagraph } from "../../../styles/typography";
 import RecipeCard from "./RecipeCard";
 import { StyledRecipeList } from "./style";
 
 const RecipeList = () => {
-   const { filteredRecipeList } = useContext(RecipeContext);
+   const { filteredRecipeList } = useContext(RecipePageContext);
    
    return (
       <>
