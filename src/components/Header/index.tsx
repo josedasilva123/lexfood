@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { StyledButton } from "../../styles/buttons";
 import { StyledContainer } from "../../styles/grid";
 import { StyledHeader, StyledHeaderFlexBox } from "./style";
-import { MdFavorite, MdDarkMode, MdLightMode } from "react-icons/md"
+import { MdFavorite, MdDarkMode, MdLightMode } from "react-icons/md";
 import { useContext } from "react";
 import { UserContext } from "../../providers/UserContext/UserContext";
 import { FavoriteContext } from "../../providers/FavoriteContext/FavoriteContext";
@@ -13,14 +13,16 @@ const Header = () => {
    const { user, userLogout } = useContext(UserContext);
    const { favoriteModal, setFavoriteModal, favoriteRecipes } = useContext(FavoriteContext);
    const { darkMode, setDarkMode } = useContext(DarkModeContext);
-   
+
    return (
       <StyledHeader>
          <StyledContainer>
             <StyledHeaderFlexBox>
-               <span className="logo">
-                  Lex<strong>Food</strong>
-               </span>
+               <Link to="/recipes">
+                  <span className="logo">
+                     Lex<strong>Food</strong>
+                  </span>
+               </Link>
                {user ? (
                   <div className="controls">
                      <div>
