@@ -41,6 +41,7 @@ export const buttonCSS = css<StyledButtonProps>`
          case "round":
             return css`
                width: 40px;
+               min-width: 40px;
                height: 40px;
             `   
       }

@@ -1,58 +1,30 @@
-import { AxiosError } from "axios";
-import { createContext, useEffect, useState } from "react";
+import { createContext } from "react";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { api } from "../../api/api";
 import { iContextProviderProps } from "../@types";
-import { iRecipeContext, iCategory, iRecipe, iRecipeGetResponse, iCategoryGetResponse, iRecipeCreateResponse } from "./@types";
+import { iRecipeContext, iRecipe, iCategoryGetResponse, iRecipeCreateResponse } from "./@types";
 
 export const RecipeContext = createContext({} as iRecipeContext);
 
 export const RecipeProvider = ({ children }: iContextProviderProps) => {
-   const [filter, setFilter] = useState("todos");
-   const [search, setSearch] = useState("");
-
    const queryClient = useQueryClient();
 
    const navigate = useNavigate();
 
    const {
-      isLoading: recipeListLoading,
-      data: recipeList,
-   } = useQuery({
-      queryKey: ["recipeList"],
-      queryFn: async () => {
-         try {
-            const response = await api.get<iRecipeGetResponse>("recipe");
-            return response.data.recipes;
-         } catch (error) {
-            console.log(error);
-            throw new Error("Ocorreu um erro!");
-         }
-      },
-      initialData: [],
-   });
-
-   const {
       isLoading: categoryListLoading,
       data: categoryList,
-   } = useQuery<iCategory[]>("categoryList", async () => {
+   } = useQuery("categoryList", async () => {
       try {
          const response = await api.get<iCategoryGetResponse>("category");
          return response.data.categories;
       } catch (error) {
-         console.log(error);
-         throw new Error("Ocorreu um erro!");
+         console.log(error);      
       }
-   }, []);
-
-   const filteredRecipeList = recipeList?.filter(
-      (recipe) =>
-         (filter === "todos" ? true : recipe.categories.includes(filter)) &&
-         (!search ? true : recipe.title.toLowerCase().includes(search.toLowerCase()))
-   );
-
+   });
+   
    const recipeCreateMutation = useMutation({
       mutationFn: async ({ formData }: { formData: FormData }) => {
          try {
@@ -67,6 +39,7 @@ export const RecipeProvider = ({ children }: iContextProviderProps) => {
             return response.data.recipe;
          } catch (error) {
             console.log(error);
+            throw new Error("Desculpe, ocorreu um erro e não foi possível cadastrar uma receita.")
          }
       },
       onSuccess: (data) => {
@@ -77,7 +50,7 @@ export const RecipeProvider = ({ children }: iContextProviderProps) => {
          navigate('/recipes');
       },
       onError: (error) => {
-         toast.error("Desculpe, ocorreu um erro.");
+         toast.error(error as string);
       },
    });
 
@@ -106,7 +79,7 @@ export const RecipeProvider = ({ children }: iContextProviderProps) => {
 
    return (
       <RecipeContext.Provider
-         value={{ categoryList, recipeList, filteredRecipeList, filter, setFilter, search, setSearch, recipeListLoading, recipeCreate }}
+         value={{ categoryList, categoryListLoading, recipeCreate }}
       >
          {children}
       </RecipeContext.Provider>

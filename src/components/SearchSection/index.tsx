@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
-import { RecipeContext } from "../../providers/RecipeContext/RecipeContext";
+import { RecipePageContext } from "../../providers/RecipeContext/RecipePageContext/RecipePageContext";
 import { StyledButton } from "../../styles/buttons";
 import { StyledTitle } from "../../styles/typography";
 import SearchForm from "./SearchForm";
 import { StyledSearchResults, StyledSearchSection } from "./style";
 
 const SearchSection = () => {
-   const { search, setSearch } = useContext(RecipeContext);
+   const { search, setSearch } = useContext(RecipePageContext);
    return (
       <StyledSearchSection>        
          <SearchForm />

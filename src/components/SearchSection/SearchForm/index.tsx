@@ -3,11 +3,11 @@ import { MdSearch } from "react-icons/md";
 import { StyledSearchForm } from "./style";
 import { StyledForm } from "../../../styles/form";
 import { StyledButton } from "../../../styles/buttons";
-import { RecipeContext } from "../../../providers/RecipeContext/RecipeContext";
+import { RecipePageContext } from "../../../providers/RecipeContext/RecipePageContext/RecipePageContext";
 
 const SearchForm = () => {
    const [searchInput, setSearchInput] = useState("");
-   const { setSearch } = useContext(RecipeContext);
+   const { setSearch } = useContext(RecipePageContext);
 
    function submit(event: SyntheticEvent) {
       event.preventDefault();
@@ -25,8 +25,7 @@ const SearchForm = () => {
             />
             <StyledButton buttonSize="default" buttonStyle="solid1">
               <MdSearch size={21} />
-            </StyledButton>
-  
+            </StyledButton>  
          </StyledForm>
       </StyledSearchForm>
    );
