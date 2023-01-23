@@ -66,7 +66,7 @@ export const buttonCSS = css<StyledButtonProps>`
                color: ${theme.colors.lockOrange};
 
                &:hover {
-                  background: ${theme.colors.lockOrange};
+                  background: ${theme.colors.orange};
                   color: ${theme.colors.lockWhite};
                }
             `;
