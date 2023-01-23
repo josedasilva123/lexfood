@@ -1,13 +1,13 @@
 import React from "react";
-import RecipeCategories from "../../components/RecipeCategories";
-import RecipeList from "../../components/RecipeList";
+import RecipeCategories from "../../components/Recipe/RecipeCategories";
 import Header from "../../components/Header";
 import { StyledContainer } from "../../styles/grid";
 import { StyledRecipePage } from "./style";
 import SearchSection from "../../components/SearchSection";
 import { useContext } from "react";
-import RecipeControls from "../../components/RecipeControls";
+import RecipeControls from "../../components/Recipe/RecipeControls";
 import { RecipePageContext } from "../../providers/RecipeContext/RecipePageContext/RecipePageContext";
+import RecipeList from "../../components/Recipe/RecipeList";
 
 const RecipePage = () => {
    const { recipeListLoading } = useContext(RecipePageContext);

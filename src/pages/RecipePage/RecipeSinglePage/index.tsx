@@ -1,12 +1,13 @@
-import React from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import { api } from "../../../api/api";
-import Breadcrumbs from "../../../components/Breadcrumbs";
 import Header from "../../../components/Header";
 import Loading from "../../../components/Loading";
 import { iRecipe } from "../../../providers/RecipeContext/@types";
 import { StyledContainer } from "../../../styles/grid";
+import { StyledParagraph } from "../../../styles/typography";
+import { StyledSinglePage } from "./style";
+import RecipeSingleHeader from "../../../components/RecipeSingle/RecipeSingleHeader";
 
 interface iRecipeGetResponse {
    recipe: iRecipe;
@@ -31,18 +32,26 @@ const RecipeSinglePage = () => {
       },
    });
    return (
-      <div>
+      <StyledSinglePage>
          <Header />
          {recipeLoading ? (
             <Loading />
          ) : (
-            <StyledContainer containerWidth={800}>
-              <Breadcrumbs breadcrumbs={[{ label: 'Teste', url: '#' }]} currentPage={recipe?.title as string} />
-               {recipeId}
-               {recipe?.title}
-            </StyledContainer>
+            <main>
+               <StyledContainer containerWidth={800}>
+                  <section className="recipeBox">
+                     <RecipeSingleHeader recipe={recipe as iRecipe} />
+                     <img src={recipe?.thumbnail_url} alt={recipe?.title} className="thumbnail" />
+                     <div className="contentBox">
+                        <StyledParagraph>
+                           {recipe?.content}
+                        </StyledParagraph>
+                     </div>
+                  </section>
+               </StyledContainer>
+            </main>
          )}
-      </div>
+      </StyledSinglePage>
    );
 };
 
