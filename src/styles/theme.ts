@@ -13,7 +13,7 @@ export const mainTheme = {
 export const darkTheme = {
    colors: {
       white: "#000000",
-      lightgray: "#DDDDDD",
+      lightgray: "#353535",
       orange: "#622C00",
       black: "#FFFFFF",
       black20: "rgba(255,255,255,.2)",
