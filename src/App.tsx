@@ -7,26 +7,29 @@ import { useContext } from "react";
 import { FavoriteContext } from "./providers/FavoriteContext/FavoriteContext";
 import { UserContext } from "./providers/UserContext/UserContext";
 import { DarkModeContext } from "./providers/DarkModeContext/DarkModeContext";
+import FormBox from "./components/FormBox";
+import { StyledButton } from "./styles/buttons";
 
 function App() {
    const { globalLoading } = useContext(UserContext);
-   const { favoriteModal } = useContext(FavoriteContext);  
-   const { darkMode } = useContext(DarkModeContext);   
-   
+   const { favoriteModal } = useContext(FavoriteContext);
+   const { darkMode } = useContext(DarkModeContext);
+
    return (
-      <ThemeProvider theme={darkMode ? darkTheme : mainTheme}>
-         <div className="App">
-            {globalLoading ? (
-               <h1>Carregando...</h1>
-            ) : (
-               <>
-                  {favoriteModal && <FavoriteList />}
-                  <RoutesComponent
-                  />
-               </>
-            )}
-         </div>
-      </ThemeProvider>
+      <>
+         <ThemeProvider theme={darkMode ? darkTheme : mainTheme}>
+            <div className="App">
+               {globalLoading ? (
+                  <h1>Carregando...</h1>
+               ) : (
+                  <>
+                     {favoriteModal && <FavoriteList />}
+                     <RoutesComponent />
+                  </>
+               )}
+            </div>
+         </ThemeProvider>
+      </>
    );
 }
 
