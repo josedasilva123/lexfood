@@ -6,11 +6,11 @@ import { UserProvider } from "./UserContext/UserContext";
 
 const Providers = ({ children }: iContextProviderProps) => {
    return (
-      <UserProvider>
-         <FavoriteProvider>
-            <DarkModeProvider>{children}</DarkModeProvider>
-         </FavoriteProvider>
-      </UserProvider>
+      <DarkModeProvider>
+         <UserProvider>
+            <FavoriteProvider>{children}</FavoriteProvider>
+         </UserProvider>
+      </DarkModeProvider>
    );
 };
 
