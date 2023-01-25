@@ -2,12 +2,12 @@
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 
-interface StyledButtonProps{ 
-   buttonSize: 'default' | 'big' | 'small' | 'round';
-   buttonStyle: 'solid1' | 'solid2' | 'outline1' | 'outline2';
+interface iStyledButtonProps{ 
+   $buttonSize: 'default' | 'big' | 'small' | 'round';
+   $buttonStyle: 'solid1' | 'solid2' | 'outline1' | 'outline2';
 }
 
-export const buttonCSS = css<StyledButtonProps>`
+export const buttonCSS = css<iStyledButtonProps>`
    display: inline-flex;
    align-items: center;
    justify-content: center;
@@ -21,8 +21,8 @@ export const buttonCSS = css<StyledButtonProps>`
       filter: brightness(1.2);
    }
 
-   ${({ buttonSize }) => {
-      switch (buttonSize) {
+   ${({ $buttonSize }) => {
+      switch ($buttonSize) {
          case "default":
             return css`
                padding: 0 2rem;
@@ -47,8 +47,8 @@ export const buttonCSS = css<StyledButtonProps>`
       }
    }}
 
-   ${({ theme, buttonStyle }) => {
-      switch (buttonStyle) {
+   ${({ theme, $buttonStyle }) => {
+      switch ($buttonStyle) {
          case "solid1":
             return css`
                background: ${theme.colors.orange};
@@ -85,10 +85,10 @@ export const buttonCSS = css<StyledButtonProps>`
    }}
 `;
 
-export const StyledButton = styled.button<StyledButtonProps>`
+export const StyledButton = styled.button<iStyledButtonProps>`
    ${buttonCSS}
 `;
 
-export const StyledLinkButton = styled(Link)<StyledButtonProps>`
+export const StyledLinkButton = styled(Link)<iStyledButtonProps>`
    ${buttonCSS}
 `;

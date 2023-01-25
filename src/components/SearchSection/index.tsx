@@ -15,7 +15,7 @@ const SearchSection = () => {
                <StyledTitle tag="h2" fontSize="two" fontWeight={700}>
                   Resultados de busca para: <span>{search}</span>
                </StyledTitle>
-               <StyledButton buttonStyle="solid1" buttonSize="default" onClick={() => setSearch("")}>
+               <StyledButton $buttonStyle="solid1" $buttonSize="default" onClick={() => setSearch("")}>
                   Limpar busca
                </StyledButton>
             </StyledSearchResults>

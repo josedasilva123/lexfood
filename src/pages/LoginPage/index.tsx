@@ -17,7 +17,7 @@ const LoginPage = () => {
                <div className="innerBox">
                   <img src={Logo} alt="Logo Receitinhas do Alex" />
                   <LoginForm />
-                  <StyledLinkButton to="/register" buttonStyle="outline1" buttonSize="big">
+                  <StyledLinkButton to="/register" $buttonStyle="outline1" $buttonSize="big">
                      <MdLogin size={21} /> Cadastrar-se
                   </StyledLinkButton>
                </div>

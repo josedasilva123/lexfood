@@ -83,7 +83,7 @@ const RecipeCreateForm = () => {
                ))}
             </Select>
 
-            <StyledButton type="submit" buttonStyle="solid1" buttonSize="big">
+            <StyledButton type="submit" $buttonStyle="solid1" $buttonSize="big">
                Enviar
             </StyledButton>
          </StyledForm>

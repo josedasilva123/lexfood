@@ -26,8 +26,8 @@ const RecipeCard = ({ recipe }: iRecipeCardProps) => {
                <StyledButton
                   aria-label="favorite"
                   title="Favoritar"
-                  buttonStyle="solid1"
-                  buttonSize="round"
+                  $buttonStyle="solid1"
+                  $buttonSize="round"
                   onClick={(event) => {
                      event.stopPropagation();
                      addRecipeToFavoriteList(recipe);
@@ -35,7 +35,7 @@ const RecipeCard = ({ recipe }: iRecipeCardProps) => {
                >
                   <MdFavorite size={21} />
                </StyledButton>
-               <StyledLinkButton to={`/recipes/${recipe._id}`} buttonSize="small" buttonStyle="outline1">
+               <StyledLinkButton to={`/recipes/${recipe._id}`} $buttonSize="small" $buttonStyle="outline1">
                   Saiba mais
                </StyledLinkButton>
             </div>

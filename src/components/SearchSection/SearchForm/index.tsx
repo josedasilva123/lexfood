@@ -23,7 +23,7 @@ const SearchForm = () => {
                placeholder="O que você está procurando?"
                onChange={(event) => setSearchInput(event.target.value)}
             />
-            <StyledButton buttonSize="default" buttonStyle="solid1">
+            <StyledButton $buttonSize="default" $buttonStyle="solid1">
               <MdSearch size={21} />
             </StyledButton>  
          </StyledForm>

@@ -13,7 +13,7 @@ const RecipeCreatePage = () => {
          <Header />
          <StyledContainer containerWidth={900}>
             <div className="flexBox">
-               <StyledLinkButton className="backButton" to="/recipes" buttonStyle="outline1" buttonSize="round" title="Voltar">
+               <StyledLinkButton className="backButton" to="/recipes" $buttonStyle="outline1" $buttonSize="round" title="Voltar">
                   <MdArrowBack />
                </StyledLinkButton>
                <div className="left">
