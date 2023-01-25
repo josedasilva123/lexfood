@@ -1,7 +1,6 @@
 import React from "react";
 import LoginForm from "../../components/Form/LoginForm";
 import { StyledLinkButton } from "../../styles/buttons";
-import { StyledTitle } from "../../styles/typography";
 import { StyledLoginPage, StyledLoginPageFlexBox } from "./style";
 import { MdLogin } from "react-icons/md"
 import Logo from "../../assets/LogoAlex.png"

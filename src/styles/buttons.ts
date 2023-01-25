@@ -85,10 +85,10 @@ export const buttonCSS = css<StyledButtonProps>`
    }}
 `;
 
-export const StyledButton = styled.button`
+export const StyledButton = styled.button<StyledButtonProps>`
    ${buttonCSS}
 `;
 
-export const StyledLinkButton = styled(Link)`
+export const StyledLinkButton = styled(Link)<StyledButtonProps>`
    ${buttonCSS}
 `;

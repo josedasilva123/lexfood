@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { AxiosError } from "axios";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -8,12 +8,14 @@ import { api } from "../../api/api";
 import { iUserLoginFormValues } from "../../components/Form/LoginForm/@types";
 import { iUserRegisterFormValues } from "../../components/Form/RegisterForm/@types";
 import { iContextProviderProps, iDefaultErrorResponse } from "../@types";
+import { DarkModeContext } from "../DarkModeContext/DarkModeContext";
 import { iUserContext, iUserAutoLoginResponse, iUserLoginResponse } from "./@types";
 
 export const UserContext = createContext({} as iUserContext);
 
 export const UserProvider = ({ children }: iContextProviderProps) => {
    const queryClient = useQueryClient();
+   const { setDarkMode } = useContext(DarkModeContext)
    const [cachedRoute, setCachedRoute] = useState("");
 
    const {
@@ -97,8 +99,9 @@ export const UserProvider = ({ children }: iContextProviderProps) => {
    };
 
    const userLogout = async () => {
-      await queryClient.setQueryData("user", null);
       setCachedRoute("");
+      setDarkMode(false);
+      await queryClient.setQueryData("user", null);      
       localStorage.removeItem("@TOKEN");
       navigate("/");
    };

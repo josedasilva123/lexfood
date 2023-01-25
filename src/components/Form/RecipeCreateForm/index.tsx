@@ -7,8 +7,10 @@ import { StyledButton } from "../../../styles/buttons";
 import { StyledFieldError, StyledForm } from "../../../styles/form";
 import Input from "../Input";
 import Select from "../Select";
+import TextArea from "../Textarea";
 import { iRecipeCreateFormValues } from "./@types";
 import { recipeCreateSchema } from "./recipeCreateSchema";
+import { StyledRecipeCreateFormBox } from "./style";
 
 const RecipeCreateForm = () => {
    const { user } = useContext(UserContext);
@@ -18,9 +20,12 @@ const RecipeCreateForm = () => {
       register,
       handleSubmit,
       formState: { errors },
+      watch,
    } = useForm<iRecipeCreateFormValues>({
-      resolver: yupResolver(recipeCreateSchema)
+      resolver: yupResolver(recipeCreateSchema),
    });
+
+   const watchFile = watch("file");
 
    const submit: SubmitHandler<iRecipeCreateFormValues> = (formData) => {
       const newRecipe = {
@@ -42,7 +47,7 @@ const RecipeCreateForm = () => {
    };
 
    return (
-      <>
+      <StyledRecipeCreateFormBox>
          <StyledForm onSubmit={handleSubmit(submit)}>
             <Input
                id="title"
@@ -52,23 +57,29 @@ const RecipeCreateForm = () => {
                register={register("title")}
                error={errors.title}
             />
-            <Input
+            <TextArea
                id="content"
                label="Conteúdo:"
-               type="text"
                placeholder="Digite um conteúdo"
                register={register("content")}
                error={errors.content}
             />
+            {watchFile?.[0] ? (
+               <label htmlFor="file">Imagem selecionada</label>
+            ) : (
+               <label htmlFor="file" className="fileLabel">Clique aqui e selecione uma imagem</label>
+            )}            
 
-            <label htmlFor="file">Selecione uma imagem de destaque:</label>
-            <input id="file" type="file" {...register("file")} />
+            {watchFile?.[0] && <img src={URL.createObjectURL(watchFile[0])} alt={watchFile[0].name} className="fileImage" />}
+            <input id="file" type="file" {...register("file")} accept="image/png, image/jpeg" />
             {errors.file && <StyledFieldError>{errors.file.message}</StyledFieldError>}
 
             <Select id="category" label="category" register={register("category")} error={errors.category}>
                <option value="">Escolha uma categoria</option>
                {categoryList?.map((category) => (
-                  <option key={category.slug} value={category.slug}>{category.name}</option>
+                  <option key={category.slug} value={category.slug}>
+                     {category.name}
+                  </option>
                ))}
             </Select>
 
@@ -76,7 +87,7 @@ const RecipeCreateForm = () => {
                Enviar
             </StyledButton>
          </StyledForm>
-      </>
+      </StyledRecipeCreateFormBox>
    );
 };
 

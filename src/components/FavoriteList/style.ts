@@ -14,6 +14,7 @@ export const StyledFavoriteList = styled.div<iStyledFavoriteListProps>`
    background: ${({ theme }) => theme.colors.white};
    box-shadow: 0 0 25px 0 ${({ theme }) => theme.colors.black20};
    min-height: 100vh;
+   z-index: 1001;
 
    ${({ isClosing }) => {
       if (isClosing) {
