@@ -7,8 +7,6 @@ import { useContext } from "react";
 import { FavoriteContext } from "./providers/FavoriteContext/FavoriteContext";
 import { UserContext } from "./providers/UserContext/UserContext";
 import { DarkModeContext } from "./providers/DarkModeContext/DarkModeContext";
-import FormBox from "./components/FormBox";
-import { StyledButton } from "./styles/buttons";
 
 function App() {
    const { globalLoading } = useContext(UserContext);
