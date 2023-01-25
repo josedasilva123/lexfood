@@ -26,7 +26,7 @@ const RecipeCard = ({ recipe }: iRecipeCardProps) => {
                <StyledButton
                   aria-label="favorite"
                   title="Favoritar"
-                  buttonStyle="outline1"
+                  buttonStyle="solid1"
                   buttonSize="round"
                   onClick={(event) => {
                      event.stopPropagation();
