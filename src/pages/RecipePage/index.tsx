@@ -10,10 +10,10 @@ import { RecipePageContext } from "../../providers/RecipeContext/RecipePageConte
 import RecipeList from "../../components/Recipe/RecipeList";
 
 const RecipePage = () => {
-   const { recipeListLoading } = useContext(RecipePageContext);
+   const { recipeListLoading } = useContext(RecipePageContext); 
 
    return (
-      <StyledRecipePage>
+      <StyledRecipePage>  
          {recipeListLoading ? (
             <h1>Carregando...</h1>
          ) : (

@@ -23,11 +23,24 @@ export const StyledForm = styled.form`
       color: ${({ theme }) => theme.colors.black};
    }
 
-   input:focus {
+   textarea{
+      font-family: 'Roboto', sans-serif;
+      background: ${({ theme }) => theme.colors.lightgray};
+      resize: vertical;
+      width: 100%;
+      padding: 20px;
+      min-height: 150px;
+      max-height: 250px;
+      color: ${({ theme }) => theme.colors.black};
+   }
+
+   input:focus,
+   textarea:focus {
       outline-color: ${({ theme }) => theme.colors.orange};
    }
 
-   input:disabled {
+   input:disabled,
+   textarea:disabled {
       cursor: not-allowed;
       opacity: 0.5;
    }

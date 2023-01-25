@@ -10,23 +10,24 @@ import { DarkModeContext } from "./providers/DarkModeContext/DarkModeContext";
 
 function App() {
    const { globalLoading } = useContext(UserContext);
-   const { favoriteModal } = useContext(FavoriteContext);  
-   const { darkMode } = useContext(DarkModeContext);   
-   
+   const { favoriteModal } = useContext(FavoriteContext);
+   const { darkMode } = useContext(DarkModeContext);
+
    return (
-      <ThemeProvider theme={darkMode ? darkTheme : mainTheme}>
-         <div className="App">
-            {globalLoading ? (
-               <h1>Carregando...</h1>
-            ) : (
-               <>
-                  {favoriteModal && <FavoriteList />}
-                  <RoutesComponent
-                  />
-               </>
-            )}
-         </div>
-      </ThemeProvider>
+      <>
+         <ThemeProvider theme={darkMode ? darkTheme : mainTheme}>
+            <div className="App">
+               {globalLoading ? (
+                  <h1>Carregando...</h1>
+               ) : (
+                  <>
+                     {favoriteModal && <FavoriteList />}
+                     <RoutesComponent />
+                  </>
+               )}
+            </div>
+         </ThemeProvider>
+      </>
    );
 }
 
