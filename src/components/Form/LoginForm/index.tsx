@@ -48,7 +48,7 @@ const LoginForm = () => {
             disabled={loading}
          />
 
-         <StyledButton type="submit" buttonStyle="solid1" buttonSize="big" disabled={loading}>
+         <StyledButton type="submit" $buttonStyle="solid1" $buttonSize="big" disabled={loading}>
             {loading ? "Entrando..." : "Entrar"}
          </StyledButton>
       </StyledForm>

@@ -75,7 +75,7 @@ const RegisterForm = () => {
             disabled={loading}
          />
 
-         <StyledButton type="submit" buttonStyle="solid1" buttonSize="big" disabled={loading}>
+         <StyledButton type="submit" $buttonStyle="solid1" $buttonSize="big" disabled={loading}>
             {loading ? "Cadastrando..." : "Cadastrar"}
          </StyledButton>
       </StyledForm>

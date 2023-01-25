@@ -12,7 +12,7 @@ const RecipeCategories = () => {
    return (
       <StyledRecipeCategories>
          <li>
-            <StyledButton onClick={() => setFilter("todos")} buttonSize="small" buttonStyle={filter === "todos" ? "solid1" : "outline1"}>
+            <StyledButton onClick={() => setFilter("todos")} $buttonSize="small" $buttonStyle={filter === "todos" ? "solid1" : "outline1"}>
                Todas
             </StyledButton>
          </li>
@@ -21,8 +21,8 @@ const RecipeCategories = () => {
                <li key={category.slug}>
                   <StyledButton
                      onClick={() => setFilter(category.slug)}
-                     buttonSize="small"
-                     buttonStyle={filter === category.slug ? "solid1" : "outline1"}
+                     $buttonSize="small"
+                     $buttonStyle={filter === category.slug ? "solid1" : "outline1"}
                   >
                      {category.name}
                   </StyledButton>

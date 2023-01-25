@@ -20,7 +20,7 @@ const RecipeSingleHeader = ({ recipe }: iRecipeSingleHeaderProps) => {
             <StyledTitle tag="h1" fontSize="two" fontWeight={700}>
                {recipe?.title}
             </StyledTitle>
-            <StyledButton buttonSize="round" buttonStyle="solid1" onClick={() => addRecipeToFavoriteList(recipe)}>
+            <StyledButton $buttonSize="round" $buttonStyle="solid1" onClick={() => addRecipeToFavoriteList(recipe)}>
                <MdFavorite />
             </StyledButton>
          </div>

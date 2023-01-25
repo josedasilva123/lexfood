@@ -10,7 +10,7 @@ const RegisterPage = () => {
          <StyledRegisterPageFlexBox>
             <div className="innerBox">
                <RegisterForm />
-               <StyledLinkButton to="/" buttonStyle="outline1" buttonSize="big">
+               <StyledLinkButton to="/" $buttonStyle="outline1" $buttonSize="big">
                   <MdArrowBack size={21} /> Voltar para o início
                </StyledLinkButton>
             </div>

@@ -29,7 +29,7 @@ const Header = () => {
                         <span>Bem vindo, {user.name}</span>
                         <span>{user.email}</span>
                      </div>
-                     <StyledButton buttonStyle="solid2" buttonSize="default" onClick={() => userLogout()}>
+                     <StyledButton $buttonStyle="solid2" $buttonSize="default" onClick={() => userLogout()}>
                         Sair
                      </StyledButton>
                      <button className="favorite" onClick={() => setFavoriteModal(!favoriteModal)}>
