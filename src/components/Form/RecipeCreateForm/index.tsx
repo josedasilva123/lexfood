@@ -7,6 +7,7 @@ import { StyledButton } from "../../../styles/buttons";
 import { StyledFieldError, StyledForm } from "../../../styles/form";
 import Input from "../Input";
 import Select from "../Select";
+import TextArea from "../Textarea";
 import { iRecipeCreateFormValues } from "./@types";
 import { recipeCreateSchema } from "./recipeCreateSchema";
 import { StyledRecipeCreateFormBox } from "./style";
@@ -56,10 +57,9 @@ const RecipeCreateForm = () => {
                register={register("title")}
                error={errors.title}
             />
-            <Input
+            <TextArea
                id="content"
                label="Conteúdo:"
-               type="text"
                placeholder="Digite um conteúdo"
                register={register("content")}
                error={errors.content}
