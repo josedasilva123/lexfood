@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import { api } from "../../../api/api";
@@ -8,6 +9,8 @@ import { StyledContainer } from "../../../styles/grid";
 import { StyledParagraph } from "../../../styles/typography";
 import { StyledSinglePage } from "./style";
 import RecipeSingleHeader from "../../../components/RecipeSingle/RecipeSingleHeader";
+import { useContext, useEffect } from "react";
+import { UserContext } from "../../../providers/UserContext/UserContext";
 
 interface iRecipeGetResponse {
    recipe: iRecipe;
@@ -31,6 +34,7 @@ const RecipeSinglePage = () => {
          }
       },
    });
+
    return (
       <StyledSinglePage>
          <Header />
@@ -43,9 +47,7 @@ const RecipeSinglePage = () => {
                      <RecipeSingleHeader recipe={recipe as iRecipe} />
                      <img src={recipe?.thumbnail_url} alt={recipe?.title} className="thumbnail" />
                      <div className="contentBox">
-                        <StyledParagraph>
-                           {recipe?.content}
-                        </StyledParagraph>
+                        <StyledParagraph>{recipe?.content}</StyledParagraph>
                      </div>
                   </section>
                </StyledContainer>

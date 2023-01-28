@@ -1,10 +1,8 @@
-import React, { useContext } from "react";
-import { MdFavorite } from "react-icons/md";
-import { FavoriteContext } from "../../../providers/FavoriteContext/FavoriteContext";
+import React from "react";
 import { iRecipe } from "../../../providers/RecipeContext/@types";
-import { StyledButton } from "../../../styles/buttons";
 import { StyledTitle } from "../../../styles/typography";
 import Breadcrumbs from "../../Breadcrumbs";
+import FavoriteButton from "../../FavoriteButton";
 import { StyledRecipeSingleHeader } from "./style";
 
 interface iRecipeSingleHeaderProps {
@@ -12,7 +10,6 @@ interface iRecipeSingleHeaderProps {
 }
 
 const RecipeSingleHeader = ({ recipe }: iRecipeSingleHeaderProps) => {
-   const { addRecipeToFavoriteList } = useContext(FavoriteContext);
    return (
       <StyledRecipeSingleHeader>
          <Breadcrumbs currentPage={recipe?.title as string} />
@@ -20,9 +17,7 @@ const RecipeSingleHeader = ({ recipe }: iRecipeSingleHeaderProps) => {
             <StyledTitle tag="h1" fontSize="two" fontWeight={700}>
                {recipe?.title}
             </StyledTitle>
-            <StyledButton $buttonSize="round" $buttonStyle="solid1" onClick={() => addRecipeToFavoriteList(recipe)}>
-               <MdFavorite />
-            </StyledButton>
+            <FavoriteButton currentRecipe={recipe}/>
          </div>
       </StyledRecipeSingleHeader>
    );
