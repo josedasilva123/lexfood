@@ -1,14 +1,15 @@
-import { AxiosError } from "axios";
 import { createContext } from "react";
+import { AxiosError } from "axios";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { api } from "../../../api/api";
 import { iContextProviderProps, iDefaultErrorResponse } from "../../@types";
 import { iRecipe } from "../@types";
-import { iRecipeGetOneResponse, iReviewCreateResponse, iReviewDeleteResponse, iReviewFormValues } from "./@types";
+import { iRecipeGetOneResponse, iRecipeSinglePageContext, iReviewCreateResponse, iReviewDeleteResponse } from "./@types";
+import { iReviewFormValues } from "../../../components/Form/ReviewCreateForm/@types";
 
-export const RecipeSinglePageContext = createContext({});
+export const RecipeSinglePageContext = createContext({} as iRecipeSinglePageContext);
 
 export const RecipeSinglePageProvider = ({ children }: iContextProviderProps) => {
    const { recipeId } = useParams();
@@ -32,11 +33,11 @@ export const RecipeSinglePageProvider = ({ children }: iContextProviderProps) =>
    });
 
    const addReviewToRecipeMutation = useMutation({
-      mutationFn: async ({ review }: { review: iReviewFormValues }) => {
+      mutationFn: async ({ formData }: { formData: iReviewFormValues }) => {
          try {
             const token = localStorage.getItem("@TOKEN");
 
-            const newReview = { ...review, score: +review.score, recipeId: recipe?._id };
+            const newReview = { ...formData, score: +formData.score, recipeId: recipe?._id };
 
             const response = await api.post<iReviewCreateResponse>("review", newReview, {
                headers: {
@@ -47,6 +48,7 @@ export const RecipeSinglePageProvider = ({ children }: iContextProviderProps) =>
             return response.data;
          } catch (error) {
             const currentError = error as AxiosError<iDefaultErrorResponse>;
+            toast.error(currentError.response?.data.error);
             throw new Error(currentError.response?.data.error);
          }
       },
@@ -58,13 +60,10 @@ export const RecipeSinglePageProvider = ({ children }: iContextProviderProps) =>
          });
          toast.success(data.message);
       },
-      onError: (error) => {
-         toast.error(error as string);
-      },
    });
 
-   const addReviewToRecipe = (review: iReviewFormValues) => {
-      addReviewToRecipeMutation.mutate({ review });
+   const addReviewToRecipe = (formData: iReviewFormValues) => {
+      addReviewToRecipeMutation.mutate({ formData });
    };
 
    const removeReviewFromRecipeMutation = useMutation({
@@ -101,5 +100,51 @@ export const RecipeSinglePageProvider = ({ children }: iContextProviderProps) =>
       removeReviewFromRecipeMutation.mutate({ reviewId });
    };
 
-   return <RecipeSinglePageContext.Provider value={{}}>{children}</RecipeSinglePageContext.Provider>;
+   const editReviewFromRecipeMutation = useMutation({
+      mutationFn: async ({ formData, reviewId }: { formData: iReviewFormValues; reviewId: string }) => {
+         try {
+            const token = localStorage.getItem("@TOKEN");
+
+            const newReview = { ...formData, score: +formData.score };
+
+            const response = await api.patch<iReviewDeleteResponse>(`review/${recipe?._id}/${reviewId}`, newReview, {
+               headers: {
+                  auth: token,
+               },
+            });
+
+            return { newReview, reviewId, message: response.data.message };
+         } catch (error) {
+            const currentError = error as AxiosError<iDefaultErrorResponse>;
+            throw new Error(currentError.response?.data.error);
+         }
+      },
+      onSuccess: (data) => {
+         queryClient.setQueryData("recipe", (currentData) => {
+            const currentRecipe = currentData as iRecipe;
+            const newReviewList = currentRecipe.reviews.map((review) => {
+               if (review._id === data.reviewId) {
+                  return { ...review, content: data.newReview.content, score: data.newReview.score };
+               } else {
+                  return review;
+               }
+            });
+            return { ...currentRecipe, reviews: newReviewList };
+         });
+         toast.success(data.message);
+      },
+      onError: (error) => {
+         toast.error(error as string);
+      },
+   });
+
+   const editReviewFromRecipe = (formData: iReviewFormValues, reviewId: string) => {
+      editReviewFromRecipeMutation.mutate({ formData, reviewId });
+   };
+
+   return (
+      <RecipeSinglePageContext.Provider value={{ recipe, recipeLoading, addReviewToRecipe, removeReviewFromRecipe, editReviewFromRecipe }}>
+         {children}
+      </RecipeSinglePageContext.Provider>
+   );
 };

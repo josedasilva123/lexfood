@@ -7,6 +7,7 @@ import ProtectedRoutes from "./components/ProtectedRoutes";
 import RecipeCreatePage from "./pages/RecipePage/RecipeCreatePage";
 import RecipeSinglePage from "./pages/RecipePage/RecipeSinglePage";
 import { RecipePageProvider } from "./providers/RecipeContext/RecipePageContext/RecipePageContext";
+import { RecipeSinglePageProvider } from "./providers/RecipeContext/RecipeSinglePageContext/RecipeSinglePageContext";
 
 const RoutesComponent = () => {
    return (
@@ -22,7 +23,14 @@ const RoutesComponent = () => {
                   </RecipePageProvider>
                }
             />
-            <Route path="/recipes/:recipeId" element={<RecipeSinglePage />} />
+            <Route
+               path="/recipes/:recipeId"
+               element={
+                  <RecipeSinglePageProvider>
+                     <RecipeSinglePage />
+                  </RecipeSinglePageProvider>
+               }
+            />
             <Route path="/recipes/create" element={<RecipeCreatePage />} />
          </Route>
       </Routes>
