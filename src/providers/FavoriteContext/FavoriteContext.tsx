@@ -1,12 +1,12 @@
 import { AxiosError } from "axios";
 import { useContext, useState } from "react";
 import { createContext } from "react";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
 import { api } from "../../api/api";
 import { iContextProviderProps, iDefaultErrorResponse } from "../@types";
 import { iRecipe } from "../RecipeContext/@types";
-import { iFavoriteRecipe, iUser, iUserAutoLoginResponse } from "../UserContext/@types";
+import { iFavoriteRecipe, iUser } from "../UserContext/@types";
 import { UserContext } from "../UserContext/UserContext";
 import { iFavoriteContext, iFavoriteCreateResponse, iFavoriteDeleteResponse } from "./@types";
 

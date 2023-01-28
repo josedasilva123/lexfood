@@ -9,8 +9,6 @@ import { StyledContainer } from "../../../styles/grid";
 import { StyledParagraph } from "../../../styles/typography";
 import { StyledSinglePage } from "./style";
 import RecipeSingleHeader from "../../../components/RecipeSingle/RecipeSingleHeader";
-import { useContext, useEffect } from "react";
-import { UserContext } from "../../../providers/UserContext/UserContext";
 
 interface iRecipeGetResponse {
    recipe: iRecipe;
