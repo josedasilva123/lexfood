@@ -2,9 +2,9 @@
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 
-interface iStyledButtonProps{ 
-   $buttonSize: 'default' | 'big' | 'small' | 'round';
-   $buttonStyle: 'solid1' | 'solid2' | 'outline1' | 'outline2';
+interface iStyledButtonProps {
+   $buttonSize?: "default" | "big" | "small" | "round";
+   $buttonStyle: "solid1" | "solid2" | "outline1" | "outline2" | "link";
 }
 
 export const buttonCSS = css<iStyledButtonProps>`
@@ -43,7 +43,7 @@ export const buttonCSS = css<iStyledButtonProps>`
                width: 40px;
                min-width: 40px;
                height: 40px;
-            `   
+            `;
       }
    }}
 
@@ -81,6 +81,11 @@ export const buttonCSS = css<iStyledButtonProps>`
                   color: ${theme.colors.orange};
                }
             `;
+         
+         case "link":
+            return css`
+               color: ${theme.colors.orange};
+            `   
       }
    }}
 `;
