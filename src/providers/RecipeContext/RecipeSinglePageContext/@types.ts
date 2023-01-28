@@ -22,3 +22,7 @@ export interface iReviewCreateResponse{
     review: iRecipe;
     message: string;
 }
+
+export interface iReviewDeleteResponse{
+    message: string;
+}
