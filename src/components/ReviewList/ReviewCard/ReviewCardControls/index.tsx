@@ -8,9 +8,10 @@ import { StyledReviewCardControls } from "./style";
 
 interface iReviewCardControlsProps{
    review: iReview;
+   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ReviewCardControls = ({ review }: iReviewCardControlsProps) => {
+const ReviewCardControls = ({ review, setIsEditing }: iReviewCardControlsProps) => {
    const { removeReviewFromRecipe } = useContext(RecipeSinglePageContext);
    const [isDeleting, setIsDeleting] = useState(false);
 
@@ -18,7 +19,7 @@ const ReviewCardControls = ({ review }: iReviewCardControlsProps) => {
       <>
          <StyledReviewCardControls>
             <StyledButton $buttonStyle="link">
-               <MdEdit />
+               <MdEdit onClick={() => setIsEditing(true)}/>
             </StyledButton>
             <StyledButton $buttonStyle="link" aria-label="delete" onClick={() => setIsDeleting(true)}>
                <MdDelete />

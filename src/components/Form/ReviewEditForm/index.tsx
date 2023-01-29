@@ -1,48 +1,60 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import { SyntheticEvent, useContext } from "react";
+import React, { SyntheticEvent, useContext } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { iReview } from "../../../providers/RecipeContext/RecipeSinglePageContext/@types";
 import { RecipeSinglePageContext } from "../../../providers/RecipeContext/RecipeSinglePageContext/RecipeSinglePageContext";
 import { StyledButton } from "../../../styles/buttons";
-import { StyledParagraph, StyledTitle } from "../../../styles/typography";
+import { StyledTitle, StyledParagraph } from "../../../styles/typography";
+import { StyledReviewCreateForm } from "../ReviewCreateForm/styles";
 import ScoreBox from "../ScoreBox";
 import Select from "../Select";
 import TextArea from "../Textarea";
-import { iReviewFormValues } from "./@types";
-import { reviewCreateFormSchema } from "./reviewCreateFormSchema";
-import { StyledReviewCreateForm } from "./styles";
+import { iReviewEditFormValues } from "./@types";
+import { reviewCreateEditSchema } from "./reviewEditFormSchema";
+import { yupResolver } from "@hookform/resolvers/yup";
 
-const ReviewCreateForm = () => {
-   const { addReviewToRecipe } = useContext(RecipeSinglePageContext);
+interface iReviewEditFormProps{
+  review: iReview;
+  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const ReviewEditForm = ({ review, setIsEditing }: iReviewEditFormProps) => {
+   const { editReviewFromRecipe } = useContext(RecipeSinglePageContext);
+
    const {
       register,
       handleSubmit,
       formState: { errors },
       setValue,
       watch,
-   } = useForm<iReviewFormValues>({
-      resolver: yupResolver(reviewCreateFormSchema),
+   } = useForm<iReviewEditFormValues>({
+      resolver: yupResolver(reviewCreateEditSchema),
+      defaultValues: {
+        content: review.content,
+        score: String(review.score),
+      },
    });
 
-   const submit: SubmitHandler<iReviewFormValues> = (formData) => {
-      addReviewToRecipe(formData);
+   const submit: SubmitHandler<iReviewEditFormValues> = (formData) => {
+      editReviewFromRecipe(formData, review._id);
+      setIsEditing(false);
    };
 
    const currentScore = watch("score");
 
    const changeScore = (event: SyntheticEvent, newValue: string) => {
-      if(newValue === null){
-         setValue('score', "");
+      if (newValue === null) {
+         setValue("score", "");
       } else {
          setValue("score", String(newValue));
       }
-   }
+   };
 
    return (
       <StyledReviewCreateForm onSubmit={handleSubmit(submit)}>
          <StyledTitle tag="h2" fontSize="four" fontWeight={600}>
-            Avalie está receita:
+            Edite sua avaliação:
          </StyledTitle>
-         <StyledParagraph>Preencha os campos abaixo e deixe uma avaliação sobre essa receita:</StyledParagraph>
+    
          <TextArea label="Sua avaliação:" id="content" register={register("content")} error={errors.content} />
 
          <StyledParagraph>Selecione uma nota de 1 a 5:</StyledParagraph>
@@ -57,11 +69,12 @@ const ReviewCreateForm = () => {
             <option value="2">2</option>
             <option value="1">1</option>
          </Select>
+
          <StyledButton type="submit" $buttonSize="default" $buttonStyle="solid1">
-            Enviar avaliação
+            Editar avaliação
          </StyledButton>
       </StyledReviewCreateForm>
    );
 };
 
-export default ReviewCreateForm;
+export default ReviewEditForm;
