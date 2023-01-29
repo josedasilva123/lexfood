@@ -1,36 +1,21 @@
-import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
-import { api } from "../../../api/api";
+/* eslint-disable react-hooks/exhaustive-deps */
 import Header from "../../../components/Header";
 import Loading from "../../../components/Loading";
 import { iRecipe } from "../../../providers/RecipeContext/@types";
 import { StyledContainer } from "../../../styles/grid";
-import { StyledParagraph } from "../../../styles/typography";
+import { StyledParagraph, StyledTitle } from "../../../styles/typography";
 import { StyledSinglePage } from "./style";
 import RecipeSingleHeader from "../../../components/RecipeSingle/RecipeSingleHeader";
-
-interface iRecipeGetResponse {
-   recipe: iRecipe;
-}
+import { useContext } from "react";
+import { RecipeSinglePageContext } from "../../../providers/RecipeContext/RecipeSinglePageContext/RecipeSinglePageContext";
+import ReviewCreateForm from "../../../components/Form/ReviewCreateForm";
+import { UserContext } from "../../../providers/UserContext/UserContext";
+import ReviewList from "../../../components/ReviewList";
 
 const RecipeSinglePage = () => {
-   const { recipeId } = useParams();
-   const { data: recipe, isLoading: recipeLoading } = useQuery({
-      queryKey: ["recipe"],
-      queryFn: async () => {
-         try {
-            const token = localStorage.getItem("@TOKEN");
-            const response = await api.get<iRecipeGetResponse>(`recipe/${recipeId}`, {
-               headers: {
-                  auth: token,
-               },
-            });
-            return response.data.recipe;
-         } catch (error) {
-            console.log(error);
-         }
-      },
-   });
+   const { user } = useContext(UserContext);
+   const { recipe, recipeLoading } = useContext(RecipeSinglePageContext);
+
    return (
       <StyledSinglePage>
          <Header />
@@ -43,10 +28,13 @@ const RecipeSinglePage = () => {
                      <RecipeSingleHeader recipe={recipe as iRecipe} />
                      <img src={recipe?.thumbnail_url} alt={recipe?.title} className="thumbnail" />
                      <div className="contentBox">
-                        <StyledParagraph>
-                           {recipe?.content}
-                        </StyledParagraph>
-                     </div>
+                        <StyledParagraph>{recipe?.content}</StyledParagraph>
+                        <div>
+                           <StyledTitle tag="h2" fontSize="three">Avaliações:</StyledTitle>
+                           <ReviewList />
+                           {!recipe?.reviews.some(review => review.userId === user?.id ) && <ReviewCreateForm />}
+                        </div>
+                     </div>                     
                   </section>
                </StyledContainer>
             </main>

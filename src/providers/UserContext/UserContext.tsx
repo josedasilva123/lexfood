@@ -17,6 +17,7 @@ export const UserProvider = ({ children }: iContextProviderProps) => {
    const queryClient = useQueryClient();
    const { setDarkMode } = useContext(DarkModeContext)
    const [cachedRoute, setCachedRoute] = useState("");
+   const [isLoginIn, setIsLoginIn] = useState(false);
 
    const {
       isLoading: globalLoading,
@@ -33,6 +34,7 @@ export const UserProvider = ({ children }: iContextProviderProps) => {
                      auth: token,
                   },
                });
+               setIsLoginIn(true);
                return response.data.user;
             } catch (error) {
                console.log(error);
@@ -47,8 +49,9 @@ export const UserProvider = ({ children }: iContextProviderProps) => {
    });
 
    useEffect(() => {
-      if (user) {
+      if (user && isLoginIn) {
          navigate(cachedRoute ? cachedRoute : "/recipes");
+         setIsLoginIn(false);
       }
    }, [user]);
 
@@ -65,6 +68,7 @@ export const UserProvider = ({ children }: iContextProviderProps) => {
          try {
             setLoading(true);
             const response = await api.post<iUserLoginResponse>("user/login", formData);
+            setIsLoginIn(true);
             return response.data;
          } catch (error) {
             console.log(error);
