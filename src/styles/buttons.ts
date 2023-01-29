@@ -84,7 +84,7 @@ export const buttonCSS = css<iStyledButtonProps>`
          
          case "link":
             return css`
-               color: ${theme.colors.orange};
+               color: ${theme.colors.lockOrange};
             `   
       }
    }}

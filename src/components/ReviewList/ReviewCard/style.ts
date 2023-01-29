@@ -16,8 +16,9 @@ export const StyledReviewCard = styled.li`
          align-items: center;
          gap: 6px;
 
-         span{
+         .scoreText{
             font-weight: 600;
+            color: ${({theme}) => theme.colors.black}
          }
       }
 

@@ -22,7 +22,7 @@ const ReviewCard = ({ review }: iReviewCardProps) => {
                </StyledParagraph>
             </div>
             <div className="score">
-               <span>{review.score}</span>
+               <span className="scoreText">{review.score}</span>
                <StyledRating value={review.score} precision={0.5} readOnly />
             </div>
          </header>
