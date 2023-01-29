@@ -6,10 +6,6 @@ import { MdLogin } from "react-icons/md"
 import Logo from "../../assets/LogoAlex.png"
 
 const LoginPage = () => {
-   /* 
-      Link: componente que exclusivamente faça um redirecionamento 
-      useNavigate: redirecionamento dentro de funções lógicas
-   */
    return (
       <StyledLoginPage>
          <div className="container">

@@ -1,4 +1,5 @@
 import { UseMutationResult } from "react-query";
+import { iReview } from "./RecipeSinglePageContext/@types";
 
 export interface iCategory {
    _id: string;
@@ -16,6 +17,7 @@ export interface iRecipe {
    thumbnail_filename: string;
    thumbnail_url: string;
    categories: string[];
+   reviews: iReview[];
    createdAt: string;
    updatedAt: string;
 }

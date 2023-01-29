@@ -6,6 +6,7 @@ import { MdFavorite } from "react-icons/md";
 import { useContext } from "react";
 import { FavoriteContext } from "../../../../providers/FavoriteContext/FavoriteContext";
 import { iRecipe } from "../../../../providers/RecipeContext/@types";
+import FavoriteButton from "../../../FavoriteButton";
 
 interface iRecipeCardProps {
    recipe: iRecipe;
@@ -23,18 +24,7 @@ const RecipeCard = ({ recipe }: iRecipeCardProps) => {
             </StyledTitle>
             <StyledParagraph>{recipe.content}</StyledParagraph>
             <div className="buttonBox">
-               <StyledButton
-                  aria-label="favorite"
-                  title="Favoritar"
-                  $buttonStyle="solid1"
-                  $buttonSize="round"
-                  onClick={(event) => {
-                     event.stopPropagation();
-                     addRecipeToFavoriteList(recipe);
-                  }}
-               >
-                  <MdFavorite size={21} />
-               </StyledButton>
+               <FavoriteButton currentRecipe={recipe}/>
                <StyledLinkButton to={`/recipes/${recipe._id}`} $buttonSize="small" $buttonStyle="outline1">
                   Saiba mais
                </StyledLinkButton>
