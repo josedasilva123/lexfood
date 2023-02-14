@@ -13,7 +13,7 @@ describe("<LoginForm />", () => {
       render(
          <ThemeProvider theme={mockTheme}>
             <UserContext.Provider value={{ userLogin: userLoginMock }}>
-                <LoginForm />
+               <LoginForm />
             </UserContext.Provider>
          </ThemeProvider>
       );
@@ -25,9 +25,9 @@ describe("<LoginForm />", () => {
       expect(passwordInput).toBeInTheDocument();
 
       await waitFor(() => {
-        fireEvent.change(emailInput, { target: { value: "example@gmail.com"}});
-        fireEvent.change(passwordInput, { target: { value: "123456"}});
-      })
+         fireEvent.change(emailInput, { target: { value: "example@gmail.com" } });
+         fireEvent.change(passwordInput, { target: { value: "123456" } });
+      });
 
       expect(emailInput).toHaveValue("example@gmail.com");
       expect(passwordInput).toHaveValue("123456");
@@ -35,33 +35,33 @@ describe("<LoginForm />", () => {
       const submitButton = screen.getByText("Entrar");
 
       await act(() => {
-        fireEvent.submit(submitButton);
-      })
+         fireEvent.submit(submitButton);
+      });
 
       expect(userLoginMock).toBeCalledTimes(1);
    });
 
    it("should show error when a field is empty", async () => {
-    render(
-       <ThemeProvider theme={mockTheme}>
-          <UserContext.Provider value={{ userLogin: userLoginMock }}>
-              <LoginForm />
-          </UserContext.Provider>
-       </ThemeProvider>
-    );
+      render(
+         <ThemeProvider theme={mockTheme}>
+            <UserContext.Provider value={{ userLogin: userLoginMock }}>
+               <LoginForm />
+            </UserContext.Provider>
+         </ThemeProvider>
+      );
 
-    const submitButton = screen.getByText("Entrar");
+      const submitButton = screen.getByText("Entrar");
 
-    await act(() => {
-        fireEvent.submit(submitButton);
-    })
+      await act(() => {
+         fireEvent.submit(submitButton);
+      });
 
-    const emailError = screen.getByText("O email é obrigatório.");
-    const passwordError = screen.getByText("A senha é obrigatória.");
+      const emailError = screen.getByText("O email é obrigatório.");
+      const passwordError = screen.getByText("A senha é obrigatória.");
 
-    expect(emailError).toBeInTheDocument();
-    expect(passwordError).toBeInTheDocument();
+      expect(emailError).toBeInTheDocument();
+      expect(passwordError).toBeInTheDocument();
 
-    expect(userLoginMock).not.toHaveBeenCalled();    
- });
+      expect(userLoginMock).not.toHaveBeenCalled();
+   });
 });
