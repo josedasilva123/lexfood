@@ -1,6 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useContextSelector } from "use-context-selector";
 import { RecipeContext } from "../../../providers/RecipeContext/RecipeContext";
 import { UserContext } from "../../../providers/UserContext/UserContext";
 import { StyledButton } from "../../../styles/buttons";
@@ -13,7 +14,8 @@ import { recipeCreateSchema } from "./recipeCreateSchema";
 import { StyledRecipeCreateFormBox } from "./style";
 
 const RecipeCreateForm = () => {
-   const { user } = useContext(UserContext);
+   const user = useContextSelector(UserContext, context => context.user);
+
    const { categoryList, recipeCreate } = useContext(RecipeContext);
 
    const {

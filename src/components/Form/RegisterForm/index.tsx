@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { UserContext } from "../../../providers/UserContext/UserContext";
 import { StyledButton } from "../../../styles/buttons";
@@ -7,11 +7,12 @@ import { StyledForm } from "../../../styles/form";
 import Input from "../Input";
 import { iUserRegisterFormValues } from "./@types";
 import { registerSchema } from "./registerSchema";
+import { useContextSelector } from "use-context-selector";
 
 const RegisterForm = () => {
    const [loading, setLoading] = useState(false);
 
-   const { userRegister } = useContext(UserContext);
+   const userRegister = useContextSelector(UserContext, (context) => context.userRegister);
 
    const {
       register,

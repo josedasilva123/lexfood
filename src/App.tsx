@@ -7,9 +7,10 @@ import { useContext } from "react";
 import { FavoriteContext } from "./providers/FavoriteContext/FavoriteContext";
 import { UserContext } from "./providers/UserContext/UserContext";
 import { DarkModeContext } from "./providers/DarkModeContext/DarkModeContext";
+import { useContextSelector } from "use-context-selector";
 
 function App() {
-   const { globalLoading } = useContext(UserContext);
+   const globalLoading = useContextSelector(UserContext, context => context.globalLoading);
    const { favoriteModal } = useContext(FavoriteContext);
    const { darkMode } = useContext(DarkModeContext);
 

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { StyledButton } from "../../../styles/buttons";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -7,12 +7,12 @@ import { loginSchema } from "./loginSchema";
 import { StyledForm } from "../../../styles/form";
 import { UserContext } from "../../../providers/UserContext/UserContext";
 import { iUserLoginFormValues } from "./@types";
+import { useContextSelector } from "use-context-selector";
 
 const LoginForm = () => {
    const [loading, setLoading] = useState(false);
 
-   /* importador */
-   const { userLogin } = useContext(UserContext);
+   const userLogin = useContextSelector(UserContext, context =>  context.userLogin);
 
    const {
       register,

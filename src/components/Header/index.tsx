@@ -7,9 +7,11 @@ import { useContext } from "react";
 import { UserContext } from "../../providers/UserContext/UserContext";
 import { FavoriteContext } from "../../providers/FavoriteContext/FavoriteContext";
 import { DarkModeContext } from "../../providers/DarkModeContext/DarkModeContext";
+import { useContextSelector } from "use-context-selector";
 
 const Header = () => {
-   const { user, userLogout } = useContext(UserContext);
+   const user = useContextSelector(UserContext, context => context.user);
+   const userLogout = useContextSelector(UserContext, context => context.userLogout);
    const { favoriteModal, setFavoriteModal, favoriteRecipes } = useContext(FavoriteContext);
    const { darkMode, setDarkMode } = useContext(DarkModeContext);
 

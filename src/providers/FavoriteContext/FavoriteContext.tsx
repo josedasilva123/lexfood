@@ -1,8 +1,9 @@
 import { AxiosError } from "axios";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { createContext } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
+import { useContextSelector } from "use-context-selector";
 import { api } from "../../api/api";
 import { iContextProviderProps, iDefaultErrorResponse } from "../@types";
 import { iRecipe } from "../RecipeContext/@types";
@@ -13,7 +14,7 @@ import { iFavoriteContext, iFavoriteCreateResponse, iFavoriteDeleteResponse } fr
 export const FavoriteContext = createContext({} as iFavoriteContext);
 
 export const FavoriteProvider = ({ children }: iContextProviderProps) => {
-   const { user } = useContext(UserContext);
+   const user = useContextSelector(UserContext, context => context.user);
    const [favoriteModal, setFavoriteModal] = useState(false);
 
    const queryClient = useQueryClient();

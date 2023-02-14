@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { iReview } from "../../../providers/RecipeContext/RecipeSinglePageContext/@types";
 import { StyledParagraph } from "../../../styles/typography";
 import { stringAvatar } from "../../../utils/material/avatar";
@@ -8,13 +8,15 @@ import ReviewCardControls from "./ReviewCardControls";
 import ReviewEditForm from "../../Form/ReviewEditForm";
 import { StyledButton } from "../../../styles/buttons";
 import { MdCancel } from "react-icons/md";
+import { useContextSelector } from "use-context-selector";
 
 interface iReviewCardProps {
    review: iReview;
 }
 
 const ReviewCard = ({ review }: iReviewCardProps) => {
-   const { user } = useContext(UserContext);
+   const user = useContextSelector(UserContext, context => context.user);
+
    const [isEditing, setIsEditing] = useState(false);
    return (
       <StyledReviewCard>

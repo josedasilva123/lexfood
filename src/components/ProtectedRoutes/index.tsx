@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import { useContextSelector } from "use-context-selector";
 import { RecipeProvider } from "../../providers/RecipeContext/RecipeContext";
 import { UserContext } from "../../providers/UserContext/UserContext";
 
@@ -9,9 +10,9 @@ const ProtectedRoutes = () => {
 
    const routeURL = window.location.pathname;
 
-   const { setCachedRoute } = useContext(UserContext);
+   const user = useContextSelector(UserContext, context => context.user);
 
-   const { user } = useContext(UserContext);
+   const setCachedRoute = useContextSelector(UserContext, context => context.setCachedRoute);
 
    useEffect(() => {
       setCachedRoute(routeURL);

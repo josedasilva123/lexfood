@@ -11,9 +11,10 @@ import { RecipeSinglePageContext } from "../../../providers/RecipeContext/Recipe
 import ReviewCreateForm from "../../../components/Form/ReviewCreateForm";
 import { UserContext } from "../../../providers/UserContext/UserContext";
 import ReviewList from "../../../components/ReviewList";
+import { useContextSelector } from "use-context-selector";
 
 const RecipeSinglePage = () => {
-   const { user } = useContext(UserContext);
+   const user = useContextSelector(UserContext, (context) => context.user);
    const { recipe, recipeLoading } = useContext(RecipeSinglePageContext);
 
    return (
@@ -30,11 +31,13 @@ const RecipeSinglePage = () => {
                      <div className="contentBox">
                         <StyledParagraph>{recipe?.content}</StyledParagraph>
                         <div>
-                           <StyledTitle tag="h2" fontSize="three">Avaliações:</StyledTitle>
+                           <StyledTitle tag="h2" fontSize="three">
+                              Avaliações:
+                           </StyledTitle>
                            <ReviewList />
-                           {!recipe?.reviews.some(review => review.userId === user?.id ) && <ReviewCreateForm />}
+                           {!recipe?.reviews.some((review) => review.userId === user?.id) && <ReviewCreateForm />}
                         </div>
-                     </div>                     
+                     </div>
                   </section>
                </StyledContainer>
             </main>
