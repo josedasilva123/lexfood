@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import FavoriteCard from "./FavoriteCard";
 import { StyledFavoriteList, StyledFavoriteListUL } from "./style";
 import { MdClose } from "react-icons/md";

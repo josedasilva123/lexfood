@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { iReview } from "../../../providers/RecipeContext/RecipeSinglePageContext/@types";
 import { StyledParagraph } from "../../../styles/typography";
 import { stringAvatar } from "../../../utils/material/avatar";

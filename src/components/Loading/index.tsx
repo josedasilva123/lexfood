@@ -1,4 +1,3 @@
-import React from 'react'
 import { StyledLoading } from './style'
 import LoadingSVG from "../../assets/Loading.svg";
 

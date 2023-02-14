@@ -1,4 +1,3 @@
-import React from "react";
 import {  StyledLinkButton } from "../../../../styles/buttons";
 import { StyledParagraph, StyledTitle } from "../../../../styles/typography";
 import { StyledRecipeCard } from "./style";

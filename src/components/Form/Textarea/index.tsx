@@ -1,4 +1,3 @@
-import React from "react";
 import { FieldError, UseFormRegisterReturn } from "react-hook-form";
 import { StyledFieldError } from "../../../styles/form";
 import { StyledTextarea } from "./style";

@@ -1,4 +1,3 @@
-import React from "react";
 import { useContext } from "react";
 import { RecipePageContext } from "../../../providers/RecipeContext/RecipePageContext/RecipePageContext";
 import { StyledParagraph } from "../../../styles/typography";

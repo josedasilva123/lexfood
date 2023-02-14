@@ -1,5 +1,4 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
-import React from 'react'
 import { StyledBreadcrumbs, StyledBreadcrumbsLink } from './style';
 
 interface iLink{

@@ -1,5 +1,5 @@
 import { Rating } from "@mui/material";
-import React, { SyntheticEvent } from "react";
+import { SyntheticEvent } from "react";
 import { StyledScoreBox } from "./styles";
 
 interface iScoreBoxProps {

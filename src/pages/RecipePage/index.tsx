@@ -1,4 +1,3 @@
-import React from "react";
 import RecipeCategories from "../../components/Recipe/RecipeCategories";
 import Header from "../../components/Header";
 import { StyledContainer } from "../../styles/grid";

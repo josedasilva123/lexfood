@@ -1,4 +1,3 @@
-import React from "react";
 import { MdArrowBack } from "react-icons/md";
 import RegisterForm from "../../components/Form/RegisterForm";
 import { StyledLinkButton } from "../../styles/buttons";

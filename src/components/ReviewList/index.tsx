@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { RecipeSinglePageContext } from "../../providers/RecipeContext/RecipeSinglePageContext/RecipeSinglePageContext";
 import { StyledParagraph } from "../../styles/typography";
 import ReviewCard from "./ReviewCard";
