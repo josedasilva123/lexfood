@@ -1,4 +1,3 @@
-import React from "react";
 import LoginForm from "../../components/Form/LoginForm";
 import { StyledLinkButton } from "../../styles/buttons";
 import { StyledLoginPage, StyledLoginPageFlexBox } from "./style";

@@ -1,4 +1,3 @@
-import React from "react";
 import RecipeCreateForm from "../../../components/Form/RecipeCreateForm";
 import Header from "../../../components/Header";
 import { StyledLinkButton } from "../../../styles/buttons";

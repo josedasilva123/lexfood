@@ -1,4 +1,4 @@
-import { Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+import { DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import React from 'react'
 import { StyledButton } from '../../../styles/buttons';
 import { StyledParagraph, StyledTitle } from '../../../styles/typography';

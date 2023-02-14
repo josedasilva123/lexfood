@@ -15,7 +15,7 @@ const Select = ({ children, id, label, register, error }: iSelectProps) => {
    return (
       <fieldset>
          {label && <label htmlFor="category">{label}</label>}
-         <StyledSelect id={id} {...register} error={error}>
+         <StyledSelect id={id} {...register} error={error} role="listbox">
             {children}
          </StyledSelect>
          {error && <StyledFieldError>{error.message}</StyledFieldError>}

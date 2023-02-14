@@ -1,4 +1,3 @@
-import React from 'react'
 import { StyledLinkButton } from '../../../styles/buttons'
 import { MdAdd } from "react-icons/md"
 import { StyledRecipeControls } from './style'

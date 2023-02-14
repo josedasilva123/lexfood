@@ -1,5 +1,4 @@
 import { Rating } from "@mui/material";
-import React from "react";
 import { iRecipe } from "../../../providers/RecipeContext/@types";
 import { StyledTitle } from "../../../styles/typography";
 import Breadcrumbs from "../../Breadcrumbs";

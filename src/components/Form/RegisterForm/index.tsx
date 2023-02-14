@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import React, { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { UserContext } from "../../../providers/UserContext/UserContext";
 import { StyledButton } from "../../../styles/buttons";

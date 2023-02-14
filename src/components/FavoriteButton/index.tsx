@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { FavoriteContext } from "../../providers/FavoriteContext/FavoriteContext";
 import { iRecipe } from "../../providers/RecipeContext/@types";
 import { StyledButton } from "../../styles/buttons";

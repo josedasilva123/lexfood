@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { StyledButton } from "../../../styles/buttons";
 import { yupResolver } from "@hookform/resolvers/yup";

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { RecipePageContext } from "../../providers/RecipeContext/RecipePageContext/RecipePageContext";
 import { StyledButton } from "../../styles/buttons";
 import { StyledTitle } from "../../styles/typography";
