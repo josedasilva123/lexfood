@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { MdDelete } from "react-icons/md"
 import { useContextSelector } from "use-context-selector";
 import { FavoriteContext } from "../../../providers/FavoriteContext/FavoriteContext";

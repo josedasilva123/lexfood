@@ -6,16 +6,21 @@ import { MdFavorite, MdDarkMode, MdLightMode } from "react-icons/md";
 import { UserContext } from "../../providers/UserContext/UserContext";
 import { FavoriteContext } from "../../providers/FavoriteContext/FavoriteContext";
 import { DarkModeContext } from "../../providers/DarkModeContext/DarkModeContext";
-import { useContext, useContextSelector } from "use-context-selector";
+import { useContextSelector } from "use-context-selector";
 
 const Header = () => {
-   const user = useContextSelector(UserContext, context => context.user);
-   const userLogout = useContextSelector(UserContext, context => context.userLogout);
-   
-   const darkMode = useContextSelector(DarkModeContext, context => context.darkMode);
-   const setDarkMode = useContextSelector(DarkModeContext, context => context.setDarkMode);
+   const user = useContextSelector(UserContext, (context) => context.user);
+   const userLogout = useContextSelector(UserContext, (context) => context.userLogout);
 
-   const { favoriteModal, setFavoriteModal, favoriteRecipes } = useContext(FavoriteContext);
+   const darkMode = useContextSelector(DarkModeContext, (context) => context.darkMode);
+   const setDarkMode = useContextSelector(DarkModeContext, (context) => context.setDarkMode);
+
+   const { favoriteModal, setFavoriteModal, favoriteRecipes } = useContextSelector(
+      FavoriteContext,
+      ({ favoriteModal, setFavoriteModal, favoriteRecipes }) => {
+         return { favoriteModal, setFavoriteModal, favoriteRecipes };
+      }
+   );
 
    return (
       <StyledHeader>

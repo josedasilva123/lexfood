@@ -9,18 +9,31 @@ interface iFavoriteButtonProps {
 }
 
 const FavoriteButton = ({ currentRecipe }: iFavoriteButtonProps) => {
-   const favoriteRecipes = useContextSelector(FavoriteContext, context => context.favoriteRecipes);
-   const addRecipeToFavoriteList = useContextSelector(FavoriteContext, context => context.addRecipeToFavoriteList);
-   const removeRecipeFromFavoriteList = useContextSelector(FavoriteContext, context => context.removeRecipeFromFavoriteList);
+   const { favoriteRecipes, addRecipeToFavoriteList, removeRecipeFromFavoriteList } = useContextSelector(
+      FavoriteContext,
+      ({ favoriteRecipes, addRecipeToFavoriteList, removeRecipeFromFavoriteList }) => {
+         return { favoriteRecipes, addRecipeToFavoriteList, removeRecipeFromFavoriteList };
+      }
+   );
 
    return (
       <>
          {favoriteRecipes?.some((recipe) => recipe.recipeId === String(currentRecipe._id)) ? (
-            <StyledButton $buttonSize="round" $buttonStyle="outline1" title="Desfavoritar receita" onClick={() => removeRecipeFromFavoriteList(currentRecipe._id)}>
+            <StyledButton
+               $buttonSize="round"
+               $buttonStyle="outline1"
+               title="Desfavoritar receita"
+               onClick={() => removeRecipeFromFavoriteList(currentRecipe._id)}
+            >
                <MdCancel size={24} />
             </StyledButton>
          ) : (
-            <StyledButton $buttonSize="round" $buttonStyle="solid1" title="Favoritar receita" onClick={() => addRecipeToFavoriteList(currentRecipe)}>
+            <StyledButton
+               $buttonSize="round"
+               $buttonStyle="solid1"
+               title="Favoritar receita"
+               onClick={() => addRecipeToFavoriteList(currentRecipe)}
+            >
                <MdFavorite size={24} />
             </StyledButton>
          )}
