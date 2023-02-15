@@ -10,9 +10,9 @@ import { DarkModeContext } from "./providers/DarkModeContext/DarkModeContext";
 import { useContextSelector } from "use-context-selector";
 
 function App() {
-   const globalLoading = useContextSelector(UserContext, context => context.globalLoading);
+   const globalLoading = useContextSelector(UserContext, (context) => context.globalLoading);
    const { favoriteModal } = useContext(FavoriteContext);
-   const { darkMode } = useContext(DarkModeContext);
+   const darkMode = useContextSelector(DarkModeContext, (context) => context.darkMode);
 
    return (
       <>

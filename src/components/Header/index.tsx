@@ -13,7 +13,8 @@ const Header = () => {
    const user = useContextSelector(UserContext, context => context.user);
    const userLogout = useContextSelector(UserContext, context => context.userLogout);
    const { favoriteModal, setFavoriteModal, favoriteRecipes } = useContext(FavoriteContext);
-   const { darkMode, setDarkMode } = useContext(DarkModeContext);
+   const darkMode = useContextSelector(DarkModeContext, context => context.darkMode);
+   const setDarkMode = useContextSelector(DarkModeContext, context => context.setDarkMode);
 
    return (
       <StyledHeader>

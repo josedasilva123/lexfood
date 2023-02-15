@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createContext } from "react";
+import { createContext } from "use-context-selector";
 import { iContextProviderProps } from "../@types";
 import { iDarkModeContext } from "./@types";
 
