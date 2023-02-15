@@ -3,18 +3,19 @@ import { StyledButton } from "../../styles/buttons";
 import { StyledContainer } from "../../styles/grid";
 import { StyledHeader, StyledHeaderFlexBox } from "./style";
 import { MdFavorite, MdDarkMode, MdLightMode } from "react-icons/md";
-import { useContext } from "react";
 import { UserContext } from "../../providers/UserContext/UserContext";
 import { FavoriteContext } from "../../providers/FavoriteContext/FavoriteContext";
 import { DarkModeContext } from "../../providers/DarkModeContext/DarkModeContext";
-import { useContextSelector } from "use-context-selector";
+import { useContext, useContextSelector } from "use-context-selector";
 
 const Header = () => {
    const user = useContextSelector(UserContext, context => context.user);
    const userLogout = useContextSelector(UserContext, context => context.userLogout);
-   const { favoriteModal, setFavoriteModal, favoriteRecipes } = useContext(FavoriteContext);
+   
    const darkMode = useContextSelector(DarkModeContext, context => context.darkMode);
    const setDarkMode = useContextSelector(DarkModeContext, context => context.setDarkMode);
+
+   const { favoriteModal, setFavoriteModal, favoriteRecipes } = useContext(FavoriteContext);
 
    return (
       <StyledHeader>

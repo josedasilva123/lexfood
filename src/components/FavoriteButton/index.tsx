@@ -1,15 +1,17 @@
-import { useContext } from "react";
 import { FavoriteContext } from "../../providers/FavoriteContext/FavoriteContext";
 import { iRecipe } from "../../providers/RecipeContext/@types";
 import { StyledButton } from "../../styles/buttons";
 import { MdFavorite, MdCancel } from "react-icons/md";
+import { useContextSelector } from "use-context-selector";
 
 interface iFavoriteButtonProps {
    currentRecipe: iRecipe;
 }
 
 const FavoriteButton = ({ currentRecipe }: iFavoriteButtonProps) => {
-   const { favoriteRecipes, addRecipeToFavoriteList, removeRecipeFromFavoriteList } = useContext(FavoriteContext);
+   const favoriteRecipes = useContextSelector(FavoriteContext, context => context.favoriteRecipes);
+   const addRecipeToFavoriteList = useContextSelector(FavoriteContext, context => context.addRecipeToFavoriteList);
+   const removeRecipeFromFavoriteList = useContextSelector(FavoriteContext, context => context.removeRecipeFromFavoriteList);
 
    return (
       <>

@@ -3,14 +3,15 @@ import FavoriteCard from "./FavoriteCard";
 import { StyledFavoriteList, StyledFavoriteListUL } from "./style";
 import { MdClose } from "react-icons/md";
 import { StyledParagraph, StyledTitle } from "../../styles/typography";
-import { useContext } from "react";
 import { FavoriteContext } from "../../providers/FavoriteContext/FavoriteContext";
 import { iFavoriteRecipe } from "../../providers/UserContext/@types";
+import { useContextSelector } from "use-context-selector";
 
 const FavoriteList = () => {
    const [isClosing, setClosing] = useState(false);
 
-   const { favoriteRecipes, setFavoriteModal } = useContext(FavoriteContext);
+   const favoriteRecipes = useContextSelector(FavoriteContext, context => context.favoriteRecipes);
+   const setFavoriteModal = useContextSelector(FavoriteContext, context => context.setFavoriteModal);
 
    function closeModal() {
       setClosing(true);
