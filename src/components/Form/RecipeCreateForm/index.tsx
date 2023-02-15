@@ -16,7 +16,8 @@ import { StyledRecipeCreateFormBox } from "./style";
 const RecipeCreateForm = () => {
    const user = useContextSelector(UserContext, context => context.user);
 
-   const { categoryList, recipeCreate } = useContext(RecipeContext);
+   const categoryList = useContextSelector(RecipeContext, context => context.categoryList);
+   const recipeCreate = useContextSelector(RecipeContext, context => context.recipeCreate);
 
    const {
       register,

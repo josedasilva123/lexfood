@@ -1,7 +1,7 @@
-import { createContext } from "react";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { createContext } from "use-context-selector";
 import { api } from "../../api/api";
 import { iContextProviderProps } from "../@types";
 import { iRecipeContext, iRecipe, iCategoryGetResponse, iRecipeCreateResponse } from "./@types";

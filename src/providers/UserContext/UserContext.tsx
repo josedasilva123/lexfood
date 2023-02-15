@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { AxiosError } from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { createContext } from "use-context-selector";
+import { createContext, useContextSelector } from "use-context-selector";
 import { api } from "../../api/api";
 import { iUserLoginFormValues } from "../../components/Form/LoginForm/@types";
 import { iUserRegisterFormValues } from "../../components/Form/RegisterForm/@types";
@@ -16,7 +16,7 @@ export const UserContext = createContext({} as iUserContext);
 
 export const UserProvider = ({ children }: iContextProviderProps) => {
    const queryClient = useQueryClient();
-   const { setDarkMode } = useContext(DarkModeContext)
+   const setDarkMode = useContextSelector(DarkModeContext, context => context.setDarkMode);
    const [cachedRoute, setCachedRoute] = useState("");
    const [isLoginIn, setIsLoginIn] = useState(false);
 

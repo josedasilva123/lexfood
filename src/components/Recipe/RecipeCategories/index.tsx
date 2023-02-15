@@ -1,11 +1,12 @@
 import { useContext } from "react";
+import { useContextSelector } from "use-context-selector";
 import { RecipeContext } from "../../../providers/RecipeContext/RecipeContext";
 import { RecipePageContext } from "../../../providers/RecipeContext/RecipePageContext/RecipePageContext";
 import { StyledButton } from "../../../styles/buttons";
 import { StyledRecipeCategories } from "./style";
 
 const RecipeCategories = () => {
-   const { categoryList } = useContext(RecipeContext);
+   const categoryList = useContextSelector(RecipeContext, context => context.categoryList);
    const { filter, setFilter, recipeList } =useContext(RecipePageContext);
    const filteredCategoryList = categoryList?.filter((category) => recipeList?.some((recipe) => recipe.categories.includes(category.slug)));
 
